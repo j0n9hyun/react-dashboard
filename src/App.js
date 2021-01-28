@@ -1,5 +1,6 @@
 import LoginForm from './components/LoginForm';
 import { createGlobalStyle } from 'styled-components';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -12,8 +13,10 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <LoginForm />
+      <Router>
+        <GlobalStyle />
+        <Route path='/' exact component={LoginForm} />
+      </Router>
     </>
   );
 }

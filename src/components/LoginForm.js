@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Container = styled.div`
   background-color: #2c3e50;
@@ -18,15 +19,15 @@ const LoginContainer = styled.div`
   background: linear-gradient(#130f40, #30336b);
 `;
 
-const SignBar = styled.div`
-  color: white;
-  font-size: 2rem;
-  &::after {
-    content: '';
-    width: 1px;
-    border: 1px solid red;
-  }
-`;
+// const SignBar = styled.div`
+//   color: white;
+//   font-size: 2rem;
+//   &::after {
+//     content: '';
+//     width: 1px;
+//     border: 1px solid red;
+//   }
+// `;
 
 const InputName = styled.div`
   position: relative;
@@ -90,13 +91,20 @@ const Checkbox = styled.label`
   }
 `;
 
+const Test = (e) => {
+  console.log(e.target.value);
+};
+
+const request = axios.get('/api/v1/');
+console.log(request);
+
 // const Test = styled.label``;
 const LoginForm = () => {
   return (
     <Container>
       <LoginContainer>
         {/* <SignBar>SIGN IN</SignBar> */}
-        <InputForm type='text' placeholder='아이디' /> <br />
+        <InputForm onChange={Test} type='text' placeholder='아이디' /> <br />
         <InputName>Username</InputName>
         <InputForm type='password' placeholder='비밀번호' /> <br />
         <InputName>Password</InputName>
