@@ -1,6 +1,6 @@
 import LoginForm from './components/LoginForm';
 import { createGlobalStyle } from 'styled-components';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 const GlobalStyle = createGlobalStyle`
   body {
