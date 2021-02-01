@@ -243,7 +243,7 @@ const Login = ({ history }) => {
           <InputName>Password</InputName>
           <ButtonForm
             type='submit'
-            // onClick={() => (window.location.href = '/dashboard')}
+            onClick={() => (window.location.href = '/dashboard')}
           >
             버튼
           </ButtonForm>

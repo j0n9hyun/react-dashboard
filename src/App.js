@@ -1,8 +1,7 @@
 import React from 'react';
 import Login from './components/Login';
 import { createGlobalStyle } from 'styled-components';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import DashBoard from './components/DashBoard';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 const GlobalStyle = createGlobalStyle`
   body {
