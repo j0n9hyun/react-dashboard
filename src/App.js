@@ -1,6 +1,8 @@
-import LoginForm from './components/LoginForm';
+import React from 'react';
+import Login from './components/Login';
 import { createGlobalStyle } from 'styled-components';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import DashBoard from './components/DashBoard';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -11,11 +13,20 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  // const [token, setToken] = useState(null);
+
+  // if (!token) {
+  //   return <Login setToken={setToken} />;
+  // }
+
   return (
     <>
+      <GlobalStyle />
       <Router>
-        <GlobalStyle />
-        <Route path='/' exact component={LoginForm} />
+        <Switch>
+          <Route path='/' exact component={Login} />
+          <Route path='/dashboard' exact component={DashBoard}></Route>
+        </Switch>
       </Router>
     </>
   );
