@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-// import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-// import DashBoard from './DashBoard';
 import axios from 'axios';
 
 const Container = styled.div`
   background-color: #2c3e50;
-  height: 1100px;
+  /* height: 1100px; */
+  height: 100%;
 `;
 
 const LoginContainer = styled.div`
@@ -38,7 +36,8 @@ const InputName = styled.div`
   font-size: 12px;
   width: 30px;
   color: lightgray;
-  top: 9%;
+  /* top: 2%; */
+  bottom: 1%;
   left: 18%;
 `;
 
@@ -46,7 +45,7 @@ const InputForm = styled.input`
   background: rgba(255, 255, 255, 0.1);
   color: lightgray;
   position: relative;
-  top: 20%;
+  top: 10%;
   font-size: 1.5rem;
   width: 250px;
   height: 30px;
@@ -67,7 +66,7 @@ const InputForm = styled.input`
 
 const ButtonForm = styled.button`
   position: relative;
-  top: 30%;
+  top: 20%;
   font-size: 1.5rem;
   width: 250px;
   margin-top: 10px;
@@ -87,7 +86,7 @@ const ButtonForm = styled.button`
 const Checkbox = styled.label`
   position: absolute;
   left: 15%;
-  top: 50%;
+  top: 60%;
   color: lightgray;
   &:hover {
     color: whitesmoke;
@@ -100,49 +99,21 @@ const WarningMsg = styled.div`
   color: pink;
 `;
 
-// async function loginUser(credentials) {
-//   return fetch('http://localhost:8888/users', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(credentials),
-//   }).then((data) => data.json());
-// }
+const Img = styled.img`
+  /* height: 80px; */
+  width: 125px;
+  /* padding-left: 45px; */
+`;
 
-const Login = ({ history }) => {
-  // let history = useHistory();
-  // console.log(setToken);
+const Login = () => {
   const [result, setResult] = useState(null);
-  // const [account, setAccount] = useState({ id: '', pw: '' });
-  // const [login, setLogin] = useState(false);
-  // const [id, setId] = useState(null);
-  // const [pw, setPw] = useState(null);
-
-  // const Test = () => {
-  //   history.push('/');
-  // login === true ? <DashBoard /> : console.log('로그인 실패');
-  // const onChangeAccount = (e) => {
-  //   setAccount({
-  //     ...account,
-  //     [e.target.id]: e.target.value,
-  //   });
-  //   console.log(account);
-  // };
-  // const history = useHistory();
-  /*
-  0: 암것도 없을 때
-  1: 아이디 조건이 맞지 않을 때
-  2: 패스워드 조건이 맞지 않을 때
-  3.
-  */
-
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setResult(null);
     }, 3000);
+
     return () => clearTimeout(timeOut);
-  });
+  }, []);
 
   const signIn = (e) => {
     e.preventDefault();
@@ -162,68 +133,39 @@ const Login = ({ history }) => {
       return false;
     }
 
-    if (
-      /[A-Z]/.test(formPw)
-      // !/[0-9]+/.test(formPw)
-      // !/[~!@$%<>^&*\-=+_]+/.test(formPw)
-    ) {
-      setResult(2);
-      return false;
-    }
-    console.log('로그인 검증 통과');
-    const idk = axios.get('http://localhost:8888/users');
-    console.log(idk);
+    // if (
+    //   /[A-Z]/.test(formPw) ||
+    //   !/[0-9]+/.test(formPw) ||
+    //   !/[~!@$%<>^&*\-=+_]+/.test(formPw)
+    // ) {
+    //   setResult(2);
+    //   return false;
+    // }
 
-    // <Redirect to='/dashboard' />;
+    const apiCall = async () => {
+      const res = await axios.get('http://localhost:8888/users');
+      const user = await res.data;
+      console.log(user);
+      const auth = user.find(
+        (user) => user.id === formId && user.pw === formPw
+      );
 
-    // .then(({ data }) => {
-    //   var { status } = data;
-    //   if (status === 200) {
-    //     localStorage.getItem('id');
-    //     // return <Redirect to='dashboard' />;
-    //     window.location.href = '/dashboard';
-    //     console.log(`logged as ${data.id}`);
-    //   } else {
-    //     console.log('무언가 에러남');
-    //     // console.log(`error ${status}`);
-    //   }
-    // });
-    // setLogin(true);
+      if (auth) {
+        console.log('success');
+        window.location.href = '/dashboard';
+      } else {
+        setResult(3);
+        return false;
+      }
+    };
+    apiCall();
   };
 
-  // const fake = axios.get('http://localhost:8888/users');
-
-  // console.log(fake);
-
-  // return true;
-  // axios.post('~~~' + '/login', { asd, asd }) .then ({ data }) => {const { asd, asd } = data if(data)}
-
-  // const onChangeId = (e) => {
-  //   setId(e.target.value);
-  //   console.log(e.target.value);
-  // };
-  // const onChangePw = (e) => {
-  //   setPw(e.target.value);
-  //   console.log(e.target.value);
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const token = await loginUser({
-  //     id,
-  //     pw,
-  //   });
-  //   setToken(token);
-
-  // };
   return (
     <Container>
-      <form
-        action='DashBoard'
-        style={{ paddingTop: '230px' }}
-        onSubmit={signIn}
-      >
+      <form style={{ paddingTop: '230px' }} onSubmit={signIn}>
         <LoginContainer>
+          <Img src='https://www.flaticon.com/svg/vstatic/svg/3452/3452468.svg?token=exp=1612167196~hmac=786c903260713a964971888ac0c54c84' />
           {/* <SignBar>SIGN IN</SignBar> */}
           <InputForm
             type='text'
@@ -241,12 +183,7 @@ const Login = ({ history }) => {
           />
           <br />
           <InputName>Password</InputName>
-          <ButtonForm
-            type='submit'
-            onClick={() => (window.location.href = '/dashboard')}
-          >
-            버튼
-          </ButtonForm>
+          <ButtonForm type='submit'>버튼</ButtonForm>
           <Checkbox>
             <input type='checkbox' />
             Remember Me
@@ -266,6 +203,7 @@ const Login = ({ history }) => {
               포함되어야 합니다.
             </WarningMsg>
           )}
+          {result === 3 && <WarningMsg>로그인 안됨</WarningMsg>}
         </LoginContainer>
       </form>
     </Container>
