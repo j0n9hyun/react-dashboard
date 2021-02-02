@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-// import { Chart } from 'react-charts';
 import axios from 'axios';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import Table from './Table';
-// import Highcharts from 'highcharts';
-// import HighchartsReact from 'highcharts-react-official';
+import TiList from './TiList';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from 'react-router-dom';
+import J0n9hyun from './J0n9hyun';
 
 const Container = styled.div`
   background-color: #2c3e50;
@@ -13,67 +17,55 @@ const Container = styled.div`
 `;
 
 const MenuBar = styled.div`
-  /* display: table-cell; */
+  position: relative;
   border: 1px solid red;
-  /* width: 50px; */
+  width: 50px;
   height: 100%;
 `;
 
 const Menu = styled.div`
+  position: relative;
   border: 2px solid coral;
   color: lightgray;
-  height: 100%;
   font-size: 2rem;
-`;
-
-const TableContainer = styled.div`
-  display: table;
-  border: 2px solid orange;
-  color: lightgray;
   text-align: center;
+  /* width: 300px; */
 `;
 
-// const Table = styled.div`
-//   position: absolute;
-//   display: table-cell;
-//   text-align: center;
-//   color: lightgray;
-//   left: 50%;
-//   border: 3px solid pink;
-// `;
+const Img = styled.img`
+  width: 30px;
+  margin: 0 5px;
+`;
 
 const DashBoard = () => {
   const [ti, setTi] = useState([]);
+  const columns = ['번호', '타입', '인디케이터', '등록일'];
+
   useEffect(() => {
     const apiCall = async () => {
       await axios.get('http://localhost:8888/data').then((res) => {
-        // console.log(res.data);
         setTi(res.data);
       });
-      // const user = await res.data;
-      // console.log(user.map((v) => setTi(v.indicator)));
     };
+
     apiCall();
   }, []);
-  const columns = ['No', 'indicator_type', 'indicator', 'reg_date'];
-  // const data = ti.map((v) => v.indicator);
-
   return (
-    <Container>
-      <MenuBar>
-        <TableContainer>
-          <Table columns={columns} data={ti} />
-        </TableContainer>
-      </MenuBar>
-    </Container>
+    <>
+      <Router>
+        <Container>
+          <MenuBar>
+            {/* <Route path='/j0n9hyun' component={J0n9hyun} /> */}
+            <Menu>💕</Menu>
+            <Menu>
+              <Link to='/dashboard'>🎶</Link>
+            </Menu>
+          </MenuBar>
+          <TiList columns={columns} data={ti} />
+        </Container>
+      </Router>
+    </>
   );
 };
 
 export default DashBoard;
-
-/* <MenuBar>
-  <Menu>😊</Menu>
-  <Menu>💕</Menu>
-  <Menu>🎁</Menu>
-  <Menu>🎶</Menu>
-</MenuBar> */

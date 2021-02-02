@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import access from '../static/access.png';
 
 const Container = styled.div`
   background-color: #2c3e50;
@@ -37,15 +38,15 @@ const InputName = styled.div`
   width: 30px;
   color: lightgray;
   /* top: 2%; */
-  bottom: 1%;
-  left: 18%;
+  bottom: 6%;
+  left: 17%;
 `;
 
 const InputForm = styled.input`
   background: rgba(255, 255, 255, 0.1);
   color: lightgray;
   position: relative;
-  top: 10%;
+  top: 5%;
   font-size: 1.5rem;
   width: 250px;
   height: 30px;
@@ -66,7 +67,7 @@ const InputForm = styled.input`
 
 const ButtonForm = styled.button`
   position: relative;
-  top: 20%;
+  top: 15%;
   font-size: 1.5rem;
   width: 250px;
   margin-top: 10px;
@@ -86,7 +87,7 @@ const ButtonForm = styled.button`
 const Checkbox = styled.label`
   position: absolute;
   left: 15%;
-  top: 60%;
+  top: 55%;
   color: lightgray;
   &:hover {
     color: whitesmoke;
@@ -101,7 +102,7 @@ const WarningMsg = styled.div`
 
 const Img = styled.img`
   /* height: 80px; */
-  width: 125px;
+  width: 130px;
   /* padding-left: 45px; */
 `;
 
@@ -163,9 +164,10 @@ const Login = () => {
 
   return (
     <Container>
-      <form style={{ paddingTop: '230px' }} onSubmit={signIn}>
+      <form style={{ paddingTop: '200px' }} onSubmit={signIn}>
         <LoginContainer>
-          <Img src='https://www.flaticon.com/svg/vstatic/svg/3452/3452468.svg?token=exp=1612167196~hmac=786c903260713a964971888ac0c54c84' />
+          {/* <Img src='https://www.flaticon.com/svg/vstatic/svg/3452/3452468.svg?token=exp=1612167196~hmac=786c903260713a964971888ac0c54c84' /> */}
+          <Img src={access} />
           {/* <SignBar>SIGN IN</SignBar> */}
           <InputForm
             type='text'
