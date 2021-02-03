@@ -70,6 +70,24 @@ const TableTh = styled.th`
     color: red;
   } */
 `;
+const TableTh2 = styled.th`
+  background-color: #ffbe76;
+  color: white;
+  border: 0px solid #8e44ad;
+  text-align: center;
+  width: 1000px;
+  padding: 12px 15px;
+  position: sticky;
+  top: 0;
+  /* &:first-child {
+    border-radius: 46px 0 0 0;
+    color: red;
+  }
+  &:last-child {
+    border-radius: 0 46px 0 0;
+    color: red;
+  } */
+`;
 
 const TableTd = styled.td`
   width: 200px;
@@ -93,9 +111,10 @@ const DownButton = styled.button`
   }
 `;
 
-const TiList = ({ columns, data }) => {
+const TiList = ({ columns, columns2, data, data2 }) => {
   const [count, setCount] = useState(5);
   // const [loading, setLoading] = useState(false);
+  // const titleData = data2;
   const loadData = data.filter(function (e) {
     return e.id <= count;
   });
@@ -114,7 +133,7 @@ const TiList = ({ columns, data }) => {
           </TableHead>
           <TableBody>
             {data.length === 0 ? (
-              <img src={spinner} />
+              <img src={spinner} alt='spinner' />
             ) : (
               loadData.map(({ id, indicator_type, indicator, reg_date }) => (
                 <TableTr key={id}>
@@ -134,6 +153,28 @@ const TiList = ({ columns, data }) => {
         >
           불러오기
         </DownButton>
+        <TableStyling>
+          <TableHead>
+            <TableTr>
+              {columns2.map((column) => (
+                <TableTh2 key={column}>{column}</TableTh2>
+              ))}
+            </TableTr>
+          </TableHead>
+          <TableBody>
+            {data.length === 0 ? (
+              <img src={spinner} alt='spinner' />
+            ) : (
+              data2.map(({ id, id_value, name, description: desc }) => (
+                <TableTr key={id}>
+                  <TableTd>{id_value}</TableTd>
+                  <TableTd>{name}</TableTd>
+                  <TableTd>{desc.substr(0, 50) + '...'}</TableTd>
+                </TableTr>
+              ))
+            )}
+          </TableBody>
+        </TableStyling>
       </TableContainer>
     </>
   );

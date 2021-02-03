@@ -1,4 +1,356 @@
 {
+    "reputation_title": [
+        {
+            "id": 1,
+            "id_value": "60197e8fe38a2703bdd08d1c",
+            "name": "Kobalos – A complex Linux threat to high performance computing infrastructure",
+            "description": "ESET researchers have analyzed malware that has been targeting high performance computing (HPC) clusters, among other high-profile targets. We reverse engineered this small, yet complex, malware that is portable to many operating systems including Linux, BSD, Solaris, and possibly AIX and Windows. We have named this malware Kobalos for its tiny code size and many tricks; in Greek mythology, a Kobalos is a small, mischievous creature. Today we publish a paper titled \"A wild Kobalos appears: Tricksy Linux malware goes after HPCs\" describing the inner working of this threat."
+        },
+        {
+            "id": 2,
+            "id_value": "6019b7d8f25640334bd72d00",
+            "name": "Operation NightScout: Supply‑chain attack targets online gaming in Asia",
+            "description": "ESET researchers uncover a supply-chain attack used in a cyberespionage operation targeting online‑gaming communities in Asia. In January 2021, ESET discovered a new supply-chain attack compromising the update mechanism of NoxPlayer, an Android emulator for PCs and Macs, and part of BigNox’s product range with over 150 million users worldwide."
+        },
+        {
+            "id": 3,
+            "id_value": "6019aed47be6b81aca013a80",
+            "name": "Matryosh Botnet",
+            "description": "On January 25, 2021, 360 netlab BotMon system labeled a suspicious ELF file as Mirai, but the network traffic did not match Mirai's characteristics. This pulse is a collection of new \"Matryosh\" samples and infrastructure."
+        },
+        {
+            "id": 4,
+            "id_value": "6019866c0bce99b4856d20ab",
+            "name": "TrickBot masrv Module",
+            "description": "Recently Kryptos Logic discovered a relatively new module that goes by the name masrv. \"The module is a network scanner that incorporates the Masscan open-source tool. Additionally, the module contains an unreferenced Anchor C2 communication function and a list of hardcoded IPs which have previously been associated with Anchor and Bazar. We believe this module is used as one of TrickBot’s network reconnaissance tools to gather more information about the victim’s network.\""
+        },
+        {
+            "id": 5,
+            "id_value": "60187639d79e79a625c81d3c",
+            "name": "DocuSign Themed Malspam Leads to BazarBackdoor and Cobalt Strike",
+            "description": "In the fall of 2020, Bazar came to prominence when several campaigns delivered Ryuk ransomware. While Bazar appeared to drop-off in December, new campaigns have sprung up recently, using similar TTP’s.\n\nIn this case, DFIR Report will describe how the threat actor went from a DocuSign themed, malicious document, to domain wide compromise, using Bazar aka KEGTAP and Cobalt Strike."
+        },
+        {
+            "id": 6,
+            "id_value": "601832343e90a9658287a666",
+            "name": "A41APT - Analysis of the Stealth APT Campaign Threatening Japan",
+            "description": "Period of Activity: March 2019 to January 2021 Present. Target: Japan (Japanese companies including overseas branches). Initial Vector: Not Spear phishing But SSL-VPN abuse. Malwares: New type of malwares using dll-sideloadin（SodaMaster/P8RAT/DESLoader/FYAntiLoader etc.) Holds posible relations to APT10 / BlackTech groups."
+        },
+        {
+            "id": 7,
+            "id_value": "60146fd59c6b2bfdcd615572",
+            "name": "Egregor Ransomware Collection",
+            "description": "As a mature and exclusive Ransomware-as-a-Service (RaaS) platform, Egregor poses a serious threat to both public and private organizations. Not only is it supported by seasoned cybercriminal software developers, but it also caters to experienced affiliates who effectively target and compromise organizations, executing enterprise-wide deployment to maximize the monetization of their efforts. Egregor operators are known to exploit vulnerable and internet-accessible RDP gateways and phish victims with targeted, convincing lures. They also commonly deploy Egregor through Qakbot (Qbot), Ursnif (Gozi/ISFB), IcedID (Bakbot) infostealer/loader hybrid Trojan malware. Cobalt Strike has also been used to deliver Egregor in select instances."
+        },
+        {
+            "id": 8,
+            "id_value": "601469651e0043684e50a802",
+            "name": "CrimsonIAS Delphi Backdoor Possibly Linked to Mustang Panda",
+            "description": "CrimsonIAS is a Delphi-written backdoor dating back to at least 2017 that enables operators to run command line tools, exfiltrate files, and upload files to the infected machine. CrimsonIAS is notable as it listens for incoming connections only; making it different from typical Windows backdoors that beacons out. The characteristics found in CrimsonIAS’s execution flow suggest a connection to Mustang Panda (aka BRONZE PRESIDENT, RedDelta) PlugX samples.  Based on those non-unique characteristics, ThreatConnect assesses with low confidence that CrimsonIAS is an additional tool in Mustang Panda’s repertoire.  Industry reporting assesses with varying levels of confidence that Mustang Panda is a Chinese espionage actor that has conducted operations in Mongolia, Vietnam, and Hong Kong among other locations.  According to fellow researchers, Mustang Panda targets non-government organizations (NGOs), law enforcement organizations, and political entities."
+        },
+        {
+            "id": 9,
+            "id_value": "5fac084160045cf3e322288b",
+            "name": "Muhstik – IoT Botnet Infecting Cloud Servers",
+            "description": "\"Muhstik leverages IRC for its command and control and has consistently used the same infrastructure since its inception. The primary method of propagation for IoT devices is via home routers however there are multiple attempted exploits for Linux server propagation. Targeted routers include GPON home router, DD-WRT router, and the Tomato router. \" -Lacework Labs"
+        },
+        {
+            "id": 10,
+            "id_value": "5f453929b07a627ecdfd9af9",
+            "name": "Lazarus Group Campaign Targeting the Cryptocurrency Vertical",
+            "description": "In 2019, F-Secure uncovered technical details on Lazarus Group’s1 modus operandi during an investigation of an attack on an organisation in the cryptocurrency vertical, hereafter referred to as “the target”. The attack was linked to a wider, ongoing global phishing campaign. The detail in this report provides detection opportunities for blue teams seeking to defend their organizations from attacks by the group."
+        },
+        {
+            "id": 11,
+            "id_value": "5cf63c5f1c20b24747675033",
+            "name": "An APT Blueprint:Gaining New Visibility into Financial Threats",
+            "description": "In mid-2018, Bitdefender researchers investigated a targeted attack on an Eastern European financial institution, gaining new\ninsights and creating a complete event timeline showing how the infamous group Carbanak infiltrates organizations, how it moves\nlaterally across the infrastructure, and the time it takes to set up the actual heist."
+        },
+        {
+            "id": 12,
+            "id_value": "6012f5927e3e5c68dd6e7bbb",
+            "name": "“Lebanese Cedar” APT Espionage Campaign",
+            "description": "Lebanese Cedar is an APT group that has been operating for almost a decade attacking companies and organizations around the world. The group's main attack vector is intrusion into Oracle and Atlassian WEB servers. We assess that the\nintrusion into these systems was done by exploiting known vulnerabilities in systems that were not patched and detecting loopholes using open-source hacking tools. In early 2020, suspicious network activities and hacking tools were found in a range of companies. Comprehensive forensic research of the infected systems revealed a strong connection to Lebanese Cedar\nand a new version of the \"Explosive” V4 RAT (Remote Access Tool) or \"Caterpillar\" V2 WebShell was found within the victim’s networks."
+        },
+        {
+            "id": 13,
+            "id_value": "60103a3268891c63b1f24d74",
+            "name": "DPRK Campaign Targeting Security Researchers",
+            "description": "Over the past several months, the Threat Analysis Group has identified an ongoing campaign targeting security researchers working on vulnerability research and development at different companies and organizations. The actors behind this campaign, which we attribute to a government-backed entity based in North Korea, have employed a number of means to target researchers."
+        },
+        {
+            "id": 48,
+            "id_value": "5fe4c9656d75476a28b8b26c",
+            "name": "IceRat evades antivirus by running PHP on Java VM",
+            "description": "\"IceRat is a malware that uses a language that runs on the Java VM to evade the antivirus system, but can also evade its detection by running a version of the language JPHP.\""
+        },
+        {
+            "id": 14,
+            "id_value": "5fe0d2b1258adac64a4f9adc",
+            "name": "Secondary Cluster - SolarWinds Intrusion",
+            "description": "This pulse is a collection of additional, and potentially non supply-chain related activity in the SolarWinds compromise. This activity, based on SUPERNOVA and COSMICGALE may be a secondary actor or subgroup of the supply-chain operating adversary. While details are sparse, it is important to separate this activity from the supply-chain activity of UNC2452."
+        },
+        {
+            "id": 15,
+            "id_value": "6012ead43e3fe0be01f1f9e6",
+            "name": "Pro-Ocean: Rocke Group’s New Cryptojacking Malware",
+            "description": "Palo Alto Unit42 uncovered a revised version of the Rocke Group's cloud-targeted cryptojacking malware, which now includes new and improved rootkit and worm capabilities. Unit42 also provides details related to the hiding techniques used by the malware to dodge cybersecurity companies’ detection methods, while explaining its four-module structure. Unit42 named the malware Pro-Ocean after the name the attacker chose for the installation script."
+        },
+        {
+            "id": 16,
+            "id_value": "6011e0e8fe4caceec3d71f63",
+            "name": "Groundhog Botnet Rapidly Infecting Cloud",
+            "description": "A large botnet is rapidly expanding and rapidly infecting servers in the cloud, according to analysis by Lacework Labs."
+        },
+        {
+            "id": 17,
+            "id_value": "601052e27a2c451b3ba5ed31",
+            "name": "Operation Dream Job / Interception by Lazarus",
+            "description": "JPCERT/CC has analysed samples of the Torisma malware, which has been used by the Lazarus cyber-espionage group to spread malware across the globe, including the US and UK. This pulse includes samples of Torisma and LCPDot."
+        },
+        {
+            "id": 18,
+            "id_value": "6011bf6e6167f335ba6e7bbb",
+            "name": "Phishing Campaign Related to Shipping Leverages WOFF Obfuscation and Telegram Channels for Communication",
+            "description": "FireEye Email Security recently encountered various phishing campaigns, mostly in the Americas and Europe, using source code obfuscation with compromised or bad domains. These domains were masquerading as authentic websites and stole personal information such as credit card data. The stolen information was then shared to cross-platform, cloud-based instant messaging applications."
+        },
+        {
+            "id": 19,
+            "id_value": "6011ba895abb37ebb4f61eb6",
+            "name": "TA551 Returns with Word Document that Pushes Qakbot",
+            "description": "Late last week, security researcher Brad Duncan saw new samples of Word documents from TA551 (Shathak) pushing malware.  This actor was active up through 2020-12-18 pushing IcedID malware before going on break for the holidays.  Now that it's returned, TA551 has been pushing Qakbot (Qbot) malware instead of IcedID."
+        },
+        {
+            "id": 20,
+            "id_value": "5fc7e6165ab5e91b7c87aea3",
+            "name": "TeamTNT Delivers Malware With New Detection Evasion Tool",
+            "description": "AT&T Alien Labs has identified a new tool from the TeamTNT adversary group, who has been previously observed  targeting exposed Docker infrastructure for cryptocurrency mining purposes and credential theft. The group is using a new detection evasion tool, copied from open source repositories."
+        },
+        {
+            "id": 21,
+            "id_value": "60108cc47e31884e434c0258",
+            "name": "DanaBot Version 4, Early 2021 Update",
+            "description": "Proofpoint researchers discovered an updated version of DanaBot in the wild. DanaBot is a banking/stealer malware first discovered by Proofpoint in May 2018. There have been at least three significant versions of the malware."
+        },
+        {
+            "id": 22,
+            "id_value": "600ee8f9094928e77e838199",
+            "name": "FreakOut – Various Vulnerabilities Leveraged for creating a Botnet",
+            "description": "A series of attacks targeting systems that run TerraMaster, Liferay Portal and other web services are being investigated by security firm Check Point Research, which has identified a new strain of malware called FreakOut."
+        },
+        {
+            "id": 23,
+            "id_value": "600ee787c56de0374e0aafc0",
+            "name": "PowerShell Script Using Runspaces and Dropping REvil Ransomware",
+            "description": "Security Researcher Xavier Mertens (@xme) discovered a malicious PowerShells script with a low VirusTotal detection score which uses PowerShell Runspaces to drop REvil Ransomware."
+        },
+        {
+            "id": 24,
+            "id_value": "5ba8ed51f48dcf0fcf73b021",
+            "name": "MadoMiner",
+            "description": "2018 seems to be a time for highly profitable cryptominers that spread over SMB file-shares.  Following my analysis on ZombieBoy in July, I found a new malware sample that I’m calling MadoMiner."
+        },
+        {
+            "id": 25,
+            "id_value": "5fe4c7917371296306b8b26b",
+            "name": "Negasteal Uses Hastebin for Fileless Delivery of Crysis Ransomware",
+            "description": "\"We recently encountered a Negasteal (also known as Agent Tesla) variant that used hastebin for the fileless delivery of the Crysis (also known as Dharma) ransomware. This is the first time that we have observed Negasteal with a ransomware payload.\""
+        },
+        {
+            "id": 26,
+            "id_value": "600b381596cb873e98e49c0a",
+            "name": "Phishing Email with JNLP Attachment Leads to Eventual AzoRult Infection",
+            "description": "Security Researcher Xavier Mertens (@xme) recently spotted suspicious emails with attached files that contain a JNLP file extension. JNLP files are XML files, Java Network Launching Protocol, which contain all the necessary information to download and execute a Java program. In this investigation the JNLP file retrieves a simple JAR downloader which leads to a final AzoRult payload being downloaded and executed."
+        },
+        {
+            "id": 27,
+            "id_value": "5f21d5b84d529ed134127a66",
+            "name": "A Global Perspective of the SideWinder APT",
+            "description": "AT&T Alien Labs has conducted an investigation on the adversary group publicly known as SideWinder in order to historically document its highly active campaigns and identify a more complete picture of targets, motivations, and objectives. Through our investigation, we have uncovered a collection of activity targeting government and business throughout South Asia and East Asia spanning many years. Our findings are primarily focused on activity since 2017, however the group has been reportedly operating since at least 2012. Alien Labs along with other security researchers have assessed with low to medium confidence that the group is operates in support of India political interests based on targets, campaign timelines, technical characteristics of command and control (C2) infrastructure and malware, association with other known India interest APTs, in addition to past cyber threat intelligence reporting and our private telemetry."
+        },
+        {
+            "id": 28,
+            "id_value": "600b318c3786fffb1bdba0ee",
+            "name": "BEC Target Selection Using Google Forms",
+            "description": "In early December 2020, Proofpoint Threat Research observed attackers using Google Forms to bypass email security content filters based on keywords. The use of Google Forms is not new and is routinely observed in credential phishing campaigns. This hybrid campaign combines the benefits of scale and legitimacy by leveraging Google Services with social engineering attacks, more commonly associated with BEC. We observed thousands of messages predominantly delivered to retail, telecommunications, healthcare, energy, and manufacturing sectors."
+        },
+        {
+            "id": 29,
+            "id_value": "6009fd65dd030c3cef32e7d2",
+            "name": "Vadokrist: A Latin American Banking Trojan",
+            "description": "Vadokrist is a Latin American banking trojan that is active only in Brazil and is able to gain access to some websites, but can also hide the victim’s username and take screenshots. Vadokrist shares several important features with families we have described earlier in the series, namely Amavaldo, Casbaneiro, Grandoreiro and Mekotio."
+        },
+        {
+            "id": 30,
+            "id_value": "6009dc6c44b5b4406ffc3672",
+            "name": "Necro Botnet upgrades with a new versions using PyInstaller and a DGA",
+            "description": "Since January 1, 2021, 360Netlab’s BotMon system has continued to detect new variants of the Necro Botnet (N3Cr0m0rPh ) family. Recently, three versions of the samples have been detected, all of which are for Linux systems, and the latest version uses DGA technology to generate C2 Domain name."
+        },
+        {
+            "id": 64,
+            "id_value": "5ff8cf15ea2b879e13584f61",
+            "name": "Bogus CSS Injection Steals Credit Card Details",
+            "description": "A recent report on a credit card swiper attack on an ecommerce website led me to investigate how such malware is commonly found on Magento, the world’s most popular online marketplace."
+        },
+        {
+            "id": 31,
+            "id_value": "6009baded35a4f4b25a2ab13",
+            "name": "A Peculiar MS-DOS Legacy Downloader Used in Phishing and Adware Campaigns",
+            "description": "In a recent investigation K7 Security Labs discovered a sample that is almost archaic and considered \"legacy\" in terms of the Tactics, Techniques and Procedures (TTP) used, but surprisingly executes fine on modern systems. This blog post is about one such sample that we noticed in our queue and analyzed. The  sample was submitted to VirusTotal (VT) from South Korea, which is a compiled MS-DOS executable, self-deletes, connects to a malicious site and downloads a file to infect the victim's system."
+        },
+        {
+            "id": 32,
+            "id_value": "60088b53da5e673bc2825ce8",
+            "name": "Deep dive into the Solorigate second-stage activation: From SUNBURST to TEARDROP and Raindrop",
+            "description": "A month after the Solorigate cyber-attack, Microsoft has published further details of the sophisticated and protracted intrusion attack that began on 1 January and continues to spread throughout the company's network and beyond."
+        },
+        {
+            "id": 33,
+            "id_value": "5fe11a7e3d4fea5764e60535",
+            "name": "Emotet is back in December",
+            "description": "After a few weeks of inactivity. Emotet is back sending malicious documents via e-mail."
+        },
+        {
+            "id": 34,
+            "id_value": "5fe0cd0101540b1d4144f8a3",
+            "name": "Suspected NSO Group iMessage ‘Zero-Click’ Exploit Used Against Journalists",
+            "description": "In July and August 2020, government operatives used NSO Group’s Pegasus spyware to hack 36 personal phones belonging to journalists, producers, anchors, and executives at Al Jazeera. The personal phone of a journalist at London-based Al Araby TV was also hacked."
+        },
+        {
+            "id": 35,
+            "id_value": "6007314fbb9b9daf8afc505c",
+            "name": "TeamTNT Botnet Deploys Improved Cloud and Container Attack Techniques",
+            "description": "Cado Security has recently identified a campaign that deploys cloud and container specific attack tools. It is the latest iteration of malware we reported on back in August 2020. The cloud and container attack tools have shown significant improvements in the ability to steal credentials from Google Cloud Platform, Amazon, and other systems."
+        },
+        {
+            "id": 36,
+            "id_value": "5f99dd6b17da45dfb9dc296e",
+            "name": "Ryuk Ransomware and Associated Threat Activity",
+            "description": "this IOC is a mistake, nothing to see in virus total, the size is 0 KB and the hash respond to \"135\" string, FALSE POSITIVE"
+        },
+        {
+            "id": 37,
+            "id_value": "600716fe0944d1652a573285",
+            "name": "Potential APT31 Activity Against Political Targets",
+            "description": "The Federal Office for the Protection of the Constitution has knowledge that German public authorities could be the focus of cyber attacks by the APT31 group. The aim of this warning message is it to sensitize German bodies and to provide them with the necessary technical information provided in order to be able to detect a possible infection.\n\nCyber attacks by the APT31 group are currently directed against political targets in Western countries. This includes, for example, ministries and authorities, political organizations and foundations."
+        },
+        {
+            "id": 38,
+            "id_value": "6007149a5ff246c7c18229c1",
+            "name": "Raindrop Loader delivers Cobalt Strike; SolarWinds",
+            "description": "Raindrop (Backdoor.Raindrop) is a loader which delivers a payload of Cobalt Strike. Raindrop is very similar to the already documented Teardrop tool, but there are some key differences between the two. While Teardrop was delivered by the initial Sunburst backdoor (Backdoor.Sunburst), Raindrop appears to have been used for spreading across the victim’s network. Symantec has seen no evidence to date of Raindrop being delivered directly by Sunburst. Instead, it appears elsewhere on networks where at least one computer has already been compromised by Sunburst."
+        },
+        {
+            "id": 39,
+            "id_value": "5fdbc835c8566536d34f9adc",
+            "name": "Credential Stealer Targets US, Canadian Bank Customers",
+            "description": "In mid-December, TrendMicro discovered a campaign that distributed a credential stealer. TrendMicro also learned that the main code components of this campaign is written in AHK. By tracking the campaign components, we found out that its activity has been occurring since early 2020. The malware infection consists of multiple stages that start with a malicious Excel file. In turn, this file contains an AHK script compiler executable, a malicious AHK script file, and a Visual Basic for Applications (VBA) AutoOpen macro. The full attack chain is depicted in Figure 1. Our telemetry tracked the malware’s command-and-control (C&C) servers and determined that these come from the US, the Netherlands, and Sweden. We also learned that the malware has been targeting financial institutions in the US and Canada."
+        },
+        {
+            "id": 40,
+            "id_value": "600098b02722f41650aee4d4",
+            "name": "Adversary Playbook: JavaScript RAT Targeting Asian Government and Financial Sectors",
+            "description": "An Adversary Playbook by FortiGuard Labs on a new JavaScript RAT campaign targeting government financial institutions in Asia, as well as a recent update for the JsOutProx malware family."
+        },
+        {
+            "id": 41,
+            "id_value": "60008dbd574147500059ba7d",
+            "name": "New Variant of Ursnif Continuously Targeting with Invoice Malspam",
+            "description": "The Ursnif Trojan has been observed targeting Italy over the past year. A few days ago, FortiGuard Labs detected a phishing campaign in the wild that was spreading a fresh variant of the Ursnif Trojan via an attached MS Word document that is continuously targeting Italy. Although Ursnif is identified as a banking Trojan, due to its C2 server’s shutdown, this latest variant has been unable download the malicious banking module it needs to steal banking information from the victim, causing it to fail to start the second stage of its attack."
+        },
+        {
+            "id": 42,
+            "id_value": "5fff646040d1907e50f04814",
+            "name": "Hancitor DocuSign Malspam Resumes After a Holiday Break",
+            "description": "Campaigns spreading Hancitor malware were active from October through December 2020, but Hancitor went quiet after 2020-12-17.  On Tuesday 2021-01-12, criminals started sending malicious spam (malspam) pushing Hancitor again."
+        },
+        {
+            "id": 43,
+            "id_value": "5fff52390820519347e5f2d3",
+            "name": "End of 2020 Charming Kitten Phishing Campaigns",
+            "description": "\"During the Christmas holidays and the beginning of the new year, the Charming Kitten group, the Iranian state-backed hackers, have begun a targeted phishing campaign of espionage against different individuals to collect information.\""
+        },
+        {
+            "id": 44,
+            "id_value": "5fff27a7a25b10cca4e89163",
+            "name": "A Rare Look Inside a Cryptojacking Campaign and its Profit",
+            "description": "This post details an ongoing cryptojacking campaign targeting Linux machines, using exposed Docker API ports as an initial access vector to a victim’s machine. The attacker then installs a Golang binary, which is undetected in VirusTotal at the time of this writing."
+        },
+        {
+            "id": 45,
+            "id_value": "5fd825b7fa4eb2223a0cf812",
+            "name": "Dark Halo Leverages SolarWinds Compromise to Breach Organizations",
+            "description": "Volexity is releasing additional research and indicators associated with a series of incidents involving malware, backdoors, and a software update that was distributed through an update to SolarWinds Orion software."
+        },
+        {
+            "id": 46,
+            "id_value": "5fd7a716e178ff014c630ecb",
+            "name": "BITTER APT Targeting Government and Critical Infrastructure in Asia",
+            "description": "\"BITTER is an APT organization suspected of having a South Asian background. This organization has long been conducting attacks against China, Pakistan and other countries, mainly targeting government, military industry, electric power, nuclear energy and other units to conduct targeted attacks to steal sensitive information.\""
+        },
+        {
+            "id": 47,
+            "id_value": "5fa05f3959d14b157007eb3a",
+            "name": "UNC1945 Adversary Overview - Targeting telecom, financial, and consulting industries",
+            "description": "Through Mandiant investigation of intrusions between February 2018 and September 2020, the FLARE Advanced Practices team observed a group we track as UNC1945 compromise telecommunications companies and operate against a tailored set of targets within the financial and professional consulting industries by leveraging access to third-party networks"
+        },
+        {
+            "id": 49,
+            "id_value": "5ffdfdb8bdb5515f9e8001a1",
+            "name": "Android spyware targets users in Pakistan",
+            "description": "SophosLabs has discovered a small cluster of Trojanized versions of Android apps, mainly marketed to people who live in Pakistan. Someone has modified these otherwise legitimate apps (clean versions are available for download on the Google Play Store) to add malicious features that seem completely focused on covert surveillance and espionage."
+        },
+        {
+            "id": 50,
+            "id_value": "5ffde53573457b19cacf41be",
+            "name": "APT Group Chimera Abusing Cloud Services to Fly Under the Radar",
+            "description": "NCC Group and Fox-IT have been tracking a threat group with a wide set of interests, from intellectual property (IP) from victims in the semiconductors industry through to data from the airline industry.\n\nIn their intrusions they regularly abuse cloud services from Google and Microsoft to achieve their goals. NCC Group and Fox-IT observed this threat actor during various incident response engagements performed between October 2019 until April 2020. Our threat intelligence analysts noticed clear overlap between the various cases in infrastructure and capabilities, and as a result we assess with moderate confidence that one group was carrying out the intrusions across multiple victims operating in Chinese interests."
+        }
+    ],
+    "users": [
+        {
+          "id": "j0n9hyun",
+          "pw": "acvdsf"
+        },
+        {
+          "id": "love",
+          "pw": "1234"
+        },
+        {
+          "id": "test",
+          "pw": "test"
+        },
+        {
+          "id": "ouMhq53"
+        },
+        {
+          "formId": "test",
+          "formPw": "a",
+          "id": "JiK_ZCL"
+        },
+        {
+          "formId": "test",
+          "formPw": "a",
+          "id": "0Q9IV91"
+        },
+        {
+          "idid": "aa",
+          "pwpw": "asd",
+          "id": "Hyn5Af-"
+        },
+        {
+          "idid": "aa",
+          "pwpw": "asdasd",
+          "id": "s6hJctw"
+        },
+        {
+          "pw": "test",
+          "id": "0NMU7Iz"
+        },
+        {
+          "id": "46EQSFE"
+        }
+      ],
   "data": [
     {
       "id": 1,

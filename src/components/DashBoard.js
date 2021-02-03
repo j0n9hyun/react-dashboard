@@ -10,6 +10,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import J0n9hyun from './J0n9hyun';
+import TableBoard from './TableBoard';
 
 const Container = styled.div`
   background-color: #2c3e50;
@@ -38,30 +39,48 @@ const Img = styled.img`
 `;
 
 const DashBoard = () => {
-  const [ti, setTi] = useState([]);
-  const columns = ['번호', '타입', '인디케이터', '등록일'];
+  // const [ti, setTi] = useState([]);
+  // const [tiTitle, setTiTitle] = useState([]);
+  // const columns = ['번호', '타입', '인디케이터', '등록일'];
+  // const columns2 = ['아이디값', '타이틀', '설명'];
 
-  useEffect(() => {
-    const apiCall = async () => {
-      await axios.get('http://localhost:8888/data').then((res) => {
-        setTi(res.data);
-      });
-    };
+  // useEffect(() => {
+  //   const apiCall = async () => {
+  //     await axios.get('http://localhost:8888/data').then((res) => {
+  //       setTi(res.data);
+  //     });
+  //   };
+  //   const Title = async () => {
+  //     await axios.get('http://localhost:8888/reputation_title').then((res) => {
+  //       setTiTitle(res.data);
+  //     });
+  //   };
 
-    apiCall();
-  }, []);
+  //   apiCall();
+  //   Title();
+  // }, []);
+
   return (
     <>
       <Router>
         <Container>
           <MenuBar>
-            {/* <Route path='/j0n9hyun' component={J0n9hyun} /> */}
-            <Menu>💕</Menu>
+            <Menu>
+              <Link to='/tableboard'>🌹</Link>
+            </Menu>
             <Menu>
               <Link to='/dashboard'>🎶</Link>
             </Menu>
           </MenuBar>
-          <TiList columns={columns} data={ti} />
+          <Route path='/tableboard'>
+            <TableBoard />
+          </Route>
+          {/* <TiList
+            columns={columns}
+            columns2={columns2}
+            data={ti}
+            data2={tiTitle}
+          /> */}
         </Container>
       </Router>
     </>
