@@ -5,8 +5,8 @@ import spinner from '../static/load.gif';
 const TableContainer = styled.div`
   position: absolute;
   text-align: center;
-  left: 30%;
-  top: 30%;
+  left: 20%;
+  top: 5%;
   height: 500px;
 `;
 
@@ -111,6 +111,14 @@ const DownButton = styled.button`
   }
 `;
 
+const Img = styled.img`
+  width: 100px;
+`;
+
+const ImgLoad = () => {
+  <Img src={spinner} alt='spinner' />;
+};
+
 const TiList = ({ columns, columns2, data, data2 }) => {
   const [count, setCount] = useState(5);
   // const [loading, setLoading] = useState(false);
@@ -133,7 +141,7 @@ const TiList = ({ columns, columns2, data, data2 }) => {
           </TableHead>
           <TableBody>
             {data.length === 0 ? (
-              <img src={spinner} alt='spinner' />
+              <Img src={spinner} alt='spinner' />
             ) : (
               loadData.map(({ id, indicator_type, indicator, reg_date }) => (
                 <TableTr key={id}>

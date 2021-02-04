@@ -3,7 +3,6 @@ import Login from './components/Login';
 import { createGlobalStyle } from 'styled-components';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import DashBoard from './components/DashBoard';
-import J0n9hyun from './components/J0n9hyun';
 import TableBoard from './components/TableBoard';
 
 const GlobalStyle = createGlobalStyle`
@@ -32,10 +31,11 @@ function App() {
     <>
       <GlobalStyle />
       <Router>
-        <Route path='/' exact component={Login} />
-        <Route path='/dashboard' component={DashBoard} />
-        <Route path='/tableboard' component={TableBoard} />
-        {/* <Route path='/j0n9hyun' exact component={J0n9hyun}></Route> */}
+        <Switch>
+          <Route path='/' exact component={Login} />
+          <Route path='/dashboard' component={DashBoard} />
+          <Route path='/tableboard' component={TableBoard} />
+        </Switch>
       </Router>
     </>
   );
