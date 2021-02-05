@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import spinner from '../static/load.gif';
 const TableContainer = styled.div`
+  margin-top: 20px;
   position: absolute;
   text-align: center;
   left: 20%;

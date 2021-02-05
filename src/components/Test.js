@@ -1,30 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import TiList from './TiList';
+import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import presentation from '../static/presentation.png';
+import background from '../static/background.jpg';
 import menubar from '../static/menu11.png';
 import settings from '../static/settings.png';
 import calendar from '../static/calendar.png';
 import dashboard from '../static/dashboard.png';
 import sign from '../static/sign.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faJedi, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faJedi } from '@fortawesome/free-solid-svg-icons';
 
 const element = (
   <FontAwesomeIcon icon={faJedi} color='white' size='4x' pull='left' />
 );
-
-const searchElement = (
-  <FontAwesomeIcon icon={faSearch} color='lightgray' size='lg' />
-);
-
-const SearchIcon = styled.span`
-  position: absolute;
-  top: 70px;
-  left: 6%;
-`;
 
 const Container = styled.div`
   background-color: #343a40;
@@ -38,8 +27,13 @@ const Header = styled.div`
 `;
 
 const MenuBar = styled.div`
+  /* top: 10px; */
+  /* left: 10px; */
+  /* position: relative; */
   position: absolute;
+  /* margin-top: 80px; */
   background-color: #212529;
+  /* border-radius: 20px; */
   width: 230px;
   height: calc(100% - 70px);
   box-shadow: 0 2px 20px -10px black;
@@ -77,7 +71,7 @@ const MenuBarShrinkButton = styled.div`
 `;
 
 const Menu1 = styled.div`
-  background-color: transparent;
+  background-color: black;
   font-weight: bold;
   padding-top: 10px;
   color: lightgray;
@@ -109,7 +103,7 @@ const Menu1 = styled.div`
 `;
 
 const Menu2 = styled(Menu1)`
-  background-color: black;
+  background-color: transparent;
   &:hover {
     &:after {
       content: '';
@@ -117,13 +111,24 @@ const Menu2 = styled(Menu1)`
     }
   }
 `;
-const Menu3 = styled(Menu1)`
-  background-color: transparent;
+
+const Welcome = styled.div`
+  box-shadow: 0 2px 30px -10px black;
+  opacity: 0.8;
+  /* border-radius: 10px; */
+  background-image: url(${background});
+  color: lightgray;
+  position: absolute;
+  text-align: center;
+  /* top: 10%; */
+  width: calc(100% - 230px);
+  height: 100px;
+  margin-left: 230px;
+
+  margin-bottom: 30px;
+  font-size: 2rem;
   &:hover {
-    &:after {
-      content: '';
-      left: 20%;
-    }
+    opacity: 1;
   }
 `;
 
@@ -134,6 +139,36 @@ const SideText = styled.span`
   right: 0;
 `;
 
+const InnerContainer = styled.div`
+  position: relative;
+  background-color: #1e272e;
+  border-radius: 20px;
+  color: lightgray;
+  top: 15%;
+  width: 50%;
+  left: 50%;
+  margin-left: -25%;
+  height: 50%;
+  box-shadow: 0 2px 20px -10px black;
+`;
+
+const List = styled.div``;
+
+const InnerContainer2 = styled.div`
+  left: 50%;
+  position: relative;
+  background-color: #1e272e;
+  border-radius: 20px;
+  height: 50%;
+  width: 30%;
+`;
+
+const Test = styled.div`
+  border: 1px solid red;
+  width: 100px;
+  height: 500px;
+`;
+
 const Img = styled.img`
   width: 33px;
   height: 30px;
@@ -142,13 +177,14 @@ const Img = styled.img`
 `;
 
 const SearchBar = styled.input`
+  /* background-color: lightgray; */
   border: 0;
   color: lightgray;
   background-color: #343a40;
   margin-bottom: 10px;
   border-radius: 10px;
-  padding-left: 35px;
-  margin-left: 6px;
+  padding-left: 25px;
+  margin-left: 8px;
   font-size: 1rem;
   width: 180px;
   height: 35px;
@@ -176,10 +212,7 @@ const HeaderButton = styled.li`
   }
 `;
 
-const TableBoard = () => {
-  const [ti, setTi] = useState([]);
-  const [tiTitle, setTiTitle] = useState([]);
-
+const Test = () => {
   const history = useHistory();
   const onClick = () => {
     history.push('/dashboard');
@@ -187,61 +220,48 @@ const TableBoard = () => {
   const onClick2 = () => {
     history.push('/tableboard');
   };
-  const columns = ['번호', '타입', '인디케이터', '등록일'];
-  const columns2 = ['아이디값', '타이틀', '설명'];
 
-  useEffect(() => {
-    const apiCall = async () => {
-      await axios.get('http://localhost:8888/data').then((res) => {
-        setTi(res.data);
-      });
-    };
-    const Title = async () => {
-      await axios.get('http://localhost:8888/reputation_title').then((res) => {
-        setTiTitle(res.data);
-      });
-    };
-
-    apiCall();
-    Title();
-  }, []);
   return (
-    <Container>
-      <Header>
-        {element}
-        <HeaderButton onClick={onClick}>Dashboard</HeaderButton>
-        <HeaderButton>Users</HeaderButton>
-        <HeaderButton>Profile</HeaderButton>
-      </Header>
-      <MenuBar>
-        <MenuBarTitle>
-          Tables
-          <MenuBarShrinkButton onClick={MenuBarInverse} />
-        </MenuBarTitle>
-        <SearchIcon>{searchElement}</SearchIcon>
-        <SearchBar placeholder='입력' />
+    <>
+      <Container>
+        <Header>
+          {element}
+          <HeaderButton onClick={onClick}>Dashboard</HeaderButton>
+          <HeaderButton>Users</HeaderButton>
+          <HeaderButton>Profile</HeaderButton>
+        </Header>
+        <MenuBar>
+          <MenuBarTitle>
+            Home
+            <MenuBarShrinkButton onClick={MenuBarInverse} />
+          </MenuBarTitle>
 
-        <Menu1 onClick={onClick}>
-          <Img src={dashboard} />
-          <SideText>Home</SideText>
-        </Menu1>
-        <Menu2 onClick={onClick2}>
-          <Img src={presentation} /> <SideText>Tables</SideText>
-        </Menu2>
-        <Menu3 onClick={onClick2}>
-          <Img src={calendar} /> <SideText>어쩌고</SideText>
-        </Menu3>
-        <Menu3 onClick={onClick2}>
-          <Img src={sign} /> <SideText>저쩌고</SideText>
-        </Menu3>
-        <Menu3 onClick={onClick2}>
-          <Img src={settings} /> <SideText>Settings</SideText>
-        </Menu3>
-      </MenuBar>
-      <TiList columns={columns} columns2={columns2} data={ti} data2={tiTitle} />
-      {/* <Header2 /> */}
-    </Container>
+          <SearchBar placeholder='입력' />
+
+          <Menu1 onClick={onClick}>
+            <Img src={dashboard} />
+            {/* <FontAwesomeIcon icon={faHome} size='2x' color='#535c68' spin /> */}
+            <SideText>Home</SideText>
+          </Menu1>
+          <Menu2 onClick={onClick2}>
+            <Img src={presentation} /> <SideText>Tables</SideText>
+          </Menu2>
+          <Menu2 onClick={onClick2}>
+            <Img src={calendar} /> <SideText>어쩌고</SideText>
+          </Menu2>
+          <Menu2 onClick={onClick2}>
+            <Img src={sign} /> <SideText>저쩌고</SideText>
+          </Menu2>
+          <Menu2 onClick={onClick2}>
+            <Img src={settings} /> <SideText>Settings</SideText>
+          </Menu2>
+        </MenuBar>
+        <Welcome>Welcome to asdasd</Welcome>
+        {/* <Header2 /> */}
+        <InnerContainer>test</InnerContainer>
+      </Container>
+    </>
   );
 };
 
-export default TableBoard;
+export default Test;
