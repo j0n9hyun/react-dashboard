@@ -4,7 +4,6 @@ import { createGlobalStyle } from 'styled-components';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import DashBoard from './components/DashBoard';
 import TableBoard from './components/TableBoard';
-
 const GlobalStyle = createGlobalStyle`
   html, head {
     height: 100%;

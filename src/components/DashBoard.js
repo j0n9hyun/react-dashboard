@@ -1,45 +1,78 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import dashboard from '../static/dashboard.png';
 import presentation from '../static/presentation.png';
 import background from '../static/background.jpg';
 import menubar from '../static/menu11.png';
 import settings from '../static/settings.png';
 import calendar from '../static/calendar.png';
-import search from '../static/search.png';
+import dashboard from '../static/dashboard.png';
 import sign from '../static/sign.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faJedi } from '@fortawesome/free-solid-svg-icons';
+
+const element = <FontAwesomeIcon icon={faJedi} color='white' size='4x' />;
 
 const Container = styled.div`
-  background-color: #2c3e50;
+  background-color: #343a40;
   height: 100%;
+`;
+const Something = styled.div`
+  background-color: #212529;
+  width: 100%;
+  height: 70px;
+  cursor: pointer;
+`;
+const Something2 = styled.div`
+  position: absolute;
+  background-color: #212529;
+  height: 1000px;
+  width: 300px;
+  border: 0px solid gray;
 `;
 
 const MenuBar = styled.div`
   top: 10px;
   left: 10px;
-  position: fixed;
-  /* position: sticky; */
-  background-color: #1e272e;
+  /* position: relative; */
+  position: absolute;
+  margin-top: 80px;
+  background-color: #212529;
   border-radius: 20px;
-  width: 200px;
+  width: 230px;
   height: 70%;
   box-shadow: 0 2px 20px -10px black;
 `;
+
+const MenuBarInverse = () => {
+  console.log('inverse');
+};
 
 const MenuBarTitle = styled.div`
   color: white;
   padding: 10px 0 20px 20px;
   font-size: 1.5rem;
-  &:after {
+  /* &:after {
     content: '';
     display: inline-block;
     height: 30px;
     width: 32px;
-    margin-left: 75px;
+    margin-left: 100px;
     background: url(${menubar});
     background-size: 32px 30px;
-  }
+  } */
+`;
+
+const MenuBarShrinkButton = styled.div`
+  position: absolute;
+  top: 0;
+  margin-top: 10px;
+  margin-left: 165px;
+  height: 30px;
+  width: 32px;
+  background: url(${menubar});
+  background-size: 32px 30px;
+  cursor: pointer;
 `;
 
 const Menu1 = styled.div`
@@ -47,14 +80,17 @@ const Menu1 = styled.div`
   font-weight: bold;
   padding-top: 10px;
   color: lightgray;
-  font-size: 1rem;
+  font-size: 16px;
   padding-left: 5px;
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: 10px;
+  margin: 10px 10px;
   transition: background-color 0.5s ease;
   &:hover {
     background-color: black;
-    width: 195px;
+    margin: 10px 10px;
+    width: 205px;
+    color: white;
     &:active {
       background-color: #130f40;
     }
@@ -88,13 +124,13 @@ const Header = styled.div`
   background-image: url(${background});
   color: lightgray;
   position: absolute;
-  /* position: relative; */
   text-align: center;
-  top: 20px;
-  width: 70%;
+  top: 10%;
+  width: 50%;
   height: 100px;
   left: 55%;
-  margin-left: calc(70% / -2);
+  margin-left: calc(50% / -2);
+
   margin-bottom: 30px;
   font-size: 2rem;
   &:hover {
@@ -110,19 +146,24 @@ const SideText = styled.span`
 `;
 
 const InnerContainer = styled.div`
-  position: absolute;
+  position: relative;
   background-color: #1e272e;
   border-radius: 20px;
   color: lightgray;
   top: 15%;
-  width: 30%;
-  left: 38%;
-  margin-left: calc(30% / -2);
+  width: 50%;
+  left: 50%;
+  margin-left: -25%;
   height: 50%;
   box-shadow: 0 2px 20px -10px black;
 `;
-const InnerContainer2 = styled(InnerContainer)`
-  left: 70%;
+const InnerContainer2 = styled.div`
+  left: 50%;
+  position: relative;
+  background-color: #1e272e;
+  border-radius: 20px;
+  height: 50%;
+  width: 30%;
 `;
 
 const Test = styled.div`
@@ -139,18 +180,21 @@ const Img = styled.img`
 `;
 
 const SearchBar = styled.input`
+  /* background-color: lightgray; */
+  border: 0;
+  color: lightgray;
+  background-color: #343a40;
   margin-bottom: 10px;
-  border-radius: 15px;
+  border-radius: 10px;
   padding-left: 25px;
   margin-left: 8px;
-
   font-size: 1rem;
-  width: 150px;
-  height: 30px;
+  width: 180px;
+  height: 35px;
   outline: none;
-  background-color: lightgray;
-  &:before {
-    content: url('../static/search.png');
+  box-shadow: 0 5px 5px -3px black;
+  &::placeholder {
+    color: darkgray;
   }
 `;
 
@@ -162,17 +206,28 @@ const DashBoard = () => {
   const onClick2 = () => {
     history.push('/tableboard');
   };
+
+  const onClick3 = () => {
+    history.push('/');
+  };
   return (
     <>
       <Container>
+        <Something onClick={onClick3}>{element}</Something>
         <Header>Welcome to asdasd</Header>
-        <InnerContainer>test</InnerContainer>
-        <InnerContainer2>test</InnerContainer2>
+        {/* <Something2 /> */}
         <MenuBar>
-          <MenuBarTitle>Home</MenuBarTitle>
-          <SearchBar placeholder='검색' />
+          <MenuBarTitle>
+            Home
+            <MenuBarShrinkButton onClick={MenuBarInverse} />
+          </MenuBarTitle>
+
+          <SearchBar placeholder='입력' />
+
           <Menu1 onClick={onClick}>
-            <Img src={dashboard} /> <SideText>Home</SideText>
+            <Img src={dashboard} />
+            {/* <FontAwesomeIcon icon={faHome} size='2x' color='#535c68' spin /> */}
+            <SideText>Home</SideText>
           </Menu1>
           <Menu2 onClick={onClick2}>
             <Img src={presentation} /> <SideText>Tables</SideText>
@@ -187,8 +242,8 @@ const DashBoard = () => {
             <Img src={settings} /> <SideText>Settings</SideText>
           </Menu2>
         </MenuBar>
+        <InnerContainer>test</InnerContainer>
       </Container>
-      <Test />
     </>
   );
 };
