@@ -115,11 +115,6 @@ const DownButton = styled.button`
 const Img = styled.img`
   width: 100px;
 `;
-
-const ImgLoad = () => {
-  <Img src={spinner} alt='spinner' />;
-};
-
 const TiList = ({ columns, columns2, data, data2 }) => {
   const [count, setCount] = useState(5);
   // const [loading, setLoading] = useState(false);
