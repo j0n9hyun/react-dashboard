@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import access from '../static/access.png';
+import palette from '../static/palette';
+import '../static/fontawesome.css';
 
 const Container = styled.div`
-  background-color: #2c3e50;
+  /* background-color: #2c3e50; */
+  background-color: ${palette.gray[8]};
   /* height: 1100px; */
   height: 100%;
 `;
@@ -18,18 +21,9 @@ const LoginContainer = styled.div`
   margin: 0 auto;
   width: 400px;
   height: 600px;
-  background: linear-gradient(#130f40, #30336b);
+  /* background: linear-gradient(#130f40, #30336b); */
+  background: ${palette.gray[9]};
 `;
-
-// const SignBar = styled.div`
-//   color: white;
-//   font-size: 2rem;
-//   &::after {
-//     content: '';
-//     width: 1px;
-//     border: 1px solid red;
-//   }
-// `;
 
 const InputName = styled.div`
   position: relative;
@@ -108,6 +102,7 @@ const Img = styled.img`
 
 const Login = () => {
   const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setResult(null);
@@ -144,20 +139,24 @@ const Login = () => {
     // }
 
     const apiCall = async () => {
-      const res = await axios.get('http://localhost:8888/users');
-      const user = await res.data;
-      console.log(user);
-      const auth = user.find(
-        (user) => user.id === formId && user.pw === formPw
-      );
+      await axios
+        .get('http://localhost:8888/users')
+        .then((user) => {
+          const auth = user.data.find(
+            (user) => user.id === formId && user.pw === formPw
+          );
 
-      if (auth) {
-        console.log('success');
-        window.location.href = '/dashboard';
-      } else {
-        setResult(3);
-        return false;
-      }
+          if (auth) {
+            window.location.href = '/dashboard';
+          } else {
+            setResult(3);
+            return false;
+          }
+        })
+        .catch((e) => {
+          setLoading(true);
+          setResult(3);
+        });
     };
     apiCall();
   };
@@ -166,23 +165,11 @@ const Login = () => {
     <Container>
       <form style={{ paddingTop: '200px' }} onSubmit={signIn}>
         <LoginContainer>
-          {/* <Img src='https://www.flaticon.com/svg/vstatic/svg/3452/3452468.svg?token=exp=1612167196~hmac=786c903260713a964971888ac0c54c84' /> */}
           <Img src={access} />
-          {/* <SignBar>SIGN IN</SignBar> */}
-          <InputForm
-            type='text'
-            id='id'
-            placeholder='아이디'
-            // onChange={onChangeId}
-          />
+          <InputForm type='text' id='id' placeholder='아이디' />
           <br />
           <InputName>Username</InputName>
-          <InputForm
-            type='password'
-            id='pw'
-            placeholder='비밀번호'
-            // onChange={onChangePw}
-          />
+          <InputForm type='password' id='pw' placeholder='비밀번호' />
           <br />
           <InputName>Password</InputName>
           <ButtonForm type='submit'>버튼</ButtonForm>
@@ -205,7 +192,12 @@ const Login = () => {
               포함되어야 합니다.
             </WarningMsg>
           )}
-          {result === 3 && <WarningMsg>로그인 안됨</WarningMsg>}
+          {result === 3 && (
+            <WarningMsg>
+              <div class='.fa-spinner'>{'\uf110'} \uf110로그인</div> 로그인 안됨
+            </WarningMsg>
+          )}
+          {loading === true && console.log('ㄴ')}
         </LoginContainer>
       </form>
     </Container>
