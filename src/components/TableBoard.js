@@ -151,27 +151,35 @@ const ProfileContainer = styled.div`
   text-align: center;
   margin: 20px 20px;
   border-radius: 10px;
-  width: 200px;
+  /* border: 1px solid coral; */
+  width: 250px;
   float: right;
-  background-color: ${palette.gray[9]};
+  /* background-color: ${palette.gray[9]}; */
   height: 50px;
 `;
 const Profile = styled.div`
-  position: absolute;
+  /* right: 0; */
+  /* border: 1px solid red; */
+  position: relative;
   margin: 10px;
-  border-radius: 10px;
+  border-radius: 50px;
+  bottom: 25px;
   width: 40px;
   height: 40px;
   background-color: ${palette.gray[6]};
 `;
 
 const ProfileText = styled.div`
-  position: absolute;
-  left: 80px;
-  color: ${palette.gray[4]};
-  top: 15px;
+  position: relative;
+  left: 75px;
+  color: ${palette.gray[5]};
 `;
-
+const ProfileTextSubtitle = styled.div`
+  position: relative;
+  left: 75px;
+  font-size: 14px;
+  color: ${palette.gray[6]};
+`;
 const TableBoard = () => {
   const [ti, setTi] = useState([]);
   const [tiTitle, setTiTitle] = useState([]);
@@ -208,9 +216,10 @@ const TableBoard = () => {
         <SearchBar placeholder='검색' />
       </SearchContainer>
       <ProfileContainer>
+        <i class='fas fa-sort-down' />
         <Profile>
-          <i class='fas fa-sort-down' />
           <ProfileText>j0n9hyun</ProfileText>
+          <ProfileTextSubtitle>QuadMiners</ProfileTextSubtitle>
         </Profile>
       </ProfileContainer>
       <MenuBar>

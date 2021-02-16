@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // import 'antd/dist/antd.css';
 import styled from 'styled-components';
 import spinner from '../static/load.gif';
+import DashBoard from './DashBoard';
 const TableContainer = styled.div`
   margin-top: 20px;
   position: absolute;

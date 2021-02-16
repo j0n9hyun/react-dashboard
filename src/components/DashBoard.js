@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import palette from '../static/palette';
 import '../static/fontAwesome/css/all.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { increseCount } from '../reducers/counter';
+import access from '../static/access.png';
 
 import {
   LineChart,
@@ -23,72 +26,6 @@ import {
   RadialBarChart,
   RadialBar,
 } from 'recharts';
-import TiList from './TiList';
-
-const d = [
-  {
-    name: '18-24',
-    uv: 31.47,
-    pv: 2400,
-    fill: '#8884d8',
-  },
-  {
-    name: '25-29',
-    uv: 26.69,
-    pv: 4567,
-    fill: '#83a6ed',
-  },
-  {
-    name: '30-34',
-    uv: -15.69,
-    pv: 1398,
-    fill: '#8dd1e1',
-  },
-  {
-    name: '35-39',
-    uv: 8.22,
-    pv: 9800,
-    fill: '#82ca9d',
-  },
-  {
-    name: '40-49',
-    uv: -8.63,
-    pv: 3908,
-    fill: '#a4de6c',
-  },
-  {
-    name: '50+',
-    uv: -2.63,
-    pv: 4800,
-    fill: '#d0ed57',
-  },
-  {
-    name: 'unknow',
-    uv: 6.67,
-    pv: 4800,
-    fill: '#ffc658',
-  },
-];
-
-const dd = [
-  { name: '하나', uv: 4000, pv: 2400 },
-  { name: '둘', uv: 3000, pv: 1398, amt: 2210 },
-  { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
-  { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
-  { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
-  { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
-  { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
-];
-
-const ddd = [
-  { name: 'Page A', uv: 4000, female: 2400, male: 2400 },
-  { name: 'Page B', uv: 3000, female: 1398, male: 2210 },
-  { name: 'Page C', uv: 2000, female: 9800, male: 2290 },
-  { name: 'Page D', uv: 2780, female: 3908, male: 2000 },
-  { name: 'Page E', uv: 1890, female: 4800, male: 2181 },
-  { name: 'Page F', uv: 2390, female: 3800, male: 2500 },
-  { name: 'Page G', uv: 3490, female: 4300, male: 2100 },
-];
 
 const Container = styled.div`
   background-color: #000;
@@ -220,33 +157,41 @@ const ProfileContainer = styled.div`
   margin: 20px 20px;
   border-radius: 10px;
   /* border: 1px solid coral; */
-  width: 200px;
+  width: 250px;
   float: right;
-  background-color: ${palette.gray[9]};
+  /* background-color: ${palette.gray[9]}; */
   height: 50px;
 `;
 const Profile = styled.div`
   /* right: 0; */
   /* border: 1px solid red; */
-  position: absolute;
+  position: relative;
   margin: 10px;
-  border-radius: 10px;
+  border-radius: 50px;
+  bottom: 25px;
   width: 40px;
   height: 40px;
   background-color: ${palette.gray[6]};
+  /* background-image: url(${access}); */
 `;
 
 const ProfileText = styled.div`
-  position: absolute;
-  left: 80px;
-  color: ${palette.gray[4]};
-  top: 15px;
+  position: relative;
+  left: 75px;
+  color: ${palette.gray[5]};
+`;
+const ProfileTextSubtitle = styled.div`
+  position: relative;
+  left: 75px;
+  font-size: 14px;
+  color: ${palette.gray[6]};
 `;
 
 const ChartContainer = styled.div`
   position: relative;
-  border: 2px solid ${palette.gray[7]};
-  width: 80%;
+  /* border: 2px solid ${palette.gray[7]}; */
+  box-shadow: 2px 2px 20px -10px gray;
+  width: 800px;
   height: 70%;
   border-radius: 15px;
   padding: 30px 20px;
@@ -255,12 +200,43 @@ const ChartContainer = styled.div`
   top: 180px;
 `;
 
-const ChartContainer2 = styled(ChartContainer)`
-  left: 50%;
+const ChartContainer2 = styled.div`
+  position: absolute;
+  top: 200px;
+  right: 5%;
+  background-color: ${palette.gray[9]};
+  width: 600px;
+  height: 300px;
+  border-radius: 15px;
+  /* border: 1px solid red; */
+`;
+const ChartContainer3 = styled.div`
+  position: absolute;
+  top: 550px;
+  right: 5%;
+  background-color: ${palette.gray[9]};
+  width: 600px;
+  height: 300px;
+  border-radius: 15px;
   /* border: 1px solid red; */
 `;
 
+const Test = styled.div`
+  &:hover {
+    color: red;
+  }
+`;
+
 const DashBoard = () => {
+  const dispatch = useDispatch();
+
+  // store에 접근하여 state 가져오기
+  const { count } = useSelector((state) => state.counter);
+
+  const increse = () => {
+    // store에 있는 state 바꾸는 함수 실행
+    dispatch(increseCount());
+  };
   const history = useHistory();
   const onClick = () => {
     history.push('/dashboard');
@@ -271,18 +247,86 @@ const DashBoard = () => {
   const onClickLogout = () => {
     history.push('/');
   };
+  const d = [
+    {
+      name: '18-24',
+      uv: 31.47,
+      pv: 2400,
+      fill: '#8884d8',
+    },
+    {
+      name: '25-29',
+      uv: 26.69,
+      pv: 4567,
+      fill: '#83a6ed',
+    },
+    {
+      name: '30-34',
+      uv: -15.69,
+      pv: 1398,
+      fill: '#8dd1e1',
+    },
+    {
+      name: '35-39',
+      uv: 8.22,
+      pv: 9800,
+      fill: '#82ca9d',
+    },
+    {
+      name: '40-49',
+      uv: -8.63,
+      pv: 3908,
+      fill: '#a4de6c',
+    },
+    {
+      name: '50+',
+      uv: -2.63,
+      pv: 4800,
+      fill: '#d0ed57',
+    },
+    {
+      name: 'unknow',
+      uv: 6.67,
+      pv: 4800,
+      fill: '#ffc658',
+    },
+  ];
+
+  const dd = [
+    { name: '하나', uv: 4000, pv: 2400 },
+    { name: '둘', uv: 3000, pv: 1398, amt: 2210 },
+    { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
+    { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
+    { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
+    { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
+    { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
+  ];
+
+  const ddd = [
+    { name: 'Page A', uv: 4000, female: 2400, male: 2400 },
+    { name: 'Page B', uv: 3000, female: 1398, male: 2210 },
+    { name: 'Page C', uv: 2000, female: 9800, male: 2290 },
+    { name: 'Page D', uv: 2780, female: 3908, male: 2000 },
+    { name: 'Page E', uv: 1890, female: 4800, male: 2181 },
+    { name: 'Page F', uv: 2390, female: 3800, male: 2500 },
+    { name: 'Page G', uv: 3490, female: 4300, male: 2100 },
+  ];
 
   return (
     <>
       <Container>
+        {/* <button onClick={increse}>증가{count}</button> */}
         <SearchContainer>
           <i class='fas fa-search' />
           <SearchBar placeholder='검색' />
         </SearchContainer>
         <ProfileContainer>
-          <Profile>
+          <Test>
             <i class='fas fa-sort-down' />
+          </Test>
+          <Profile>
             <ProfileText>j0n9hyun</ProfileText>
+            <ProfileTextSubtitle>QuadMiners</ProfileTextSubtitle>
           </Profile>
         </ProfileContainer>
         <MenuBar>
@@ -319,7 +363,7 @@ const DashBoard = () => {
         </MenuBar>
         <ChartContainer>
           <LineChart
-            width={600}
+            width={800}
             height={300}
             data={dd}
             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
@@ -354,46 +398,47 @@ const DashBoard = () => {
             <Bar dataKey='uv' fill='#ffc658' />
           </BarChart>
         </ChartContainer>
-        {/* <ChartContainer2>
-          <RadialBarChart
-            width={730}
-            height={350}
-            innerRadius='10%'
-            outerRadius='80%'
-            data={d}
-            startAngle={180}
-            endAngle={0}
-          >
-            <RadialBar
-              minAngle={15}
-              label={{ fill: 'black', position: 'insideStart' }}
-              background
-              clockWise={true}
-              dataKey='uv'
-            />
-            <Legend
-              iconSize={10}
-              width={120}
-              height={120}
-              layout='vertical'
-              verticalAlign='middle'
-              align='right'
-            />
-            <Tooltip />
-          </RadialBarChart>
+        <ChartContainer2 />
+        <ChartContainer3 />
 
-          <ScatterChart
-            width={400}
-            height={300}
-            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-          >
-            <CartesianGrid />
-            <XAxis dataKey={'x'} type='number' name='stature' unit='cm' />
-            <YAxis dataKey={'y'} type='number' name='weight' unit='kg' />
-            <Scatter name='A school' data={dddd} fill='#8884d8' />
-            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-          </ScatterChart>
-        </ChartContainer2> */}
+        {/* <RadialBarChart
+          width={730}
+          height={350}
+          innerRadius='10%'
+          outerRadius='80%'
+          data={d}
+          startAngle={180}
+          endAngle={0}
+        >
+          <RadialBar
+            minAngle={15}
+            label={{ fill: 'black', position: 'insideStart' }}
+            background
+            clockWise={true}
+            dataKey='uv'
+          />
+          <Legend
+            iconSize={10}
+            width={120}
+            height={120}
+            layout='vertical'
+            verticalAlign='middle'
+            align='right'
+          />
+          <Tooltip />
+        </RadialBarChart>
+
+        <ScatterChart
+          width={400}
+          height={300}
+          margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+        >
+          <CartesianGrid />
+          <XAxis dataKey={'x'} type='number' name='stature' unit='cm' />
+          <YAxis dataKey={'y'} type='number' name='weight' unit='kg' />
+          <Scatter name='A school' data={d} fill='#8884d8' />
+          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+        </ScatterChart> */}
       </Container>
     </>
   );
