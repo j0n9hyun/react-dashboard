@@ -1,11 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import background from '../static/background.jpg';
-import menubar from '../static/menu11.png';
 import palette from '../static/palette';
 import '../static/fontAwesome/css/all.css';
-import TableBoard from './TableBoard';
 
 import {
   LineChart,
@@ -74,8 +71,8 @@ const d = [
 ];
 
 const dd = [
-  { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
-  { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
+  { name: '하나', uv: 4000, pv: 2400 },
+  { name: '둘', uv: 3000, pv: 1398, amt: 2210 },
   { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
   { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
   { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
@@ -93,38 +90,18 @@ const ddd = [
   { name: 'Page G', uv: 3490, female: 4300, male: 2100 },
 ];
 
-const dddd = [
-  { x: 100, y: 200, z: 200 },
-  { x: 120, y: 100, z: 260 },
-  { x: 170, y: 300, z: 400 },
-  { x: 140, y: 250, z: 280 },
-  { x: 150, y: 400, z: 500 },
-  { x: 110, y: 280, z: 200 },
-];
-
-const ddddd = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
-];
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-
-const RADIAN = Math.PI / 180;
-
 const Container = styled.div`
   background-color: #000;
-  /* background-color: ${palette.gray[9]}; */
   height: 100%;
+  /* background-color: ${palette.gray[9]}; */
 `;
 
 const MenuBar = styled.div`
   position: absolute;
   background-color: ${palette.gray[9]};
-  /* background-color: #122620; */
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
-  width: 250px;
+  /* width: 250px; */
   /* left: 10px; */
   height: 100%;
   /* height: calc(100% - 110px); */
@@ -132,12 +109,9 @@ const MenuBar = styled.div`
   box-shadow: 0 2px 20px -10px black;
 `;
 
-const MenuBarInverse = () => {
-  console.log('inverse');
-};
-
 const MenuBarTitle = styled.div`
   position: absolute;
+
   top: 65px;
   left: 260px;
   color: white;
@@ -151,24 +125,13 @@ const SubTitle = styled.div`
   color: ${palette.gray[5]};
 `;
 
-const MenuBarShrinkButton = styled.div`
-  position: absolute;
-  top: 0;
-  margin-top: 10px;
-  margin-left: 165px;
-  height: 30px;
-  width: 32px;
-  background: url(${menubar});
-  background-size: 32px 30px;
-  cursor: pointer;
-`;
-
 const Menu1 = styled.div`
   background-color: black;
   font-weight: bold;
   padding: 10px 10px;
   margin: 10px 10px;
   width: 210px;
+  height: 35px;
   color: lightgray;
   font-size: 16px;
   cursor: pointer;
@@ -186,7 +149,7 @@ const Menu1 = styled.div`
       text-align: center;
       content: '';
       position: absolute;
-      left: 0;
+      left: 10px;
       height: 35px;
       width: 3px;
       border-radius: 20px;
@@ -197,59 +160,26 @@ const Menu1 = styled.div`
 
 const Menu2 = styled(Menu1)`
   background-color: transparent;
+`;
+const Menu3 = styled(Menu2)`
+  position: absolute;
+  bottom: 20px;
   &:hover {
-    &:after {
-      content: '';
-      left: 20%;
+    &:before {
+      left: 0;
     }
   }
-`;
-const Menu3 = styled(Menu1)`
-  position: absolute;
-  background-color: transparent;
-  bottom: 20px;
 `;
 const Menu4 = styled(Menu3)`
   bottom: 80px;
 `;
 
-const Welcome = styled.div`
-  box-shadow: 0 2px 30px -10px black;
-  opacity: 0.8;
-  background-image: url(${background});
-  color: lightgray;
-  position: absolute;
-  text-align: center;
-  width: calc(100% - 230px);
-  height: 100px;
-  margin-left: 230px;
-  margin-bottom: 30px;
-  font-size: 2rem;
-  &:hover {
-    opacity: 1;
-  }
-`;
-
-const SideText = styled.span`
+const SideText = styled.div`
   position: relative;
-  /* border: 1px solid red; */
-  margin: 5px 10px 10px 48px;
-  /* margin: 0 auto; */
-  left: 0;
-  right: 0;
+  bottom: 30px;
   text-align: center;
-`;
-
-const InnerContainer = styled.div`
-  position: relative;
-  background-color: #1e272e;
-  /* border-radius: 20px; */
-  color: lightgray;
-  top: 13%;
-  width: calc(100% - 230px);
-  margin-left: 230px;
-  /* height: 100%; */
-  box-shadow: 0 2px 20px -10px black;
+  line-height: 2;
+  padding-left: 28px;
 `;
 
 const SearchContainer = styled.div`
@@ -258,6 +188,8 @@ const SearchContainer = styled.div`
   left: 250px;
 `;
 const SearchBar = styled.input`
+  position: relative;
+  width: 500px;
   border: 0;
   color: lightgray;
   background-color: #343a40;
@@ -266,49 +198,11 @@ const SearchBar = styled.input`
   padding-left: 15px;
   margin-left: 20px;
   font-size: 1rem;
-  /* width: 180px; */
-  width: 500px;
   height: 35px;
   outline: none;
   box-shadow: 0 5px 5px -3px black;
   &::placeholder {
     color: darkgray;
-  }
-`;
-
-const HeaderButton = styled.li`
-  position: relative;
-  top: 25%;
-  border: 0px solid transparent;
-  background-color: transparent;
-  list-style: none;
-  float: left;
-  color: lightgray;
-  padding-left: 30px;
-  text-align: center;
-  outline: none;
-  font-size: 1.5rem;
-  &:hover {
-    color: lightblue;
-  }
-`;
-
-const Item = styled.li`
-  position: relative;
-  top: 25%;
-  border: 0px solid transparent;
-  background-color: #868e96;
-  list-style: none;
-  border-radius: 10px;
-  color: lightgray;
-  padding-left: 30px;
-  width: 200px;
-  margin-bottom: 10px;
-  outline: none;
-  font-size: 1.5rem;
-  box-shadow: 0 5px 5px -3px black;
-  &:hover {
-    color: skyblue;
   }
 `;
 
@@ -318,7 +212,7 @@ const LogoTitle = styled.div`
 `;
 
 const ProfileContainer = styled.div`
-  position: absolute;
+  position: relative;
   border: 0;
   right: 0;
   color: ${palette.gray[6]};
@@ -327,12 +221,14 @@ const ProfileContainer = styled.div`
   border-radius: 10px;
   /* border: 1px solid coral; */
   width: 200px;
+  float: right;
   background-color: ${palette.gray[9]};
   height: 50px;
 `;
 const Profile = styled.div`
   /* right: 0; */
   /* border: 1px solid red; */
+  position: absolute;
   margin: 10px;
   border-radius: 10px;
   width: 40px;
@@ -348,13 +244,15 @@ const ProfileText = styled.div`
 `;
 
 const ChartContainer = styled.div`
+  position: relative;
   border: 2px solid ${palette.gray[7]};
+  width: 80%;
+  height: 70%;
   border-radius: 15px;
   padding: 30px 20px;
   background-color: ${palette.gray[9]};
-  position: absolute;
   left: 300px;
-  top: 20%;
+  top: 180px;
 `;
 
 const ChartContainer2 = styled(ChartContainer)`
@@ -369,6 +267,9 @@ const DashBoard = () => {
   };
   const onClick2 = () => {
     history.push('/tableboard');
+  };
+  const onClickLogout = () => {
+    history.push('/');
   };
 
   return (
@@ -407,7 +308,7 @@ const DashBoard = () => {
           <Menu2 onClick={onClick2}>
             <i class='fas fa-key' /> <SideText>blabla</SideText>
           </Menu2>
-          <Menu3>
+          <Menu3 onClick={onClickLogout}>
             <i class='fas fa-sign-out-alt'></i>
             <SideText>Logout</SideText>
           </Menu3>
@@ -453,7 +354,7 @@ const DashBoard = () => {
             <Bar dataKey='uv' fill='#ffc658' />
           </BarChart>
         </ChartContainer>
-        <ChartContainer2>
+        {/* <ChartContainer2>
           <RadialBarChart
             width={730}
             height={350}
@@ -492,7 +393,7 @@ const DashBoard = () => {
             <Scatter name='A school' data={dddd} fill='#8884d8' />
             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
           </ScatterChart>
-        </ChartContainer2>
+        </ChartContainer2> */}
       </Container>
     </>
   );

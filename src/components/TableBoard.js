@@ -3,94 +3,56 @@ import axios from 'axios';
 import TiList from './TiList';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import presentation from '../static/presentation.png';
-import menubar from '../static/menu11.png';
-import settings from '../static/settings.png';
-import calendar from '../static/calendar.png';
-import dashboard from '../static/dashboard.png';
-import sign from '../static/sign.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faJedi, faSearch } from '@fortawesome/free-solid-svg-icons';
-
-const element = (
-  <FontAwesomeIcon icon={faJedi} color='white' size='4x' pull='left' />
-);
-
-const searchElement = (
-  <FontAwesomeIcon icon={faSearch} color='lightgray' size='lg' />
-);
-
-const SearchIcon = styled.span`
-  position: absolute;
-  top: 70px;
-  left: 6%;
-`;
+import palette from '../static/palette';
+import '../static/fontAwesome/css/all.css';
 
 const Container = styled.div`
-  background-color: #343a40;
+  background-color: #000;
   height: 100%;
-`;
-const Header = styled.div`
-  background-color: #212529;
-  width: 100%;
-  height: 70px;
-  cursor: pointer;
 `;
 
 const MenuBar = styled.div`
   position: absolute;
-  background-color: #212529;
-  width: 230px;
-  height: calc(100% - 70px);
+  background-color: ${palette.gray[9]};
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  height: 100%;
   box-shadow: 0 2px 20px -10px black;
 `;
 
-const MenuBarInverse = () => {
-  console.log('inverse');
-};
-
 const MenuBarTitle = styled.div`
+  position: absolute;
+
+  top: 65px;
+  left: 260px;
   color: white;
   padding: 10px 0 20px 20px;
   font-size: 1.5rem;
-  /* &:after {
-    content: '';
-    display: inline-block;
-    height: 30px;
-    width: 32px;
-    margin-left: 100px;
-    background: url(${menubar});
-    background-size: 32px 30px;
-  } */
 `;
 
-const MenuBarShrinkButton = styled.div`
-  position: absolute;
-  top: 0;
-  margin-top: 10px;
-  margin-left: 165px;
-  height: 30px;
-  width: 32px;
-  background: url(${menubar});
-  background-size: 32px 30px;
-  cursor: pointer;
+const SubTitle = styled.div`
+  margin-top: 15px;
+  font-size: 14px;
+  width: 300px;
+  color: ${palette.gray[5]};
 `;
 
 const Menu1 = styled.div`
   background-color: transparent;
   font-weight: bold;
-  padding-top: 10px;
+  padding: 10px 10px;
+  margin: 10px 10px;
+  width: 210px;
+  height: 35px;
   color: lightgray;
   font-size: 16px;
-  padding-left: 5px;
   cursor: pointer;
   border-radius: 10px;
-  margin: 10px 10px;
   transition: background-color 0.5s ease;
   &:hover {
     background-color: black;
     margin: 10px 10px;
-    width: 205px;
+    width: 210px;
     color: white;
     &:active {
       background-color: #130f40;
@@ -99,7 +61,7 @@ const Menu1 = styled.div`
       text-align: center;
       content: '';
       position: absolute;
-      left: 0;
+      left: 10px;
       height: 35px;
       width: 3px;
       border-radius: 20px;
@@ -110,47 +72,45 @@ const Menu1 = styled.div`
 
 const Menu2 = styled(Menu1)`
   background-color: black;
-  &:hover {
-    &:after {
-      content: '';
-      left: 20%;
-    }
-  }
 `;
-const Menu3 = styled(Menu1)`
-  background-color: transparent;
-  &:hover {
-    &:after {
-      content: '';
-      left: 20%;
-    }
-  }
-`;
-
-const SideText = styled.span`
+const Menu3 = styled(Menu2)`
+  background: transparent;
   position: absolute;
+  bottom: 20px;
+  &:hover {
+    &:before {
+      left: 0;
+    }
+  }
+`;
+const Menu4 = styled(Menu3)`
+  bottom: 80px;
+`;
+
+const SideText = styled.div`
+  position: relative;
+  bottom: 30px;
   text-align: center;
-  left: 0;
-  right: 0;
+  line-height: 2;
+  padding-left: 28px;
 `;
 
-const Img = styled.img`
-  width: 33px;
-  height: 30px;
-  padding-bottom: 5px;
-  padding-left: 3px;
+const SearchContainer = styled.div`
+  position: absolute;
+  margin: 20px 0 20px 40px;
+  left: 250px;
 `;
-
 const SearchBar = styled.input`
+  position: relative;
+  width: 500px;
   border: 0;
   color: lightgray;
   background-color: #343a40;
   margin-bottom: 10px;
   border-radius: 10px;
-  padding-left: 35px;
-  margin-left: 6px;
+  padding-left: 15px;
+  margin-left: 20px;
   font-size: 1rem;
-  width: 180px;
   height: 35px;
   outline: none;
   box-shadow: 0 5px 5px -3px black;
@@ -159,21 +119,57 @@ const SearchBar = styled.input`
   }
 `;
 
-const HeaderButton = styled.li`
-  position: relative;
-  top: 25%;
-  border: 0px solid transparent;
-  background-color: transparent;
-  list-style: none;
-  float: left;
-  color: lightgray;
-  padding-left: 30px;
+// const Item = styled.li`
+//   position: relative;
+//   top: 25%;
+//   border: 0px solid transparent;
+//   background-color: #868e96;
+//   list-style: none;
+//   border-radius: 10px;
+//   color: lightgray;
+//   padding-left: 30px;
+//   width: 200px;
+//   margin-bottom: 10px;
+//   outline: none;
+//   font-size: 1.5rem;
+//   box-shadow: 0 5px 5px -3px black;
+//   &:hover {
+//     color: skyblue;
+//   }
+// `;
+
+const LogoTitle = styled.div`
   text-align: center;
-  outline: none;
-  font-size: 1.5rem;
-  &:hover {
-    color: lightblue;
-  }
+  margin: 30px 0;
+`;
+
+const ProfileContainer = styled.div`
+  position: relative;
+  border: 0;
+  right: 0;
+  color: ${palette.gray[6]};
+  text-align: center;
+  margin: 20px 20px;
+  border-radius: 10px;
+  width: 200px;
+  float: right;
+  background-color: ${palette.gray[9]};
+  height: 50px;
+`;
+const Profile = styled.div`
+  position: absolute;
+  margin: 10px;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: ${palette.gray[6]};
+`;
+
+const ProfileText = styled.div`
+  position: absolute;
+  left: 80px;
+  color: ${palette.gray[4]};
+  top: 15px;
 `;
 
 const TableBoard = () => {
@@ -207,39 +203,49 @@ const TableBoard = () => {
   }, []);
   return (
     <Container>
-      <Header>
-        {element}
-        <HeaderButton onClick={onClick}>Dashboard</HeaderButton>
-        <HeaderButton>Users</HeaderButton>
-        <HeaderButton>Profile</HeaderButton>
-      </Header>
+      <SearchContainer>
+        <i class='fas fa-search' />
+        <SearchBar placeholder='검색' />
+      </SearchContainer>
+      <ProfileContainer>
+        <Profile>
+          <i class='fas fa-sort-down' />
+          <ProfileText>j0n9hyun</ProfileText>
+        </Profile>
+      </ProfileContainer>
       <MenuBar>
+        <LogoTitle>
+          <i class='fab fa-phoenix-framework' />
+        </LogoTitle>
         <MenuBarTitle>
           Tables
-          <MenuBarShrinkButton onClick={MenuBarInverse} />
+          <SubTitle>테이블 공간입니다</SubTitle>
         </MenuBarTitle>
-        <SearchIcon>{searchElement}</SearchIcon>
-        <SearchBar placeholder='입력' />
 
         <Menu1 onClick={onClick}>
-          <Img src={dashboard} />
-          <SideText>Home</SideText>
+          <i class='fas fa-border-all' />
+          <SideText>DashBoard</SideText>
         </Menu1>
         <Menu2 onClick={onClick2}>
-          <Img src={presentation} /> <SideText>Tables</SideText>
+          <i class='fas fa-dice-d6' /> <SideText>Tables</SideText>
         </Menu2>
-        <Menu3 onClick={onClick2}>
-          <Img src={calendar} /> <SideText>어쩌고</SideText>
+        <Menu1 onClick={onClick2}>
+          <i class='far fa-chart-bar'></i>
+          <SideText>Charts</SideText>
+        </Menu1>
+        <Menu1 onClick={onClick2}>
+          <i class='fas fa-key' /> <SideText>blabla</SideText>
+        </Menu1>
+        <Menu3>
+          <i class='fas fa-sign-out-alt'></i>
+          <SideText>Logout</SideText>
         </Menu3>
-        <Menu3 onClick={onClick2}>
-          <Img src={sign} /> <SideText>저쩌고</SideText>
-        </Menu3>
-        <Menu3 onClick={onClick2}>
-          <Img src={settings} /> <SideText>Settings</SideText>
-        </Menu3>
+        <Menu4>
+          <i class='fas fa-cogs' />
+          <SideText>Settings</SideText>
+        </Menu4>
       </MenuBar>
       <TiList columns={columns} columns2={columns2} data={ti} data2={tiTitle} />
-      {/* <Header2 /> */}
     </Container>
   );
 };

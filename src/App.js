@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
     border: 0;
     height: 100%;
   }
+
   a {
     text-decoration: none;
     color: lightgray;

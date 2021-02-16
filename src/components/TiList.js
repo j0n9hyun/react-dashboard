@@ -7,7 +7,7 @@ const TableContainer = styled.div`
   position: absolute;
   text-align: center;
   left: 20%;
-  top: 5%;
+  top: 15%;
   height: 500px;
 `;
 
