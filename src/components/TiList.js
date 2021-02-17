@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-// import 'antd/dist/antd.css';
 import styled from 'styled-components';
 import spinner from '../static/load.gif';
-import DashBoard from './DashBoard';
+import palette from '../static/palette';
 const TableContainer = styled.div`
   margin-top: 20px;
   position: absolute;
   text-align: center;
-  left: 20%;
+  right: 10px;
   top: 15%;
   height: 500px;
+  background-color: transparent;
 `;
 
 const TableStyling = styled.table`
@@ -29,12 +29,18 @@ const TableHead = styled.thead`
 const TableTr = styled.tr`
   display: table;
   width: 100%;
-  background-color: white;
-  color: black;
+  /* background-color: white; */
+  background-color: ${palette.gray[9]};
+  color: ${palette.gray[4]};
+
+  /* color: black; */
   height: 50px;
+  &:nth-of-type(1) {
+    background-color: transparent;
+  }
   &:nth-of-type(even) {
-    background-color: lightgray;
-    color: black;
+    background-color: ${palette.gray[9]};
+    color: ${palette.gray[4]};
   }
 `;
 
@@ -55,7 +61,8 @@ const TableBody = styled.tbody`
 `;
 
 const TableTh = styled.th`
-  background-color: #6c7ae0;
+  /* background-color: #6c7ae0; */
+  background-color: ${palette.gray[8]};
   color: white;
   border: 0px solid #8e44ad;
   text-align: center;
@@ -63,10 +70,14 @@ const TableTh = styled.th`
   padding: 12px 15px;
   position: sticky;
   top: 0;
-  /* &:first-child {
-    border-radius: 46px 0 0 0;
-    color: red;
+  &:first-child {
+    border-top-left-radius: 15px;
   }
+  &:last-child {
+    border-top-right-radius: 15px;
+  }
+
+  /*
   &:last-child {
     border-radius: 0 46px 0 0;
     color: red;

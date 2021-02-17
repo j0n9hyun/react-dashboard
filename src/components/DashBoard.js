@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import palette from '../static/palette';
 import '../static/fontAwesome/css/all.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { increseCount } from '../reducers/counter';
-import access from '../static/access.png';
-
+import Clock from 'react-live-clock';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import axios from 'axios';
+import TiList from './TiList';
 import {
-  LineChart,
-  Line,
+  ResponsiveContainer,
   BarChart,
   Bar,
   XAxis,
@@ -17,14 +17,6 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  PieChart,
-  Pie,
-  Sector,
-  ScatterChart,
-  Scatter,
-  Cell,
-  RadialBarChart,
-  RadialBar,
 } from 'recharts';
 
 const Container = styled.div`
@@ -38,7 +30,7 @@ const MenuBar = styled.div`
   background-color: ${palette.gray[9]};
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
-  /* width: 250px; */
+  width: 255px;
   /* left: 10px; */
   height: 100%;
   /* height: calc(100% - 110px); */
@@ -125,7 +117,8 @@ const SearchContainer = styled.div`
   left: 250px;
 `;
 const SearchBar = styled.input`
-  position: relative;
+  /* position: relative; */
+  max-width: 300px;
   width: 500px;
   border: 0;
   color: lightgray;
@@ -172,7 +165,6 @@ const Profile = styled.div`
   width: 40px;
   height: 40px;
   background-color: ${palette.gray[6]};
-  /* background-image: url(${access}); */
 `;
 
 const ProfileText = styled.div`
@@ -187,12 +179,33 @@ const ProfileTextSubtitle = styled.div`
   color: ${palette.gray[6]};
 `;
 
+const Time = styled.div`
+  position: relative;
+  text-align: center;
+  left: 25%;
+  top: 25%;
+  padding-right: 50%;
+`;
+
+const TimezoneText = styled.div`
+  font-size: 1rem;
+  color: ${palette.gray[6]};
+  text-align: center;
+`;
+
+const Wrapper = styled.div`
+  position: relative;
+  width: 300px;
+  border: 1px solid red;
+`;
+
 const ChartContainer = styled.div`
   position: relative;
   /* border: 2px solid ${palette.gray[7]}; */
   box-shadow: 2px 2px 20px -10px gray;
-  width: 800px;
-  height: 70%;
+  width: 750px;
+  max-width: 60%;
+  height: 300px;
   border-radius: 15px;
   padding: 30px 20px;
   background-color: ${palette.gray[9]};
@@ -201,15 +214,21 @@ const ChartContainer = styled.div`
 `;
 
 const ChartContainer2 = styled.div`
-  position: absolute;
+  position: relative;
+  max-width: 100%;
+  color: whitesmoke;
+  font-size: 3rem;
   top: 200px;
-  right: 5%;
+  left: 300px;
   background-color: ${palette.gray[9]};
-  width: 600px;
-  height: 300px;
+  width: 400px;
+  margin: 0 0;
+  /* height: 0; */
+  height: 200px;
   border-radius: 15px;
   /* border: 1px solid red; */
 `;
+
 const ChartContainer3 = styled.div`
   position: absolute;
   top: 550px;
@@ -220,23 +239,80 @@ const ChartContainer3 = styled.div`
   border-radius: 15px;
   /* border: 1px solid red; */
 `;
+const DropdownContent = styled.div`
+  display: none;
+  position: absolute;
+  background-color: gray;
+  text-align: center;
+  left: -205px;
+  top: 65px;
+  width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+`;
 
-const Test = styled.div`
-  &:hover {
-    color: red;
+const Dropdown = styled.div`
+  position: relative;
+  display: inline-block;
+  left: 100px;
+  bottom: 5px;
+  font-size: 1.5rem;
+  &:hover ${DropdownContent} {
+    display: block;
+    color: coral;
   }
 `;
 
+const DropdownButton = styled.div`
+  background-color: #ffdab9;
+  padding: 8px;
+  font-size: 15px;
+  border: none;
+`;
+
+const Dropdownbtn = styled.button`
+  background-color: #4caf50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+`;
+
+const CalendarContainer = styled.div`
+  position: relative;
+  left: -2px;
+`;
+
+const TableContainer = styled.div`
+  position: static;
+  border: 1px solid red;
+  width: 300px;
+  height: 300px;
+`;
+
 const DashBoard = () => {
-  const dispatch = useDispatch();
+  const [ti, setTi] = useState([]);
+  const [tiTitle, setTiTitle] = useState([]);
 
-  // store에 접근하여 state 가져오기
-  const { count } = useSelector((state) => state.counter);
+  const columns = ['번호', '타입', '인디케이터', '등록일'];
+  const columns2 = ['아이디값', '타이틀', '설명'];
 
-  const increse = () => {
-    // store에 있는 state 바꾸는 함수 실행
-    dispatch(increseCount());
-  };
+  useEffect(() => {
+    const apiCall = async () => {
+      await axios.get('http://localhost:8888/data').then((res) => {
+        setTi(res.data);
+      });
+    };
+    const Title = async () => {
+      await axios.get('http://localhost:8888/reputation_title').then((res) => {
+        setTiTitle(res.data);
+      });
+    };
+
+    apiCall();
+    Title();
+  }, []);
+
   const history = useHistory();
   const onClick = () => {
     history.push('/dashboard');
@@ -292,16 +368,6 @@ const DashBoard = () => {
     },
   ];
 
-  const dd = [
-    { name: '하나', uv: 4000, pv: 2400 },
-    { name: '둘', uv: 3000, pv: 1398, amt: 2210 },
-    { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
-    { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
-    { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
-    { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
-    { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
-  ];
-
   const ddd = [
     { name: 'Page A', uv: 4000, female: 2400, male: 2400 },
     { name: 'Page B', uv: 3000, female: 1398, male: 2210 },
@@ -315,15 +381,18 @@ const DashBoard = () => {
   return (
     <>
       <Container>
-        {/* <button onClick={increse}>증가{count}</button> */}
         <SearchContainer>
-          <i class='fas fa-search' />
+          <i className='fas fa-search' />
           <SearchBar placeholder='검색' />
         </SearchContainer>
         <ProfileContainer>
-          <Test>
-            <i class='fas fa-sort-down' />
-          </Test>
+          <Dropdown>
+            <i className='fas fa-sort-down' />
+
+            <DropdownContent>
+              <a href='#'>Profile</a>
+            </DropdownContent>
+          </Dropdown>
           <Profile>
             <ProfileText>j0n9hyun</ProfileText>
             <ProfileTextSubtitle>QuadMiners</ProfileTextSubtitle>
@@ -331,7 +400,7 @@ const DashBoard = () => {
         </ProfileContainer>
         <MenuBar>
           <LogoTitle>
-            <i class='fab fa-phoenix-framework' />
+            <i className='fab fa-phoenix-framework' />
           </LogoTitle>
           <MenuBarTitle>
             DashBoard
@@ -339,106 +408,63 @@ const DashBoard = () => {
           </MenuBarTitle>
 
           <Menu1 onClick={onClick}>
-            <i class='fas fa-border-all' />
+            <i className='fas fa-border-all' />
             <SideText>DashBoard</SideText>
           </Menu1>
           <Menu2 onClick={onClick2}>
-            <i class='fas fa-dice-d6' /> <SideText>Tables</SideText>
+            <i className='fas fa-dice-d6' /> <SideText>Tables</SideText>
           </Menu2>
           <Menu2 onClick={onClick2}>
-            <i class='far fa-chart-bar'></i>
+            <i className='far fa-chart-bar'></i>
             <SideText>Charts</SideText>
           </Menu2>
           <Menu2 onClick={onClick2}>
-            <i class='fas fa-key' /> <SideText>blabla</SideText>
+            <i className='fas fa-key' /> <SideText>blabla</SideText>
           </Menu2>
           <Menu3 onClick={onClickLogout}>
-            <i class='fas fa-sign-out-alt'></i>
+            <i className='fas fa-sign-out-alt'></i>
             <SideText>Logout</SideText>
           </Menu3>
           <Menu4>
-            <i class='fas fa-cogs' />
+            <i className='fas fa-cogs' />
             <SideText>Settings</SideText>
           </Menu4>
         </MenuBar>
+
         <ChartContainer>
-          <LineChart
-            width={800}
-            height={300}
-            data={dd}
-            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-          >
-            <XAxis dataKey='name' />
-            <YAxis />
-            <CartesianGrid strokeDasharray='3 3' />
-            <Tooltip />
-            <Legend />
-            <Line
-              type='monotone'
-              dataKey='pv'
-              stroke='#8884d8'
-              activeDot={{ r: 8 }}
-            />
-            <Line type='monotone' dataKey='uv' stroke='#82ca9d' />
-          </LineChart>
-
-          <BarChart
-            width={600}
-            height={300}
-            data={ddd}
-            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-          >
-            <CartesianGrid strokeDasharray='3 3' />
-            <XAxis dataKey='name' />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey='female' stackId='a' fill='#8884d8' />
-            <Bar dataKey='male' stackId='a' fill='#82ca9d' />
-            <Bar dataKey='uv' fill='#ffc658' />
-          </BarChart>
+          <ResponsiveContainer>
+            <BarChart
+              width={800}
+              height={300}
+              data={ddd}
+              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+            >
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis dataKey='name' />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey='female' stackId='a' fill='#8884d8' />
+              <Bar dataKey='male' stackId='a' fill='#82ca9d' />
+              <Bar dataKey='uv' fill='#ffc658' />
+            </BarChart>
+          </ResponsiveContainer>
         </ChartContainer>
-        <ChartContainer2 />
-        <ChartContainer3 />
-
-        {/* <RadialBarChart
-          width={730}
-          height={350}
-          innerRadius='10%'
-          outerRadius='80%'
-          data={d}
-          startAngle={180}
-          endAngle={0}
-        >
-          <RadialBar
-            minAngle={15}
-            label={{ fill: 'black', position: 'insideStart' }}
-            background
-            clockWise={true}
-            dataKey='uv'
-          />
-          <Legend
-            iconSize={10}
-            width={120}
-            height={120}
-            layout='vertical'
-            verticalAlign='middle'
-            align='right'
-          />
-          <Tooltip />
-        </RadialBarChart>
-
-        <ScatterChart
-          width={400}
-          height={300}
-          margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-        >
-          <CartesianGrid />
-          <XAxis dataKey={'x'} type='number' name='stature' unit='cm' />
-          <YAxis dataKey={'y'} type='number' name='weight' unit='kg' />
-          <Scatter name='A school' data={d} fill='#8884d8' />
-          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-        </ScatterChart> */}
+        <ChartContainer2>
+          <Time>
+            <Clock format={'HH:mm:ss'} ticking={true} timezone={'Asia/Seoul'} />
+            <TimezoneText>Asia/Seoul</TimezoneText>
+          </Time>
+        </ChartContainer2>
+        <CalendarContainer>
+          <Calendar />
+        </CalendarContainer>
+        <TiList
+          columns={columns}
+          columns2={columns2}
+          data={ti}
+          data2={tiTitle}
+        />
       </Container>
     </>
   );
