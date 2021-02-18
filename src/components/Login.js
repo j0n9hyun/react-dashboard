@@ -103,6 +103,7 @@ const Img = styled.img`
 const Login = () => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setResult(null);
@@ -192,11 +193,7 @@ const Login = () => {
               포함되어야 합니다.
             </WarningMsg>
           )}
-          {result === 3 && (
-            <WarningMsg>
-              <div class='.fa-spinner'>{'\uf110'} \uf110로그인</div> 로그인 안됨
-            </WarningMsg>
-          )}
+          {result === 3 && <WarningMsg>로그인 안됨</WarningMsg>}
           {loading === true && console.log('ㄴ')}
         </LoginContainer>
       </form>

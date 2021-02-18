@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import palette from '../static/palette';
 import '../static/fontAwesome/css/all.css';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const Container = styled.div`
   background-color: #000;
@@ -117,6 +119,13 @@ const SearchBar = styled.input`
   &::placeholder {
     color: darkgray;
   }
+`;
+
+const CalendarContainer = styled.div`
+  position: relative;
+  top: 55%;
+  left: -2px;
+  width: 255px;
 `;
 
 // const Item = styled.li`
@@ -254,6 +263,9 @@ const TableBoard = () => {
           <SideText>Settings</SideText>
         </Menu4>
       </MenuBar>
+      <CalendarContainer>
+        <Calendar />
+      </CalendarContainer>
       <TiList columns={columns} columns2={columns2} data={ti} data2={tiTitle} />
     </Container>
   );

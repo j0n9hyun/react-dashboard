@@ -6,7 +6,8 @@ const TableContainer = styled.div`
   margin-top: 20px;
   position: absolute;
   text-align: center;
-  right: 10px;
+  right: 60px;
+  width: 700px;
   top: 15%;
   height: 500px;
   background-color: transparent;

@@ -8,6 +8,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import axios from 'axios';
 import TiList from './TiList';
+import Modal from 'react-overlays/Modal';
 import {
   ResponsiveContainer,
   BarChart,
@@ -17,6 +18,10 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  PieChart,
+  Pie,
+  Sector,
+  Cell,
 } from 'recharts';
 
 const Container = styled.div`
@@ -154,13 +159,23 @@ const ProfileContainer = styled.div`
   float: right;
   /* background-color: ${palette.gray[9]}; */
   height: 50px;
+  /* &:hover {
+    background-color: ${palette.gray[8]};
+  } */
+  background-color: transparent;
+
+  &:hover {
+    background-color: ${palette.gray[9]};
+    cursor: pointer;
+  }
 `;
 const Profile = styled.div`
   /* right: 0; */
   /* border: 1px solid red; */
   position: relative;
-  margin: 10px;
+  /* margin: 10px; */
   border-radius: 50px;
+  left: 10%;
   bottom: 25px;
   width: 40px;
   height: 40px;
@@ -176,6 +191,7 @@ const ProfileTextSubtitle = styled.div`
   position: relative;
   left: 75px;
   font-size: 14px;
+  text-align: center;
   color: ${palette.gray[6]};
 `;
 
@@ -191,12 +207,6 @@ const TimezoneText = styled.div`
   font-size: 1rem;
   color: ${palette.gray[6]};
   text-align: center;
-`;
-
-const Wrapper = styled.div`
-  position: relative;
-  width: 300px;
-  border: 1px solid red;
 `;
 
 const ChartContainer = styled.div`
@@ -229,16 +239,6 @@ const ChartContainer2 = styled.div`
   /* border: 1px solid red; */
 `;
 
-const ChartContainer3 = styled.div`
-  position: absolute;
-  top: 550px;
-  right: 5%;
-  background-color: ${palette.gray[9]};
-  width: 600px;
-  height: 300px;
-  border-radius: 15px;
-  /* border: 1px solid red; */
-`;
 const DropdownContent = styled.div`
   display: none;
   position: absolute;
@@ -254,7 +254,7 @@ const Dropdown = styled.div`
   position: relative;
   display: inline-block;
   left: 100px;
-  bottom: 5px;
+  bottom: 15px;
   font-size: 1.5rem;
   &:hover ${DropdownContent} {
     display: block;
@@ -262,33 +262,108 @@ const Dropdown = styled.div`
   }
 `;
 
-const DropdownButton = styled.div`
-  background-color: #ffdab9;
-  padding: 8px;
-  font-size: 15px;
-  border: none;
-`;
-
-const Dropdownbtn = styled.button`
-  background-color: #4caf50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-`;
-
 const CalendarContainer = styled.div`
   position: relative;
   left: -2px;
+  width: 255px;
 `;
 
-const TableContainer = styled.div`
-  position: static;
-  border: 1px solid red;
-  width: 300px;
-  height: 300px;
+const PieContainer = styled.div`
+  position: absolute;
+  max-width: 100%;
+  color: whitesmoke;
+  top: 560px;
+  left: 730px;
+  background-color: ${palette.gray[9]};
+  width: 350px;
+  margin: 0 0;
+  /* height: 0; */
+  height: 200px;
+  border-radius: 15px;
 `;
+
+// let rand = () => Math.floor(Math.random() * 20) - 10;
+
+const Backdrop = styled('div')`
+  position: fixed;
+  z-index: 1040;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.5;
+`;
+
+const RandomlyPositionedModal = styled(Modal)`
+  position: fixed;
+  width: 400px;
+  /* height: 600px; */
+  z-index: 1040;
+  top: 50%;
+  left: 50%;
+  border: 0;
+  outline: none;
+  border-radius: 15px;
+  margin-left: calc(400px / -2);
+  margin-top: calc(400px / -2);
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  background-color: ${palette.gray[8]};
+  color: ${palette.gray[5]};
+  transform: scale(0);
+`;
+
+const ModalWrapper = styled.div`
+  margin: 0;
+  padding: 0;
+  text-align: center;
+`;
+
+const ModalProfile = styled.div`
+  position: absolute;
+  border: 1px solid blue;
+  width: 50px;
+  height: 50px;
+  right: 0;
+  margin-right: 15px;
+`;
+
+const data = [
+  { name: 'Group A', value: 400 },
+  { name: 'Group B', value: 300 },
+  { name: 'Group C', value: 300 },
+  { name: 'Group D', value: 200 },
+];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+  index,
+}) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text
+      x={x}
+      y={y}
+      fill='white'
+      textAnchor={x > cx ? 'start' : 'end'}
+      dominantBaseline='central'
+    >
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
 
 const DashBoard = () => {
   const [ti, setTi] = useState([]);
@@ -296,6 +371,10 @@ const DashBoard = () => {
 
   const columns = ['번호', '타입', '인디케이터', '등록일'];
   const columns2 = ['아이디값', '타이틀', '설명'];
+
+  const [show, setShow] = useState(false);
+
+  const renderBackdrop = (props) => <Backdrop {...props} />;
 
   useEffect(() => {
     const apiCall = async () => {
@@ -323,50 +402,6 @@ const DashBoard = () => {
   const onClickLogout = () => {
     history.push('/');
   };
-  const d = [
-    {
-      name: '18-24',
-      uv: 31.47,
-      pv: 2400,
-      fill: '#8884d8',
-    },
-    {
-      name: '25-29',
-      uv: 26.69,
-      pv: 4567,
-      fill: '#83a6ed',
-    },
-    {
-      name: '30-34',
-      uv: -15.69,
-      pv: 1398,
-      fill: '#8dd1e1',
-    },
-    {
-      name: '35-39',
-      uv: 8.22,
-      pv: 9800,
-      fill: '#82ca9d',
-    },
-    {
-      name: '40-49',
-      uv: -8.63,
-      pv: 3908,
-      fill: '#a4de6c',
-    },
-    {
-      name: '50+',
-      uv: -2.63,
-      pv: 4800,
-      fill: '#d0ed57',
-    },
-    {
-      name: 'unknow',
-      uv: 6.67,
-      pv: 4800,
-      fill: '#ffc658',
-    },
-  ];
 
   const ddd = [
     { name: 'Page A', uv: 4000, female: 2400, male: 2400 },
@@ -385,13 +420,9 @@ const DashBoard = () => {
           <i className='fas fa-search' />
           <SearchBar placeholder='검색' />
         </SearchContainer>
-        <ProfileContainer>
+        <ProfileContainer onClick={() => setShow(true)}>
           <Dropdown>
             <i className='fas fa-sort-down' />
-
-            <DropdownContent>
-              <a href='#'>Profile</a>
-            </DropdownContent>
           </Dropdown>
           <Profile>
             <ProfileText>j0n9hyun</ProfileText>
@@ -450,6 +481,25 @@ const DashBoard = () => {
             </BarChart>
           </ResponsiveContainer>
         </ChartContainer>
+        <PieContainer>
+          <ResponsiveContainer>
+            <PieChart width={400} height={1000}>
+              <Pie
+                data={data}
+                // cx={100}
+                // cy={75}
+                labelLine={false}
+                label={renderCustomizedLabel}
+                outerRadius={70}
+                fill='#8884d8'
+              >
+                {data.map((entry, index) => (
+                  <Cell fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        </PieContainer>
         <ChartContainer2>
           <Time>
             <Clock format={'HH:mm:ss'} ticking={true} timezone={'Asia/Seoul'} />
@@ -459,12 +509,38 @@ const DashBoard = () => {
         <CalendarContainer>
           <Calendar />
         </CalendarContainer>
+
         <TiList
           columns={columns}
           columns2={columns2}
           data={ti}
           data2={tiTitle}
         />
+        <RandomlyPositionedModal
+          show={show}
+          onHide={() => setShow(false)}
+          renderBackdrop={renderBackdrop}
+        >
+          <ModalWrapper>
+            프로필 설정
+            <ModalProfile>
+              <i class='fas fa-user'></i>
+            </ModalProfile>
+            <div>
+              아이디 <br />
+            </div>
+            <div>
+              현재 비밀번호 <br />
+              <input />
+            </div>
+            <div>
+              새 비밀번호 <br /> <input />
+            </div>
+            <div>
+              비밀번호 확인 <br /> <input />
+            </div>
+          </ModalWrapper>
+        </RandomlyPositionedModal>
       </Container>
     </>
   );
