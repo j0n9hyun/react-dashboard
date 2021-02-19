@@ -6,9 +6,7 @@ import palette from '../static/palette';
 import '../static/fontawesome.css';
 
 const Container = styled.div`
-  /* background-color: #2c3e50; */
   background-color: ${palette.gray[8]};
-  /* height: 1100px; */
   height: 100%;
 `;
 
@@ -21,7 +19,6 @@ const LoginContainer = styled.div`
   margin: 0 auto;
   width: 400px;
   height: 600px;
-  /* background: linear-gradient(#130f40, #30336b); */
   background: ${palette.gray[9]};
 `;
 
@@ -31,7 +28,6 @@ const InputName = styled.div`
   font-size: 12px;
   width: 30px;
   color: lightgray;
-  /* top: 2%; */
   bottom: 6%;
   left: 17%;
 `;
@@ -95,20 +91,31 @@ const WarningMsg = styled.div`
 `;
 
 const Img = styled.img`
-  /* height: 80px; */
   width: 130px;
-  /* padding-left: 45px; */
 `;
 
-const Login = () => {
+const Login = (authenticated) => {
+  // console.log(authenticated);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
+    const TokenLoad = async () => {
+      await axios
+        .post('http://localhost:8000/account/sign-in', {
+          id: 'whdgus',
+          password: 'whdgus',
+        })
+        .then((res) => {
+          setUser(res.data);
+        });
+    };
     const timeOut = setTimeout(() => {
       setResult(null);
     }, 3000);
 
+    TokenLoad();
     return () => clearTimeout(timeOut);
   }, []);
 
@@ -141,26 +148,57 @@ const Login = () => {
 
     const apiCall = async () => {
       await axios
-        .get('http://localhost:8888/users')
-        .then((user) => {
-          const auth = user.data.find(
-            (user) => user.id === formId && user.pw === formPw
-          );
+        .post('http://localhost:8000/account/sign-in', {
+          id: formId,
+          password: formPw,
+        })
+        .then((res) => {
+          // console.log(res.data);
+          // const auth = res.data.find(
+          //   (user) => user.id === formId && user.password === formPw
+          // );
+          // console.log(auth);
+          if (res.status === 501) {
+            console.log('하이');
+          }
 
-          if (auth) {
+          if (res) {
+            console.log('토큰 확인');
             window.location.href = '/dashboard';
-          } else {
-            setResult(3);
-            return false;
           }
         })
         .catch((e) => {
+          if (e.response.status === 500) {
+            console.log('500에러');
+          }
           setLoading(true);
           setResult(3);
         });
     };
     apiCall();
   };
+  //   const apiCall = async () => {
+  //     await axios
+  //       .get('http://localhost:8888/users')
+  //       .then((user) => {
+  //         const auth = user.data.find(
+  //           (user) => user.id === formId && user.pw === formPw
+  //         );
+
+  //         if (auth) {
+  //           window.location.href = '/dashboard';
+  //         } else {
+  //           setResult(3);
+  //           return false;
+  //         }
+  //       })
+  //       .catch((e) => {
+  //         setLoading(true);
+  //         setResult(3);
+  //       });
+  //   };
+  //   apiCall();
+  // };
 
   return (
     <Container>
@@ -194,7 +232,7 @@ const Login = () => {
             </WarningMsg>
           )}
           {result === 3 && <WarningMsg>로그인 안됨</WarningMsg>}
-          {loading === true && console.log('ㄴ')}
+          {loading === true && console.log('loading(true)')}
         </LoginContainer>
       </form>
     </Container>

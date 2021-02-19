@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import Login from './components/Login';
 import { createGlobalStyle } from 'styled-components';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from 'react-router-dom';
 import DashBoard from './components/DashBoard';
 import TableBoard from './components/TableBoard';
-import Profile from './components/Profile';
+import MyProfile from './components/MyProfile';
 import { signIn } from './components/auth';
-import AuthRoute from './components/AuthRoute';
+// import AuthRoute from './components/AuthRoute';
 
 const GlobalStyle = createGlobalStyle`
   html, head {
@@ -33,9 +38,11 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const [user, setUser] = useState(null);
-  const authenticated = user == null;
+  // const authenticated = user == null;
+  const [authenticated, setAuthenticated] = useState(false);
 
   const login = ({ id, pw }) => setUser(signIn({ id, pw }));
+  const history = useHistory();
   console.log(signIn);
   const logout = () => setUser(null);
   return (
@@ -43,15 +50,25 @@ function App() {
       <GlobalStyle />
       <Router>
         <Switch>
-          <Route path='/' exact component={Login} />
-          <Route path='/dashboard' component={DashBoard} />
+          <Route
+            path='/'
+            exact
+            component={Login}
+            authenticated={authenticated}
+          />
+
+          {authenticated === true ? (
+            <Route path='/dashboard' component={DashBoard} />
+          ) : (
+            <Route path='/' component={Login} />
+          )}
           <Route path='/tableboard' component={TableBoard} />
-          {/* <Route path='/profile' component={Profile} /> */}
-          <AuthRoute
+          <Route path='/profile' component={MyProfile} />
+          {/* <AuthRoute
             authenticated={authenticated}
             path='/profile'
-            render={(props) => <Profile user={user} {...props} />}
-          />
+            render={(props) => <MyProfile user={user} {...props} />}
+          /> */}
           {/* <AuthRoute
             authenticated={authenticated}
             path='/dashboard'
