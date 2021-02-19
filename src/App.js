@@ -50,12 +50,7 @@ function App() {
       <GlobalStyle />
       <Router>
         <Switch>
-          <Route
-            path='/'
-            exact
-            component={Login}
-            authenticated={authenticated}
-          />
+          <Route path='/' exact component={Login} auth={authenticated} />
 
           {authenticated === true ? (
             <Route path='/dashboard' component={DashBoard} />

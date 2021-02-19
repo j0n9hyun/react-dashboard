@@ -95,7 +95,7 @@ const Img = styled.img`
 `;
 
 const Login = (authenticated) => {
-  // console.log(authenticated);
+  console.log(authenticated);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
@@ -164,6 +164,7 @@ const Login = (authenticated) => {
 
           if (res) {
             console.log('토큰 확인');
+            setAuthenticated(true);
             window.location.href = '/dashboard';
           }
         })
