@@ -4,6 +4,7 @@ import axios from 'axios';
 import access from '../static/access.png';
 import palette from '../static/palette';
 import '../static/fontawesome.css';
+import { Counter } from '../features/counter/Counter';
 
 const Container = styled.div`
   background-color: ${palette.gray[8]};
@@ -94,28 +95,15 @@ const Img = styled.img`
   width: 130px;
 `;
 
-const Login = (authenticated) => {
-  console.log(authenticated);
+const Login = ({ setAuthenticated }) => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const TokenLoad = async () => {
-      await axios
-        .post('http://localhost:8000/account/sign-in', {
-          id: 'whdgus',
-          password: 'whdgus',
-        })
-        .then((res) => {
-          setUser(res.data);
-        });
-    };
     const timeOut = setTimeout(() => {
       setResult(null);
     }, 3000);
 
-    TokenLoad();
     return () => clearTimeout(timeOut);
   }, []);
 
@@ -153,19 +141,19 @@ const Login = (authenticated) => {
           password: formPw,
         })
         .then((res) => {
-          // console.log(res.data);
-          // const auth = res.data.find(
-          //   (user) => user.id === formId && user.password === formPw
-          // );
-          // console.log(auth);
           if (res.status === 501) {
-            console.log('하이');
+            console.log('501 error');
           }
 
-          if (res) {
-            console.log('토큰 확인');
+          if (res.status === 401) {
+            console.log('401 error');
+          }
+
+          if (res.status === 200) {
             setAuthenticated(true);
-            window.location.href = '/dashboard';
+            console.log('auth check');
+            // return <Redirect to='http://localhost:3000/dashboard' />;
+            // window.location.href = '/dashboard';
           }
         })
         .catch((e) => {
@@ -178,31 +166,11 @@ const Login = (authenticated) => {
     };
     apiCall();
   };
-  //   const apiCall = async () => {
-  //     await axios
-  //       .get('http://localhost:8888/users')
-  //       .then((user) => {
-  //         const auth = user.data.find(
-  //           (user) => user.id === formId && user.pw === formPw
-  //         );
-
-  //         if (auth) {
-  //           window.location.href = '/dashboard';
-  //         } else {
-  //           setResult(3);
-  //           return false;
-  //         }
-  //       })
-  //       .catch((e) => {
-  //         setLoading(true);
-  //         setResult(3);
-  //       });
-  //   };
-  //   apiCall();
-  // };
 
   return (
     <Container>
+      <Counter />
+
       <form style={{ paddingTop: '200px' }} onSubmit={signIn}>
         <LoginContainer>
           <Img src={access} />

@@ -22,7 +22,6 @@ import {
 } from 'recharts';
 import MyProfile from './MyProfile';
 import Menu from './Menu';
-import { useSelector } from 'react-redux';
 
 const Container = styled.div`
   background-color: #000;
@@ -148,11 +147,7 @@ const renderCustomizedLabel = ({
   );
 };
 
-const DashBoard = () => {
-  let todos = useSelector((state) => {
-    return state.todoReducer;
-  });
-  console.log(todos);
+const DashBoard = ({ setAuthenticated }) => {
   const [ti, setTi] = useState([]);
   const [tiTitle, setTiTitle] = useState([]);
   const columns = ['번호', '타입', '인디케이터', '등록일'];

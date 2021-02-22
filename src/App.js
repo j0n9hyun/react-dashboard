@@ -3,15 +3,17 @@ import Login from './components/Login';
 import { createGlobalStyle } from 'styled-components';
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   Switch,
-  useHistory,
+  // useHistory,
 } from 'react-router-dom';
 import DashBoard from './components/DashBoard';
 import TableBoard from './components/TableBoard';
 import MyProfile from './components/MyProfile';
-import { signIn } from './components/auth';
+// import { signIn } from './components/auth';
 // import AuthRoute from './components/AuthRoute';
+// import { Counter } from './reducers/Counter';
 
 const GlobalStyle = createGlobalStyle`
   html, head {
@@ -37,38 +39,22 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  const [user, setUser] = useState(null);
-  // const authenticated = user == null;
   const [authenticated, setAuthenticated] = useState(false);
-
-  const login = ({ id, pw }) => setUser(signIn({ id, pw }));
-  const history = useHistory();
-  console.log(signIn);
-  const logout = () => setUser(null);
+  console.log(authenticated);
   return (
     <>
       <GlobalStyle />
       <Router>
+        {!authenticated ? <Redirect to='/' /> : <Redirect to='/dashboard' />}
         <Switch>
-          <Route path='/' exact component={Login} auth={authenticated} />
-
-          {authenticated === true ? (
-            <Route path='/dashboard' component={DashBoard} />
-          ) : (
-            <Route path='/' component={Login} />
-          )}
+          <Route
+            path='/'
+            exact
+            render={() => <Login setAuthenticated={setAuthenticated} />}
+          />
+          <Route path='/dashboard' component={DashBoard} />
           <Route path='/tableboard' component={TableBoard} />
           <Route path='/profile' component={MyProfile} />
-          {/* <AuthRoute
-            authenticated={authenticated}
-            path='/profile'
-            render={(props) => <MyProfile user={user} {...props} />}
-          /> */}
-          {/* <AuthRoute
-            authenticated={authenticated}
-            path='/dashboard'
-            render={(props) => <DashBoard user={user} {...props} />}
-          /> */}
         </Switch>
       </Router>
     </>
