@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import spinner from '../static/load.gif';
 import palette from '../static/palette';
+import { useSelector } from 'react-redux';
+
 const TableContainer = styled.div`
   margin-top: 20px;
   position: absolute;
@@ -30,11 +32,9 @@ const TableHead = styled.thead`
 const TableTr = styled.tr`
   display: table;
   width: 100%;
-  /* background-color: white; */
   background-color: ${palette.gray[9]};
   color: ${palette.gray[4]};
 
-  /* color: black; */
   height: 50px;
   &:nth-of-type(1) {
     background-color: transparent;
@@ -62,7 +62,6 @@ const TableBody = styled.tbody`
 `;
 
 const TableTh = styled.th`
-  /* background-color: #6c7ae0; */
   background-color: ${palette.gray[8]};
   color: white;
   border: 0px solid #8e44ad;
@@ -77,12 +76,6 @@ const TableTh = styled.th`
   &:last-child {
     border-top-right-radius: 15px;
   }
-
-  /*
-  &:last-child {
-    border-radius: 0 46px 0 0;
-    color: red;
-  } */
 `;
 const TableTh2 = styled.th`
   background-color: #ffbe76;
@@ -93,14 +86,6 @@ const TableTh2 = styled.th`
   padding: 12px 15px;
   position: sticky;
   top: 0;
-  /* &:first-child {
-    border-radius: 46px 0 0 0;
-    color: red;
-  }
-  &:last-child {
-    border-radius: 0 46px 0 0;
-    color: red;
-  } */
 `;
 
 const TableTd = styled.td`
@@ -128,22 +113,23 @@ const DownButton = styled.button`
 const Img = styled.img`
   width: 100px;
 `;
-const TiList = ({ columns, columns2, data, data2 }) => {
+const TiList = () => {
   const [count, setCount] = useState(5);
-  // const [loading, setLoading] = useState(false);
-  // const titleData = data2;
+  const column = useSelector((state) => state.column);
+  const column2 = useSelector((state) => state.column2);
+  const data = useSelector((state) => state.api);
+  const data2 = useSelector((state) => state.apiTitle);
   const loadData = data.filter(function (e) {
     return e.id <= count;
   });
 
-  // data.length === 0 ? console.log('참') : console.log('거짓');
   return (
     <>
       <TableContainer>
         <TableStyling>
           <TableHead>
             <TableTr>
-              {columns.map((column) => (
+              {column.map((column) => (
                 <TableTh key={column}>{column}</TableTh>
               ))}
             </TableTr>
@@ -157,7 +143,7 @@ const TiList = ({ columns, columns2, data, data2 }) => {
                   <TableTd>{id}</TableTd>
                   <TableTd>{indicator_type}</TableTd>
                   <TableTd>{indicator}</TableTd>
-                  <TableTd>{reg_date.slice(0, 19).replace('T', ' ')}</TableTd>
+                  <TableTd>{reg_date.slice(0, 1).replace('T', ' ')}</TableTd>
                 </TableTr>
               ))
             )}
@@ -173,13 +159,13 @@ const TiList = ({ columns, columns2, data, data2 }) => {
         <TableStyling>
           <TableHead>
             <TableTr>
-              {columns2.map((column) => (
+              {column2.map((column) => (
                 <TableTh2 key={column}>{column}</TableTh2>
               ))}
             </TableTr>
           </TableHead>
           <TableBody>
-            {data.length === 0 ? (
+            {data2.length === 0 ? (
               <img src={spinner} alt='spinner' />
             ) : (
               data2.map(({ id, id_value, name, description: desc }) => (

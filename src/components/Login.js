@@ -4,7 +4,6 @@ import axios from 'axios';
 import access from '../static/access.png';
 import palette from '../static/palette';
 import '../static/fontawesome.css';
-import { Counter } from '../features/counter/Counter';
 
 const Container = styled.div`
   background-color: ${palette.gray[8]};
@@ -86,7 +85,7 @@ const Checkbox = styled.label`
 `;
 
 const WarningMsg = styled.div`
-  margin-top: 200px;
+  margin-top: 140px;
   text-align: center;
   color: pink;
 `;
@@ -95,20 +94,22 @@ const Img = styled.img`
   width: 130px;
 `;
 
-const Login = ({ setAuthenticated }) => {
+const Login = () => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const timeOut = setTimeout(() => {
-      setResult(null);
-    }, 3000);
+  // useEffect(() => {
+  //   const timeOut = setTimeout(() => {
+  //     setResult(null);
+  //   }, 7000);
 
-    return () => clearTimeout(timeOut);
-  }, []);
+  //   return () => clearTimeout(timeOut);
+  // }, []);
 
   const signIn = (e) => {
     e.preventDefault();
+    setLoading(true);
+    setResult(3);
     const formId = document.getElementById('id').value.trim();
     const formPw = document.getElementById('pw').value.trim();
 
@@ -141,25 +142,19 @@ const Login = ({ setAuthenticated }) => {
           password: formPw,
         })
         .then((res) => {
-          if (res.status === 501) {
-            console.log('501 error');
-          }
-
-          if (res.status === 401) {
-            console.log('401 error');
-          }
-
           if (res.status === 200) {
-            setAuthenticated(true);
-            console.log('auth check');
-            // return <Redirect to='http://localhost:3000/dashboard' />;
-            // window.location.href = '/dashboard';
+            try {
+              localStorage.setItem('user', JSON.stringify(res.data));
+              if (!res.data) return;
+              window.location.href = '/dashboard';
+              console.log('localstorage');
+            } catch (e) {
+              console.log(e);
+            }
           }
         })
         .catch((e) => {
-          if (e.response.status === 500) {
-            console.log('500에러');
-          }
+          console.log('네떡 에러');
           setLoading(true);
           setResult(3);
         });
@@ -169,8 +164,6 @@ const Login = ({ setAuthenticated }) => {
 
   return (
     <Container>
-      <Counter />
-
       <form style={{ paddingTop: '200px' }} onSubmit={signIn}>
         <LoginContainer>
           <Img src={access} />
@@ -200,8 +193,19 @@ const Login = ({ setAuthenticated }) => {
               포함되어야 합니다.
             </WarningMsg>
           )}
-          {result === 3 && <WarningMsg>로그인 안됨</WarningMsg>}
-          {loading === true && console.log('loading(true)')}
+          {/* {result === 3 && (
+            <WarningMsg>
+              <i class='fas fa-spinner fa-spin' /> <br />
+              로그인 안됨
+            </WarningMsg>
+          )} */}
+
+          {result === 3 && loading === true ? (
+            <WarningMsg>
+              <i class='fas fa-spinner fa-spin' /> <br />
+              로그인 중...
+            </WarningMsg>
+          ) : null}
         </LoginContainer>
       </form>
     </Container>

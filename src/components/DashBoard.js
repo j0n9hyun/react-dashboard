@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import palette from '../static/palette';
 import '../static/fontAwesome/css/all.css';
 import Clock from 'react-live-clock';
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import axios from 'axios';
 import TiList from './TiList';
 import {
   ResponsiveContainer,
@@ -22,6 +20,11 @@ import {
 } from 'recharts';
 import MyProfile from './MyProfile';
 import Menu from './Menu';
+import { useDispatch, useSelector } from 'react-redux';
+import { getList } from '../features/api/apiAsync';
+import { getTitle } from '../features/api/apiTitleAsync';
+import { useHistory } from 'react-router-dom';
+import { valueAmount } from '../features/table/pieChartSlice';
 
 const Container = styled.div`
   background-color: #000;
@@ -34,7 +37,7 @@ const SearchContainer = styled.div`
   left: 250px;
 `;
 const SearchBar = styled.input`
-  max-width: 300px;
+  /* max-width: 300px; */
   width: 500px;
   border: 0;
   color: lightgray;
@@ -93,12 +96,6 @@ const ChartContainer2 = styled.div`
   border-radius: 15px;
 `;
 
-const CalendarContainer = styled.div`
-  position: relative;
-  left: -2px;
-  width: 255px;
-`;
-
 const PieContainer = styled.div`
   position: absolute;
   max-width: 100%;
@@ -112,12 +109,63 @@ const PieContainer = styled.div`
   border-radius: 15px;
 `;
 
-const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
-];
+const MenuBarTitle = styled.div`
+  position: absolute;
+
+  top: 65px;
+  left: 260px;
+  color: white;
+  padding: 10px 0 20px 20px;
+  font-size: 1.5rem;
+`;
+
+const SubTitle = styled.div`
+  margin-top: 15px;
+  font-size: 14px;
+  color: ${palette.gray[5]};
+`;
+
+const Menu1 = styled.div`
+  /* background-color: black; */
+  background-color: ${(props) => props.color || 'transparent'};
+  font-weight: bold;
+  padding: 10px 10px;
+  margin: 10px 10px;
+  width: 210px;
+  height: 35px;
+  color: lightgray;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.5s ease;
+  &:hover {
+    background-color: black;
+    margin: 10px 10px;
+    width: 210px;
+    color: white;
+    &:active {
+      background-color: #130f40;
+    }
+    &:before {
+      text-align: center;
+      content: '';
+      position: absolute;
+      left: 10px;
+      height: 35px;
+      width: 3px;
+      border-radius: 20px;
+      background-color: lightgray;
+    }
+  }
+`;
+
+const SideText = styled.div`
+  position: relative;
+  bottom: 30px;
+  text-align: center;
+  line-height: 2;
+  padding-left: 28px;
+`;
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const RADIAN = Math.PI / 180;
@@ -146,38 +194,49 @@ const renderCustomizedLabel = ({
     </text>
   );
 };
+const ddd = [
+  { name: 'Page A', uv: 4000, female: 2400, male: 2400 },
+  { name: 'Page B', uv: 3000, female: 1398, male: 2210 },
+  { name: 'Page C', uv: 2000, female: 9800, male: 2290 },
+  { name: 'Page D', uv: 2780, female: 3908, male: 2000 },
+  { name: 'Page E', uv: 1890, female: 4800, male: 2181 },
+  { name: 'Page F', uv: 2390, female: 3800, male: 2500 },
+  { name: 'Page G', uv: 3490, female: 4300, male: 2100 },
+];
 
-const DashBoard = ({ setAuthenticated }) => {
-  const [ti, setTi] = useState([]);
-  const [tiTitle, setTiTitle] = useState([]);
-  const columns = ['번호', '타입', '인디케이터', '등록일'];
-  const columns2 = ['아이디값', '타이틀', '설명'];
-
-  useEffect(() => {
-    const apiCall = async () => {
-      await axios.get('http://localhost:8888/data').then((res) => {
-        setTi(res.data);
-      });
-    };
-    const Title = async () => {
-      await axios.get('http://localhost:8888/reputation_title').then((res) => {
-        setTiTitle(res.data);
-      });
-    };
-
-    apiCall();
-    Title();
-  }, []);
-
-  const ddd = [
-    { name: 'Page A', uv: 4000, female: 2400, male: 2400 },
-    { name: 'Page B', uv: 3000, female: 1398, male: 2210 },
-    { name: 'Page C', uv: 2000, female: 9800, male: 2290 },
-    { name: 'Page D', uv: 2780, female: 3908, male: 2000 },
-    { name: 'Page E', uv: 1890, female: 4800, male: 2181 },
-    { name: 'Page F', uv: 2390, female: 3800, male: 2500 },
-    { name: 'Page G', uv: 3490, female: 4300, male: 2100 },
+const DashBoard = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const test = useSelector((state) => state.api.map((v) => v.indicator_type));
+  const testFilter = test.filter((c) => c === 1).length;
+  const test2Filter = test.filter((c) => c === 2).length;
+  const test3Filter = test.filter((c) => c === 3).length;
+  console.log(testFilter);
+  console.log(test2Filter);
+  console.log(test3Filter);
+  // dispatch(valueAmount());
+  const data = [
+    { name: 'Type 3', value: testFilter },
+    { name: 'Group B', value: test2Filter },
+    { name: 'Group C', value: test3Filter },
+    // { name: 'Group D', value: 200 },
   ];
+
+  const onClick = () => {
+    history.push('/dashboard');
+  };
+  const onClick2 = () => {
+    history.push('/tableboard');
+  };
+  const onClickLogout = () => {
+    localStorage.removeItem('user');
+    history.push('/');
+  };
+  useEffect(() => {
+    dispatch(getList());
+    dispatch(getTitle());
+    // dispatch(valueAmount());
+  }, [dispatch]);
 
   return (
     <>
@@ -187,6 +246,11 @@ const DashBoard = ({ setAuthenticated }) => {
           <SearchBar placeholder='검색' />
         </SearchContainer>
         <MyProfile />
+        <MenuBarTitle>
+          DashBoard
+          <SubTitle>대시보드입니다.</SubTitle>
+          {/* <button onClick={() => dispatch(valueAmount())}>버튼</button> */}
+        </MenuBarTitle>
         <Menu />
         <ChartContainer>
           <ResponsiveContainer>
@@ -232,15 +296,7 @@ const DashBoard = ({ setAuthenticated }) => {
             <TimezoneText>Asia/Seoul</TimezoneText>
           </Time>
         </ChartContainer2>
-        <CalendarContainer>
-          <Calendar />
-        </CalendarContainer>
-        <TiList
-          columns={columns}
-          columns2={columns2}
-          data={ti}
-          data2={tiTitle}
-        />
+        <TiList />
       </Container>
     </>
   );

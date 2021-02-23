@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import palette from '../static/palette';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const MenuBar = styled.div`
   position: absolute;
@@ -15,7 +17,6 @@ const MenuBar = styled.div`
 
 const MenuBarTitle = styled.div`
   position: absolute;
-
   top: 65px;
   left: 260px;
   color: white;
@@ -30,7 +31,8 @@ const SubTitle = styled.div`
 `;
 
 const Menu1 = styled.div`
-  background-color: black;
+  /* background-color: black; */
+  background-color: ${(props) => props.color || 'transparent'};
   font-weight: bold;
   padding: 10px 10px;
   margin: 10px 10px;
@@ -63,7 +65,7 @@ const Menu1 = styled.div`
 `;
 
 const Menu2 = styled(Menu1)`
-  background-color: transparent;
+  background-color: ${(props) => props.color || 'transparent'};
 `;
 const Menu3 = styled(Menu2)`
   position: absolute;
@@ -91,6 +93,13 @@ const LogoTitle = styled.div`
   margin: 30px 0;
 `;
 
+const CalendarContainer = styled.div`
+  position: relative;
+  left: -2px;
+  width: 255px;
+  top: 15%;
+`;
+
 const Menu = () => {
   const history = useHistory();
   const onClick = () => {
@@ -100,6 +109,7 @@ const Menu = () => {
     history.push('/tableboard');
   };
   const onClickLogout = () => {
+    localStorage.removeItem('user');
     history.push('/');
   };
   return (
@@ -108,12 +118,7 @@ const Menu = () => {
         <LogoTitle>
           <i className='fab fa-phoenix-framework' />
         </LogoTitle>
-        <MenuBarTitle>
-          DashBoard
-          <SubTitle>대시보드입니다.</SubTitle>
-        </MenuBarTitle>
-
-        <Menu1 onClick={onClick}>
+        <Menu1 onClick={onClick} color='black'>
           <i className='fas fa-border-all' />
           <SideText>DashBoard</SideText>
         </Menu1>
@@ -135,6 +140,9 @@ const Menu = () => {
           <i className='fas fa-cogs' />
           <SideText>Settings</SideText>
         </Menu4>
+        <CalendarContainer>
+          <Calendar />
+        </CalendarContainer>
       </MenuBar>
     </div>
   );

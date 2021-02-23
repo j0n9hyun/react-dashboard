@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Login from './components/Login';
 import { createGlobalStyle } from 'styled-components';
 import {
@@ -6,14 +6,10 @@ import {
   Redirect,
   Route,
   Switch,
-  // useHistory,
 } from 'react-router-dom';
 import DashBoard from './components/DashBoard';
 import TableBoard from './components/TableBoard';
 import MyProfile from './components/MyProfile';
-// import { signIn } from './components/auth';
-// import AuthRoute from './components/AuthRoute';
-// import { Counter } from './reducers/Counter';
 
 const GlobalStyle = createGlobalStyle`
   html, head {
@@ -39,19 +35,23 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  const [authenticated, setAuthenticated] = useState(false);
-  console.log(authenticated);
+  // const [authenticated, setAuthenticated] = useState(false);
+  const getValue = localStorage.getItem('user');
+  // console.log(getValue);
+
+  // console.log(authenticated);
   return (
     <>
       <GlobalStyle />
       <Router>
-        {!authenticated ? <Redirect to='/' /> : <Redirect to='/dashboard' />}
+        {getValue ? <Redirect to='/dashboard' /> : <Redirect to='/' />}
         <Switch>
-          <Route
+          {/* <Route
             path='/'
             exact
             render={() => <Login setAuthenticated={setAuthenticated} />}
-          />
+          /> */}
+          <Route path='/' exact component={Login} />
           <Route path='/dashboard' component={DashBoard} />
           <Route path='/tableboard' component={TableBoard} />
           <Route path='/profile' component={MyProfile} />
