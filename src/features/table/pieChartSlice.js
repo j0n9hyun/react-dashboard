@@ -12,6 +12,8 @@ export const pieChartSlice = createSlice({
   reducers: {
     valueAmount: (state, action) => {
       state.value += action.payload;
+      // console.log(action.payload);
+      // console.log(state.name);
     },
   },
 });

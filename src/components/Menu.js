@@ -108,6 +108,9 @@ const Menu = () => {
   const onClick2 = () => {
     history.push('/tableboard');
   };
+  const onClick3 = () => {
+    history.push('/chartboard');
+  };
   const onClickLogout = () => {
     localStorage.removeItem('user');
     history.push('/');
@@ -118,14 +121,14 @@ const Menu = () => {
         <LogoTitle>
           <i className='fab fa-phoenix-framework' />
         </LogoTitle>
-        <Menu1 onClick={onClick} color='black'>
+        <Menu1 onClick={onClick} color=''>
           <i className='fas fa-border-all' />
           <SideText>DashBoard</SideText>
         </Menu1>
         <Menu2 onClick={onClick2}>
           <i className='fas fa-dice-d6' /> <SideText>Tables</SideText>
         </Menu2>
-        <Menu2 onClick={onClick2}>
+        <Menu2 onClick={onClick3}>
           <i className='far fa-chart-bar'></i>
           <SideText>Charts</SideText>
         </Menu2>

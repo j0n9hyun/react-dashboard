@@ -33,21 +33,30 @@ const TableTr = styled.tr`
   display: table;
   width: 100%;
   background-color: ${palette.gray[9]};
+
   color: ${palette.gray[4]};
 
   height: 50px;
   &:nth-of-type(1) {
     background-color: transparent;
+    border-right: none;
   }
   &:nth-of-type(even) {
     background-color: ${palette.gray[9]};
     color: ${palette.gray[4]};
+  }
+  &:first-child {
+    border-top: none;
+  }
+  &:last-child {
+    border-bottom: none;
   }
 `;
 
 const TableBody = styled.tbody`
   display: block;
   overflow-y: scroll;
+  margin-bottom: 30px;
   height: 250px;
   &::-webkit-scrollbar {
     background-color: gray;
@@ -62,18 +71,19 @@ const TableBody = styled.tbody`
 `;
 
 const TableTh = styled.th`
-  background-color: ${palette.gray[8]};
-  color: white;
+  background-color: #1b1e24;
+  /* background-color: ${palette.gray[8]}; */
+  color: ${palette.gray[4]};
   border: 0px solid #8e44ad;
   text-align: center;
   width: 1000px;
   padding: 12px 15px;
   position: sticky;
   top: 0;
-  &:first-child {
+  &:nth-of-type(1) {
     border-top-left-radius: 15px;
   }
-  &:last-child {
+  &:nth-of-type(4) {
     border-top-right-radius: 15px;
   }
 `;
@@ -86,6 +96,12 @@ const TableTh2 = styled.th`
   padding: 12px 15px;
   position: sticky;
   top: 0;
+  &:nth-of-type(1) {
+    border-top-left-radius: 15px;
+  }
+  &:nth-of-type(3) {
+    border-top-right-radius: 15px;
+  }
 `;
 
 const TableTd = styled.td`
@@ -147,15 +163,15 @@ const TiList = () => {
                 </TableTr>
               ))
             )}
+            <DownButton
+              onClick={(e) => {
+                setCount(count + 5);
+              }}
+            >
+              불러오기
+            </DownButton>
           </TableBody>
         </TableStyling>
-        <DownButton
-          onClick={(e) => {
-            setCount(count + 5);
-          }}
-        >
-          불러오기
-        </DownButton>
         <TableStyling>
           <TableHead>
             <TableTr>

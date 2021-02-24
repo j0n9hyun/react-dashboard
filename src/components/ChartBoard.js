@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import palette from '../static/palette';
 import '../static/fontAwesome/css/all.css';
-import Clock from 'react-live-clock';
 import 'react-calendar/dist/Calendar.css';
 import {
   ResponsiveContainer,
   BarChart,
-  Bar,
+  // Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -23,7 +22,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getList } from '../features/api/apiAsync';
 import { getTitle } from '../features/api/apiTitleAsync';
 import { valueAmount } from '../features/table/pieChartSlice';
-import TiTypeList from './TiTypeList';
+import { Bar } from '@reactchartjs/react-chart.js';
 
 const Container = styled.div`
   background-color: #000;
@@ -54,20 +53,6 @@ const SearchBar = styled.input`
   }
 `;
 
-const Time = styled.div`
-  position: relative;
-  text-align: center;
-  left: 25%;
-  top: 25%;
-  padding-right: 50%;
-`;
-
-const TimezoneText = styled.div`
-  font-size: 1rem;
-  color: ${palette.gray[6]};
-  text-align: center;
-`;
-
 const ChartContainer = styled.div`
   position: relative;
   box-shadow: 2px 2px 20px -10px gray;
@@ -79,20 +64,6 @@ const ChartContainer = styled.div`
   background-color: ${palette.gray[9]};
   left: 300px;
   top: 180px;
-`;
-
-const ChartContainer2 = styled.div`
-  position: relative;
-  max-width: 100%;
-  color: whitesmoke;
-  font-size: 3rem;
-  top: 200px;
-  left: 300px;
-  background-color: ${palette.gray[9]};
-  width: 400px;
-  margin: 0 0;
-  height: 200px;
-  border-radius: 15px;
 `;
 
 const PieContainer = styled.div`
@@ -161,7 +132,7 @@ const ddd = [
   { name: 'Page G', uv: 3490, female: 4300, male: 2100 },
 ];
 
-const DashBoard = () => {
+const ChartBoard = () => {
   const dispatch = useDispatch();
   const selectIndicatorType = useSelector((state) =>
     state.api.map((v) => v.indicator_type)
@@ -186,17 +157,14 @@ const DashBoard = () => {
   return (
     <>
       <Container>
-        <div style={{ paddingLeft: '1210px', height: '0' }}>
-          <TiTypeList />
-        </div>
         <SearchContainer>
           <i className='fas fa-search' />
           <SearchBar placeholder='검색' />
         </SearchContainer>
         <MyProfile />
         <MenuBarTitle>
-          DashBoard
-          <SubTitle>대시보드입니다.</SubTitle>
+          ChartBoard
+          <SubTitle>차트보드입니다.</SubTitle>
           {/* <button onClick={() => dispatch(valueAmount())}>버튼</button> */}
         </MenuBarTitle>
         <Menu />
@@ -239,15 +207,15 @@ const DashBoard = () => {
             </PieChart>
           </ResponsiveContainer>
         </PieContainer>
-        <ChartContainer2>
-          <Time>
-            <Clock format={'HH:mm:ss'} ticking={true} timezone={'Asia/Seoul'} />
-            <TimezoneText>Asia/Seoul</TimezoneText>
-          </Time>
-        </ChartContainer2>
+        <Bar
+          data={data}
+          width={100}
+          height={50}
+          options={{ maintainAspectRatio: false }}
+        />
       </Container>
     </>
   );
 };
 
-export default DashBoard;
+export default ChartBoard;

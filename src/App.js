@@ -10,6 +10,8 @@ import {
 import DashBoard from './components/DashBoard';
 import TableBoard from './components/TableBoard';
 import MyProfile from './components/MyProfile';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import ChartBoard from './components/ChartBoard';
 
 const GlobalStyle = createGlobalStyle`
   html, head {
@@ -51,9 +53,11 @@ function App() {
             exact
             render={() => <Login setAuthenticated={setAuthenticated} />}
           /> */}
+
           <Route path='/' exact component={Login} />
           <Route path='/dashboard' component={DashBoard} />
           <Route path='/tableboard' component={TableBoard} />
+          <Route path='/chartboard' component={ChartBoard} />
           <Route path='/profile' component={MyProfile} />
         </Switch>
       </Router>

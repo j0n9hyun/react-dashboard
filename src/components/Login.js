@@ -98,13 +98,13 @@ const Login = () => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   const timeOut = setTimeout(() => {
-  //     setResult(null);
-  //   }, 7000);
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      setResult(null);
+    }, 5000);
 
-  //   return () => clearTimeout(timeOut);
-  // }, []);
+    return () => clearTimeout(timeOut);
+  }, []);
 
   const signIn = (e) => {
     e.preventDefault();
