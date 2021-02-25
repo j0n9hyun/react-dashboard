@@ -8,7 +8,7 @@ const TableContainer = styled.div`
   margin-top: 20px;
   position: absolute;
   text-align: center;
-  right: 60px;
+  right: 88px;
   width: 700px;
   top: 15%;
   height: 500px;
@@ -33,10 +33,9 @@ const TableTr = styled.tr`
   display: table;
   width: 100%;
   background-color: ${palette.gray[9]};
-
   color: ${palette.gray[4]};
-
   height: 50px;
+
   &:nth-of-type(1) {
     background-color: transparent;
     border-right: none;
@@ -57,7 +56,10 @@ const TableBody = styled.tbody`
   display: block;
   overflow-y: scroll;
   margin-bottom: 30px;
+  width: 770px;
   height: 250px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   &::-webkit-scrollbar {
     background-color: gray;
     width: 12px;
@@ -66,8 +68,6 @@ const TableBody = styled.tbody`
     background-color: #6c5ce7;
     border-radius: 15px;
   }
-  &::-webkit-scrollbar-track {
-  }
 `;
 
 const TableTh = styled.th`
@@ -75,6 +75,7 @@ const TableTh = styled.th`
   /* background-color: ${palette.gray[8]}; */
   color: ${palette.gray[4]};
   border: 0px solid #8e44ad;
+  font-weight: 100;
   text-align: center;
   width: 1000px;
   padding: 12px 15px;
@@ -88,8 +89,10 @@ const TableTh = styled.th`
   }
 `;
 const TableTh2 = styled.th`
-  background-color: #ffbe76;
-  color: white;
+  /* background-color: #ffbe76; */
+  background-color: #1b1e24;
+  font-weight: 100;
+  color: ${palette.gray[4]};
   border: 0px solid #8e44ad;
   text-align: center;
   width: 1000px;
@@ -111,9 +114,13 @@ const TableTd = styled.td`
 
 const DownButton = styled.button`
   position: relative;
+  padding: 0;
+  margin: 0;
   font-size: 1rem;
-  width: 250px;
-  border-radius: 15px;
+  width: 100%;
+  /* border-radius: 15px; */
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   color: lightgray;
   border: 2px solid transparent;
   background: rgba(255, 255, 255, 0.1);
@@ -139,6 +146,8 @@ const TiList = () => {
     return e.id <= count;
   });
 
+  console.log(loadData.map((e) => e.id));
+
   return (
     <>
       <TableContainer>
@@ -155,11 +164,11 @@ const TiList = () => {
               <Img src={spinner} alt='spinner' />
             ) : (
               loadData.map(({ id, indicator_type, indicator, reg_date }) => (
-                <TableTr key={id}>
+                <TableTr>
                   <TableTd>{id}</TableTd>
                   <TableTd>{indicator_type}</TableTd>
-                  <TableTd>{indicator}</TableTd>
-                  <TableTd>{reg_date.slice(0, 1).replace('T', ' ')}</TableTd>
+                  <TableTd>{indicator.slice(0, 20) + '...'}</TableTd>
+                  <TableTd>{reg_date.slice(0, 16).replace('T', ' ')}</TableTd>
                 </TableTr>
               ))
             )}

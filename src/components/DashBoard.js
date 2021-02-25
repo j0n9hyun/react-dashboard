@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../static/palette';
 import '../static/fontAwesome/css/all.css';
@@ -104,7 +104,7 @@ const PieContainer = styled.div`
   background-color: ${palette.gray[9]};
   width: 350px;
   margin: 0 0;
-  height: 200px;
+  height: 280px;
   border-radius: 15px;
 `;
 
@@ -123,7 +123,24 @@ const SubTitle = styled.div`
   font-size: 14px;
   color: ${palette.gray[5]};
 `;
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
+const TimeoutContainer = styled.div`
+  position: absolute;
+  border: 1px solid red;
+  right: 305px;
+  color: red;
+  width: 100px;
+`;
+
+const COLORS = [
+  '#0088FE',
+  '#00C49F',
+  '#FFBB28',
+  '#FF8042',
+  // '#9b59b6',
+  // '#34495e',
+  // '#bdc3c7',
+];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -162,6 +179,7 @@ const ddd = [
 ];
 
 const DashBoard = () => {
+  const [chart, setChart] = useState([]);
   const dispatch = useDispatch();
   const selectIndicatorType = useSelector((state) =>
     state.api.map((v) => v.indicator_type)
@@ -169,20 +187,36 @@ const DashBoard = () => {
   const filterType1 = selectIndicatorType.filter((c) => c === 1).length;
   const filterType2 = selectIndicatorType.filter((c) => c === 2).length;
   const filterType3 = selectIndicatorType.filter((c) => c === 3).length;
-
-  const data = [
-    { name: 'Hostname', value: filterType1 },
-    { name: 'IPv4', value: filterType2 },
-    { name: 'URL', value: filterType3 },
-    { name: 'SHA256-hash', value: 10 },
-  ];
+  const filterType4 = selectIndicatorType.filter((c) => c === 4).length;
+  const filterType5 = selectIndicatorType.filter((c) => c === 5).length;
+  const filterType6 = selectIndicatorType.filter((c) => c === 6).length;
+  const filterType7 = selectIndicatorType.filter((c) => c === 7).length;
+  const filterType8 = selectIndicatorType.filter((c) => c === 8).length;
+  const ccc = () => {
+    setChart([
+      { name: 'Hostname', value: filterType1 },
+      { name: 'IPv4', value: filterType2 },
+      { name: 'URL', value: filterType3 },
+      { name: 'FileHash-SHA256', value: filterType4 },
+      { name: 'FileHash-MD5', value: filterType5 },
+      { name: 'FileHash-SHA1', value: filterType6 },
+      { name: 'domain', value: filterType7 },
+      { name: 'CVE', value: filterType8 },
+      { name: 'BitcoinAddress', value: 10 },
+      { name: 'email', value: 10 },
+      { name: 'YARA', value: 10 },
+      { name: 'JA3', value: 10 },
+    ]);
+  };
 
   useEffect(() => {
     dispatch(getList());
     dispatch(getTitle());
     dispatch(valueAmount());
+    // ccc();
   }, [dispatch]);
 
+  /* {chart.map((e) => e.name)} */
   return (
     <>
       <Container>
@@ -193,6 +227,7 @@ const DashBoard = () => {
           <i className='fas fa-search' />
           <SearchBar placeholder='검색' />
         </SearchContainer>
+        <TimeoutContainer>대충 clock</TimeoutContainer>
         <MyProfile />
         <MenuBarTitle>
           DashBoard
@@ -221,17 +256,17 @@ const DashBoard = () => {
         </ChartContainer>
         <PieContainer>
           <ResponsiveContainer>
-            <PieChart width={400} height={1000}>
+            <PieChart width={100} height={500}>
               <Pie
-                data={data}
+                data={chart}
                 // cx={100}
                 // cy={75}
                 labelLine={false}
                 label={renderCustomizedLabel}
-                outerRadius={70}
+                outerRadius={130}
                 fill='#8884d8'
               >
-                {data.map((entry, index) => (
+                {chart.map((entry, index) => (
                   <Cell fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>

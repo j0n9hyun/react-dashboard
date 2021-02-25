@@ -10,7 +10,6 @@ import {
 import DashBoard from './components/DashBoard';
 import TableBoard from './components/TableBoard';
 import MyProfile from './components/MyProfile';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import ChartBoard from './components/ChartBoard';
 
 const GlobalStyle = createGlobalStyle`
@@ -37,23 +36,13 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  // const [authenticated, setAuthenticated] = useState(false);
   const getValue = localStorage.getItem('user');
-  // console.log(getValue);
-
-  // console.log(authenticated);
   return (
     <>
       <GlobalStyle />
       <Router>
         {getValue ? <Redirect to='/dashboard' /> : <Redirect to='/' />}
         <Switch>
-          {/* <Route
-            path='/'
-            exact
-            render={() => <Login setAuthenticated={setAuthenticated} />}
-          /> */}
-
           <Route path='/' exact component={Login} />
           <Route path='/dashboard' component={DashBoard} />
           <Route path='/tableboard' component={TableBoard} />

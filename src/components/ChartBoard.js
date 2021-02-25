@@ -1,28 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../static/palette';
 import '../static/fontAwesome/css/all.css';
 import 'react-calendar/dist/Calendar.css';
-import {
-  ResponsiveContainer,
-  BarChart,
-  // Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  PieChart,
-  Pie,
-  Cell,
-} from 'recharts';
 import MyProfile from './MyProfile';
 import Menu from './Menu';
 import { useDispatch, useSelector } from 'react-redux';
 import { getList } from '../features/api/apiAsync';
 import { getTitle } from '../features/api/apiTitleAsync';
 import { valueAmount } from '../features/table/pieChartSlice';
-import { Bar } from '@reactchartjs/react-chart.js';
+import { Bar, Pie } from 'react-chartjs-2';
 
 const Container = styled.div`
   background-color: #000;
@@ -94,66 +81,166 @@ const SubTitle = styled.div`
   font-size: 14px;
   color: ${palette.gray[5]};
 `;
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+const BarContainer2 = styled.div`
+  position: relative;
+  text-align: center;
+  width: 680px;
+`;
 
-  return (
-    <text
-      x={x}
-      y={y}
-      fill='white'
-      textAnchor={x > cx ? 'start' : 'end'}
-      dominantBaseline='central'
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
-const ddd = [
-  { name: 'Page A', uv: 4000, female: 2400, male: 2400 },
-  { name: 'Page B', uv: 3000, female: 1398, male: 2210 },
-  { name: 'Page C', uv: 2000, female: 9800, male: 2290 },
-  { name: 'Page D', uv: 2780, female: 3908, male: 2000 },
-  { name: 'Page E', uv: 1890, female: 4800, male: 2181 },
-  { name: 'Page F', uv: 2390, female: 3800, male: 2500 },
-  { name: 'Page G', uv: 3490, female: 4300, male: 2100 },
+const Types = [
+  'Hostname',
+  'IPv4',
+  'URL',
+  'FileHash-SHA256',
+  'FileHash-MD5',
+  'FileHash-SHA1',
+  'domain',
+  'CVE',
+  'BitcoinAddress',
+  'email',
+  'YARA',
+  'JA3',
+  'SSLCertFingerprint',
+  'Mutex',
+  'FileHash-IMPHASH',
 ];
+
+const pieData = {
+  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
+// console.log(data2);
 
 const ChartBoard = () => {
   const dispatch = useDispatch();
+  const [chart, setChart] = useState([]);
   const selectIndicatorType = useSelector((state) =>
     state.api.map((v) => v.indicator_type)
   );
+  // const filterType1 = selectIndicatorType.filter((c) => c === 1).length;
   const filterType1 = selectIndicatorType.filter((c) => c === 1).length;
   const filterType2 = selectIndicatorType.filter((c) => c === 2).length;
   const filterType3 = selectIndicatorType.filter((c) => c === 3).length;
-
-  const data = [
-    { name: 'Hostname', value: filterType1 },
-    { name: 'IPv4', value: filterType2 },
-    { name: 'URL', value: filterType3 },
-    { name: 'SHA256-hash', value: 10 },
-  ];
+  const filterType4 = selectIndicatorType.filter((c) => c === 4).length;
+  const filterType5 = selectIndicatorType.filter((c) => c === 5).length;
+  const filterType6 = selectIndicatorType.filter((c) => c === 6).length;
+  const filterType7 = selectIndicatorType.filter((c) => c === 7).length;
+  const filterType8 = selectIndicatorType.filter((c) => c === 8).length;
+  const filterType9 = selectIndicatorType.filter((c) => c === 9).length;
+  const filterType10 = selectIndicatorType.filter((c) => c === 10).length;
+  const filterType11 = selectIndicatorType.filter((c) => c === 11).length;
+  const filterType12 = selectIndicatorType.filter((c) => c === 12).length;
+  const filterType13 = selectIndicatorType.filter((c) => c === 13).length;
+  const filterType14 = selectIndicatorType.filter((c) => c === 14).length;
+  const filterType15 = selectIndicatorType.filter((c) => c === 15).length;
+  // console.log(filterType1);
 
   useEffect(() => {
     dispatch(getList());
     dispatch(getTitle());
     dispatch(valueAmount());
-  }, [dispatch]);
+    // data2();
+  }, []);
 
+  // const data2 = () => {
+  //   setChart([sample]);
+  // };
+  // console.log(data2);
+  const sample = {
+    labels: Types,
+    datasets: [
+      {
+        label: '발견 수',
+        data: [
+          filterType1,
+          filterType2,
+          filterType3,
+          filterType4,
+          filterType5,
+          filterType6,
+          filterType7,
+          filterType8,
+          filterType9,
+          filterType10,
+          filterType11,
+          filterType12,
+          filterType13,
+          filterType14,
+          filterType15,
+        ],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const options2 = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
+  };
   return (
     <>
       <Container>
@@ -169,50 +256,13 @@ const ChartBoard = () => {
         </MenuBarTitle>
         <Menu />
         <ChartContainer>
-          <ResponsiveContainer>
-            <BarChart
-              width={800}
-              height={300}
-              data={ddd}
-              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-            >
-              <CartesianGrid strokeDasharray='3 3' />
-              <XAxis dataKey='name' />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey='female' stackId='a' fill='#8884d8' />
-              <Bar dataKey='male' stackId='a' fill='#82ca9d' />
-              <Bar dataKey='uv' fill='#ffc658' />
-            </BarChart>
-          </ResponsiveContainer>
+          <BarContainer2>
+            <Bar data={sample} options={options2} />
+          </BarContainer2>
         </ChartContainer>
         <PieContainer>
-          <ResponsiveContainer>
-            <PieChart width={400} height={1000}>
-              <Pie
-                data={data}
-                // cx={100}
-                // cy={75}
-                labelLine={false}
-                label={renderCustomizedLabel}
-                outerRadius={70}
-                fill='#8884d8'
-              >
-                {data.map((entry, index) => (
-                  <Cell fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
+          <Pie data={pieData} />
         </PieContainer>
-        <Bar
-          data={data}
-          width={100}
-          height={50}
-          options={{ maintainAspectRatio: false }}
-        />
       </Container>
     </>
   );
