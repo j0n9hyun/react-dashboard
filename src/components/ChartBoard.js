@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getList } from '../features/api/apiAsync';
 import { getTitle } from '../features/api/apiTitleAsync';
 import { valueAmount } from '../features/table/pieChartSlice';
-import { Bar, Pie } from 'react-chartjs-2';
+import { Bar, Pie, Line } from 'react-chartjs-2';
 
 const Container = styled.div`
   background-color: #000;
@@ -64,6 +64,7 @@ const PieContainer = styled.div`
   margin: 0 0;
   height: 200px;
   border-radius: 15px;
+  box-shadow: 2px 2px 20px -10px gray;
 `;
 
 const MenuBarTitle = styled.div`
@@ -86,6 +87,18 @@ const BarContainer2 = styled.div`
   position: relative;
   text-align: center;
   width: 680px;
+`;
+
+const LineContainer = styled.div`
+  position: relative;
+  width: 740px;
+  padding: 0 10px;
+  left: 1120px;
+  height: 360px;
+  bottom: 179px;
+  background-color: ${palette.gray[9]};
+  border-radius: 15px;
+  box-shadow: 2px 2px 20px -10px gray;
 `;
 
 const Types = [
@@ -144,18 +157,6 @@ const ChartBoard = () => {
   const filterType1 = selectIndicatorType.filter((c) => c === 1).length;
   const filterType2 = selectIndicatorType.filter((c) => c === 2).length;
   const filterType3 = selectIndicatorType.filter((c) => c === 3).length;
-  const filterType4 = selectIndicatorType.filter((c) => c === 4).length;
-  const filterType5 = selectIndicatorType.filter((c) => c === 5).length;
-  const filterType6 = selectIndicatorType.filter((c) => c === 6).length;
-  const filterType7 = selectIndicatorType.filter((c) => c === 7).length;
-  const filterType8 = selectIndicatorType.filter((c) => c === 8).length;
-  const filterType9 = selectIndicatorType.filter((c) => c === 9).length;
-  const filterType10 = selectIndicatorType.filter((c) => c === 10).length;
-  const filterType11 = selectIndicatorType.filter((c) => c === 11).length;
-  const filterType12 = selectIndicatorType.filter((c) => c === 12).length;
-  const filterType13 = selectIndicatorType.filter((c) => c === 13).length;
-  const filterType14 = selectIndicatorType.filter((c) => c === 14).length;
-  const filterType15 = selectIndicatorType.filter((c) => c === 15).length;
   // console.log(filterType1);
 
   useEffect(() => {
@@ -174,23 +175,7 @@ const ChartBoard = () => {
     datasets: [
       {
         label: '발견 수',
-        data: [
-          filterType1,
-          filterType2,
-          filterType3,
-          filterType4,
-          filterType5,
-          filterType6,
-          filterType7,
-          filterType8,
-          filterType9,
-          filterType10,
-          filterType11,
-          filterType12,
-          filterType13,
-          filterType14,
-          filterType15,
-        ],
+        data: [filterType1, filterType2, filterType3],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -241,6 +226,50 @@ const ChartBoard = () => {
       ],
     },
   };
+
+  const lineData = {
+    labels: ['1', '2', '3', '4', '5', '6'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        fill: false,
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgba(255, 99, 132, 0.2)',
+        yAxisID: 'y-axis-1',
+      },
+      {
+        label: '# of No Votes',
+        data: [1, 2, 1, 1, 2, 2],
+        fill: false,
+        backgroundColor: 'rgb(54, 162, 235)',
+        borderColor: 'rgba(54, 162, 235, 0.2)',
+        yAxisID: 'y-axis-2',
+      },
+    ],
+  };
+
+  const lineOptions = {
+    scales: {
+      yAxes: [
+        {
+          type: 'linear',
+          display: true,
+          position: 'left',
+          id: 'y-axis-1',
+        },
+        {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          id: 'y-axis-2',
+          gridLines: {
+            drawOnArea: false,
+          },
+        },
+      ],
+    },
+  };
   return (
     <>
       <Container>
@@ -263,6 +292,9 @@ const ChartBoard = () => {
         <PieContainer>
           <Pie data={pieData} />
         </PieContainer>
+        <LineContainer>
+          <Line data={lineData} options={lineOptions} />
+        </LineContainer>
       </Container>
     </>
   );

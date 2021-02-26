@@ -87,7 +87,7 @@ const TableBoard = () => {
       </MenuBarTitle>
       <Menu color='red' />
       <TiTypeList />
-      <TiList />
+      {/* <TiList /> */}
     </Container>
   );
 };

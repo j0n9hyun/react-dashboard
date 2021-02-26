@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const getTitle = createAsyncThunk('get_title', async () => {
+  // const response = await axios.get('http://localhost:8888/reputation_title');
   const response = await axios.get('http://localhost:8000/api/v2');
   return response.data;
 });

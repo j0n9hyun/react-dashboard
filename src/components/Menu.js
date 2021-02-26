@@ -15,20 +15,20 @@ const MenuBar = styled.div`
   box-shadow: 0 2px 20px -10px black;
 `;
 
-const MenuBarTitle = styled.div`
-  position: absolute;
-  top: 65px;
-  left: 260px;
-  color: white;
-  padding: 10px 0 20px 20px;
-  font-size: 1.5rem;
-`;
+// const MenuBarTitle = styled.div`
+//   position: absolute;
+//   top: 65px;
+//   left: 260px;
+//   color: white;
+//   padding: 10px 0 20px 20px;
+//   font-size: 1.5rem;
+// `;
 
-const SubTitle = styled.div`
-  margin-top: 15px;
-  font-size: 14px;
-  color: ${palette.gray[5]};
-`;
+// const SubTitle = styled.div`
+//   margin-top: 15px;
+//   font-size: 14px;
+//   color: ${palette.gray[5]};
+// `;
 
 const Menu1 = styled.div`
   /* background-color: black; */

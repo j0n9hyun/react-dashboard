@@ -24,6 +24,7 @@ import { getList } from '../features/api/apiAsync';
 import { getTitle } from '../features/api/apiTitleAsync';
 import { valueAmount } from '../features/table/pieChartSlice';
 import TiTypeList from './TiTypeList';
+import Search from './Search';
 
 const Container = styled.div`
   background-color: #000;
@@ -220,15 +221,14 @@ const DashBoard = () => {
   return (
     <>
       <Container>
-        <div style={{ paddingLeft: '1210px', height: '0' }}>
+        <div style={{ paddingLeft: '1220px', height: '0' }}>
           <TiTypeList />
         </div>
-        <SearchContainer>
-          <i className='fas fa-search' />
-          <SearchBar placeholder='검색' />
-        </SearchContainer>
+        {/* <SearchContainer>
+          <Search />
+        </SearchContainer> */}
         <TimeoutContainer>대충 clock</TimeoutContainer>
-        <MyProfile />
+        {/* <MyProfile /> */}
         <MenuBarTitle>
           DashBoard
           <SubTitle>대시보드입니다.</SubTitle>
