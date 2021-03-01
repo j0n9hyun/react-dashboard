@@ -180,11 +180,11 @@ const TiTypeList = () => {
   const data2 = useSelector((state) => state.apiTitle);
   const [show, setShow] = useState(false);
   const [id, setId] = useState(null);
-  const [tid, setTid] = useState(null);
+  const [sibal, setSibal] = useState(null);
   const [title, setTitle] = useState(null);
   const renderBackdrop = (props) => <Backdrop {...props} />;
 
-  const loadData = data.filter(function (e) {
+  const loadData = data2.filter(function (e) {
     return e.id <= count;
   });
 
@@ -193,7 +193,10 @@ const TiTypeList = () => {
     setTableModal(true);
   };
 
-  console.log(loadData);
+  // const love = data.map((v) => v.info);
+  // const love = data.map((v) => v);
+  // console.log(data.filter((v) => v.info === 3));
+  console.log(data);
 
   return (
     <>
@@ -206,35 +209,32 @@ const TiTypeList = () => {
           </TableTr>
         </TableHead>
         <TableBody>
-          {data2.length === 0
+          {data.length === 0
             ? // <img src={spinner} alt='spinner' />
               // <i class='fas fa-spinner fa-spin' />
               null
-            : loadData.map(
+            : data.map(
                 ({
                   id,
-                  tid,
-                  title,
                   indicator,
-                  indicator_type,
-                  description: desc,
-                  reg_date,
+                  indicator_type: { indicator_name },
+                  info: { description },
                 }) => (
                   <TableTr
                     key={id}
                     onClick={() => {
                       setShow(true);
-                      // setId(id_value);
-                      setTid(indicator);
-                      setTitle(title);
-                      // console.log(indicator);
+                      // setTitle(title);
+
+                      // console.log(data);
+                      // setSibal(data.filter((v) => v.info === id));
+                      // console.log(sibal);
                     }}
                   >
+                    <TableTd>{id}</TableTd>
                     <TableTd>{indicator}</TableTd>
-                    <TableTd>{indicator_type}</TableTd>
-                    <TableTd>
-                      {reg_date.substr(0, 16).replace('T', ' ')}
-                    </TableTd>
+                    {/* <TableTd>{description}</TableTd> */}
+                    {/* <TableTd>{reg_date.substr(0, 16).replace('T', ' ')}</TableTd> */}
                     {/* <TableTd>{desc.substr(0, 50) + '...'}</TableTd> */}
                   </TableTr>
                 )
@@ -255,12 +255,11 @@ const TiTypeList = () => {
         renderBackdrop={renderBackdrop}
       >
         <ModalWrapper>
-          프로필 설정
+          Modal
           <div>
             <TableTr>test</TableTr>
-            {id}
-            {tid}
-            {title}
+            {/* {love} */}
+            {/* {sibal} */}
           </div>
         </ModalWrapper>
       </RandomlyPositionedModal>
