@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import palette from '../static/palette';
 import '../static/fontAwesome/css/all.css';
-import axios from 'axios';
 
 const SearchBar = styled.input`
   /* max-width: 300px; */
@@ -23,36 +23,41 @@ const SearchBar = styled.input`
   }
 `;
 
-const API = 'http://localhost:8888/data';
+// const API = 'http://localhost:8888/data';
 
 const Search = () => {
-  const [input, setInput] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [result, setResult] = useState([]);
-  const [inputData, setInputData] = useState([]);
-
-  useEffect(() => {
-    const conn = async () => {
-      await axios
-        .get(API)
-        .then((res) => setInput(res.data.map((v) => v.indicator)));
-    };
-    conn();
-  }, []);
+  const data = useSelector((state) => state.api);
+  const dd = data.map((v) => v.indicator);
 
   const onChange = (e) => {
-    setInputData(input);
+    setSearchTerm(e.target.value);
+    // const love = data.map((v) => v.indicator);
+    // setResult(data);
+    // const wordFilter = sample.filter((v) => {
+    //   return v.toLowerCase().includes(sample);
+    // });
+
+    // console.log(wordFilter);
+
     // const f = input.filter((v) => {
     //   return v.toLowerCase().includes(input);
     // });
     // setResult(input.filter((v) => v ===));
   };
 
+  useEffect(() => {
+    const results = dd.filter((v) => v.toLowerCase().includes(searchTerm));
+    setResult(results);
+  }, [searchTerm]);
+
   return (
     <div>
       <i className='fas fa-search' />
-      <SearchBar placeholder='검색' onChange={onChange} />
-      {/* <div style={{ color: 'white' }}> {input} </div> */}
-      <div style={{ color: 'yellow' }}> {result} </div>
+      <SearchBar placeholder='검색' onChange={onChange} value={searchTerm} />
+      {/* <div style={{ color: 'white' }}> {result}</div> */}
+      {/* <div style={{ color: 'yellow' }}> {searchTerm} </div> */}
     </div>
   );
 };

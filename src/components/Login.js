@@ -202,7 +202,7 @@ const Login = () => {
 
           {result === 3 && loading === true ? (
             <WarningMsg>
-              <i class='fas fa-spinner fa-spin' /> <br />
+              <i className='fas fa-spinner fa-spin' /> <br />
               로그인 중...
             </WarningMsg>
           ) : null}

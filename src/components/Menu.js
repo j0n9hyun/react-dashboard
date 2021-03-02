@@ -11,6 +11,7 @@ const MenuBar = styled.div`
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   width: 255px;
+  max-width: 100%;
   height: 100%;
   box-shadow: 0 2px 20px -10px black;
 `;
@@ -143,9 +144,9 @@ const Menu = () => {
           <i className='fas fa-cogs' />
           <SideText>Settings</SideText>
         </Menu4>
-        <CalendarContainer>
+        {/* <CalendarContainer>
           <Calendar />
-        </CalendarContainer>
+        </CalendarContainer> */}
       </MenuBar>
     </div>
   );

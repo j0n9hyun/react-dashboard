@@ -8,6 +8,7 @@ import Menu from './Menu';
 import { useSelector } from 'react-redux';
 import MyProfile from './MyProfile';
 import TiTypeList from './TiTypeList';
+import Search from './Search';
 
 const Container = styled.div`
   background-color: #000;
@@ -76,10 +77,9 @@ const TableBoard = () => {
   return (
     <Container>
       <SearchContainer>
-        <i class='fas fa-search' />
-        <SearchBar placeholder='검색' />
+        <Search />
       </SearchContainer>
-      <MyProfile />
+      {/* <MyProfile /> */}
 
       <MenuBarTitle>
         TableBoard

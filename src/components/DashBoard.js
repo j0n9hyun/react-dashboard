@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import palette from '../static/palette';
 import '../static/fontAwesome/css/all.css';
 import Clock from 'react-live-clock';
 import 'react-calendar/dist/Calendar.css';
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  PieChart,
-  Pie,
-  Cell,
-} from 'recharts';
-import MyProfile from './MyProfile';
 import Menu from './Menu';
-import { useDispatch, useSelector } from 'react-redux';
-import { getList } from '../features/api/apiAsync';
-import { getTitle } from '../features/api/apiTitleAsync';
-import { valueAmount } from '../features/table/pieChartSlice';
-import TiTypeList from './TiTypeList';
-import Search from './Search';
+// import {
+//   ResponsiveContainer,
+//   BarChart,
+//   Bar,
+//   XAxis,
+//   YAxis,
+//   CartesianGrid,
+//   Tooltip,
+//   Legend,
+//   PieChart,
+//   Pie,
+//   Cell,
+// } from 'recharts';
+// import MyProfile from './MyProfile';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { getList } from '../features/api/apiAsync';
+// import { getTitle } from '../features/api/apiTitleAsync';
+// import { valueAmount } from '../features/table/pieChartSlice';
+// import TiTypeList from './TiTypeList';
+// import Search from './Search';
 
 const Container = styled.div`
   background-color: #000;
@@ -143,91 +143,91 @@ const COLORS = [
   // '#bdc3c7',
 ];
 
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+// const RADIAN = Math.PI / 180;
+// const renderCustomizedLabel = ({
+//   cx,
+//   cy,
+//   midAngle,
+//   innerRadius,
+//   outerRadius,
+//   percent,
+//   index,
+// }) => {
+//   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+//   const x = cx + radius * Math.cos(-midAngle * RADIAN);
+//   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-  return (
-    <text
-      x={x}
-      y={y}
-      fill='white'
-      textAnchor={x > cx ? 'start' : 'end'}
-      dominantBaseline='central'
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
-const ddd = [
-  { name: 'Page A', uv: 4000, female: 2400, male: 2400 },
-  { name: 'Page B', uv: 3000, female: 1398, male: 2210 },
-  { name: 'Page C', uv: 2000, female: 9800, male: 2290 },
-  { name: 'Page D', uv: 2780, female: 3908, male: 2000 },
-  { name: 'Page E', uv: 1890, female: 4800, male: 2181 },
-  { name: 'Page F', uv: 2390, female: 3800, male: 2500 },
-  { name: 'Page G', uv: 3490, female: 4300, male: 2100 },
-];
+//   return (
+//     <text
+//       x={x}
+//       y={y}
+//       fill='white'
+//       textAnchor={x > cx ? 'start' : 'end'}
+//       dominantBaseline='central'
+//     >
+//       {`${(percent * 100).toFixed(0)}%`}
+//     </text>
+//   );
+// };
+// const ddd = [
+//   { name: 'Page A', uv: 4000, female: 2400, male: 2400 },
+//   { name: 'Page B', uv: 3000, female: 1398, male: 2210 },
+//   { name: 'Page C', uv: 2000, female: 9800, male: 2290 },
+//   { name: 'Page D', uv: 2780, female: 3908, male: 2000 },
+//   { name: 'Page E', uv: 1890, female: 4800, male: 2181 },
+//   { name: 'Page F', uv: 2390, female: 3800, male: 2500 },
+//   { name: 'Page G', uv: 3490, female: 4300, male: 2100 },
+// ];
 
 const DashBoard = () => {
-  const [chart, setChart] = useState([]);
-  const dispatch = useDispatch();
-  const selectIndicatorType = useSelector((state) =>
-    state.api.map((v) => v.indicator_type)
-  );
-  const filterType1 = selectIndicatorType.filter((c) => c === 1).length;
-  const filterType2 = selectIndicatorType.filter((c) => c === 2).length;
-  const filterType3 = selectIndicatorType.filter((c) => c === 3).length;
-  const filterType4 = selectIndicatorType.filter((c) => c === 4).length;
-  const filterType5 = selectIndicatorType.filter((c) => c === 5).length;
-  const filterType6 = selectIndicatorType.filter((c) => c === 6).length;
-  const filterType7 = selectIndicatorType.filter((c) => c === 7).length;
-  const filterType8 = selectIndicatorType.filter((c) => c === 8).length;
-  const ccc = () => {
-    setChart([
-      { name: 'Hostname', value: filterType1 },
-      { name: 'IPv4', value: filterType2 },
-      { name: 'URL', value: filterType3 },
-      { name: 'FileHash-SHA256', value: filterType4 },
-      { name: 'FileHash-MD5', value: filterType5 },
-      { name: 'FileHash-SHA1', value: filterType6 },
-      { name: 'domain', value: filterType7 },
-      { name: 'CVE', value: filterType8 },
-      { name: 'BitcoinAddress', value: 10 },
-      { name: 'email', value: 10 },
-      { name: 'YARA', value: 10 },
-      { name: 'JA3', value: 10 },
-    ]);
-  };
+  // const [chart, setChart] = useState([]);
+  // const dispatch = useDispatch();
+  // const selectIndicatorType = useSelector((state) =>
+  //   state.api.map((v) => v.indicator_type)
+  // );
+  // const filterType1 = selectIndicatorType.filter((c) => c === 1).length;
+  // const filterType2 = selectIndicatorType.filter((c) => c === 2).length;
+  // const filterType3 = selectIndicatorType.filter((c) => c === 3).length;
+  // const filterType4 = selectIndicatorType.filter((c) => c === 4).length;
+  // const filterType5 = selectIndicatorType.filter((c) => c === 5).length;
+  // const filterType6 = selectIndicatorType.filter((c) => c === 6).length;
+  // const filterType7 = selectIndicatorType.filter((c) => c === 7).length;
+  // const filterType8 = selectIndicatorType.filter((c) => c === 8).length;
+  // const ccc = () => {
+  //   setChart([
+  //     { name: 'Hostname', value: filterType1 },
+  //     { name: 'IPv4', value: filterType2 },
+  //     { name: 'URL', value: filterType3 },
+  //     { name: 'FileHash-SHA256', value: filterType4 },
+  //     { name: 'FileHash-MD5', value: filterType5 },
+  //     { name: 'FileHash-SHA1', value: filterType6 },
+  //     { name: 'domain', value: filterType7 },
+  //     { name: 'CVE', value: filterType8 },
+  //     { name: 'BitcoinAddress', value: 10 },
+  //     { name: 'email', value: 10 },
+  //     { name: 'YARA', value: 10 },
+  //     { name: 'JA3', value: 10 },
+  //   ]);
+  // };
 
-  useEffect(() => {
-    dispatch(getList());
-    dispatch(getTitle());
-    dispatch(valueAmount());
-    // ccc();
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getList());
+  //   dispatch(getTitle());
+  //   dispatch(valueAmount());
+  //   // ccc();
+  // }, [dispatch]);
 
   /* {chart.map((e) => e.name)} */
   return (
     <>
       <Container>
-        <div style={{ paddingLeft: '1220px', height: '0' }}>
+        {/* <div style={{ paddingLeft: '1220px', height: '0' }}>
           <TiTypeList />
-        </div>
+        </div> */}
         {/* <SearchContainer>
           <Search />
         </SearchContainer> */}
-        <TimeoutContainer>대충 clock</TimeoutContainer>
+        {/* <TimeoutContainer>대충 clock</TimeoutContainer> */}
         {/* <MyProfile /> */}
         <MenuBarTitle>
           DashBoard
@@ -235,7 +235,7 @@ const DashBoard = () => {
           {/* <button onClick={() => dispatch(valueAmount())}>버튼</button> */}
         </MenuBarTitle>
         <Menu />
-        <ChartContainer>
+        {/* <ChartContainer>
           <ResponsiveContainer>
             <BarChart
               width={800}
@@ -273,7 +273,7 @@ const DashBoard = () => {
               <Tooltip />
             </PieChart>
           </ResponsiveContainer>
-        </PieContainer>
+        </PieContainer> */}
         <ChartContainer2>
           <Time>
             <Clock format={'HH:mm:ss'} ticking={true} timezone={'Asia/Seoul'} />
