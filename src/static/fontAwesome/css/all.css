@@ -126,6 +126,12 @@
 .fa-spin {
   -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear;
+  font-size: 3rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  margin-left: calc(300px / -2);
 }
 
 .fa-pulse {

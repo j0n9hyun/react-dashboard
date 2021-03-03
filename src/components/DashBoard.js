@@ -31,30 +31,6 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const SearchContainer = styled.div`
-  position: absolute;
-  margin: 20px 0 20px 40px;
-  left: 250px;
-`;
-const SearchBar = styled.input`
-  /* max-width: 300px; */
-  width: 500px;
-  border: 0;
-  color: lightgray;
-  background-color: #343a40;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  padding-left: 15px;
-  margin-left: 20px;
-  font-size: 1rem;
-  height: 35px;
-  outline: none;
-  box-shadow: 0 5px 5px -3px black;
-  &::placeholder {
-    color: darkgray;
-  }
-`;
-
 const Time = styled.div`
   position: relative;
   text-align: center;
@@ -69,19 +45,6 @@ const TimezoneText = styled.div`
   text-align: center;
 `;
 
-const ChartContainer = styled.div`
-  position: relative;
-  box-shadow: 2px 2px 20px -10px gray;
-  width: 750px;
-  max-width: 60%;
-  height: 300px;
-  border-radius: 15px;
-  padding: 30px 20px;
-  background-color: ${palette.gray[9]};
-  left: 300px;
-  top: 180px;
-`;
-
 const ChartContainer2 = styled.div`
   position: relative;
   max-width: 100%;
@@ -93,19 +56,6 @@ const ChartContainer2 = styled.div`
   width: 400px;
   margin: 0 0;
   height: 200px;
-  border-radius: 15px;
-`;
-
-const PieContainer = styled.div`
-  position: absolute;
-  max-width: 100%;
-  color: whitesmoke;
-  top: 560px;
-  left: 730px;
-  background-color: ${palette.gray[9]};
-  width: 350px;
-  margin: 0 0;
-  height: 280px;
   border-radius: 15px;
 `;
 
@@ -124,24 +74,6 @@ const SubTitle = styled.div`
   font-size: 14px;
   color: ${palette.gray[5]};
 `;
-
-const TimeoutContainer = styled.div`
-  position: absolute;
-  border: 1px solid red;
-  right: 305px;
-  color: red;
-  width: 100px;
-`;
-
-const COLORS = [
-  '#0088FE',
-  '#00C49F',
-  '#FFBB28',
-  '#FF8042',
-  // '#9b59b6',
-  // '#34495e',
-  // '#bdc3c7',
-];
 
 // const RADIAN = Math.PI / 180;
 // const renderCustomizedLabel = ({
@@ -234,7 +166,7 @@ const DashBoard = () => {
           <SubTitle>대시보드입니다.</SubTitle>
           {/* <button onClick={() => dispatch(valueAmount())}>버튼</button> */}
         </MenuBarTitle>
-        <Menu />
+        <Menu color='blue' />
         {/* <ChartContainer>
           <ResponsiveContainer>
             <BarChart

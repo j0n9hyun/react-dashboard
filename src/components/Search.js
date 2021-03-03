@@ -5,8 +5,8 @@ import palette from '../static/palette';
 import '../static/fontAwesome/css/all.css';
 
 const SearchBar = styled.input`
-  /* max-width: 300px; */
-  width: 500px;
+  /* max-width: 500px; */
+  max-width: 100%;
   border: 0;
   color: lightgray;
   background-color: #343a40;

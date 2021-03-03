@@ -18,7 +18,7 @@ const LoginContainer = styled.div`
   text-align: center;
   margin: 0 auto;
   width: 400px;
-  height: 600px;
+  height: 480px;
   background: ${palette.gray[9]};
 `;
 
@@ -28,7 +28,7 @@ const InputName = styled.div`
   font-size: 12px;
   width: 30px;
   color: lightgray;
-  bottom: 6%;
+  bottom: 14%;
   left: 17%;
 `;
 
@@ -36,7 +36,7 @@ const InputForm = styled.input`
   background: rgba(255, 255, 255, 0.1);
   color: lightgray;
   position: relative;
-  top: 5%;
+  /* top: 5%; */
   font-size: 1.5rem;
   width: 250px;
   height: 30px;
@@ -57,7 +57,7 @@ const InputForm = styled.input`
 
 const ButtonForm = styled.button`
   position: relative;
-  top: 15%;
+  top: 5%;
   font-size: 1.5rem;
   width: 250px;
   margin-top: 10px;
@@ -85,7 +85,7 @@ const Checkbox = styled.label`
 `;
 
 const WarningMsg = styled.div`
-  margin-top: 140px;
+  margin-top: 60px;
   text-align: center;
   color: pink;
 `;
@@ -145,9 +145,9 @@ const Login = () => {
           if (res.status === 200) {
             try {
               localStorage.setItem('user', JSON.stringify(res.data));
+              // localStorage.setItem('user', res.data));
               if (!res.data) return;
               window.location.href = '/dashboard';
-              console.log('localstorage');
             } catch (e) {
               console.log(e);
             }
@@ -173,11 +173,7 @@ const Login = () => {
           <InputForm type='password' id='pw' placeholder='비밀번호' />
           <br />
           <InputName>Password</InputName>
-          <ButtonForm type='submit'>버튼</ButtonForm>
-          <Checkbox>
-            <input type='checkbox' />
-            Remember Me
-          </Checkbox>
+          <ButtonForm type='submit'>Login</ButtonForm>
           {result === 0 && (
             <WarningMsg>아이디 또는 패스워드가 입력되지 않았습니다.</WarningMsg>
           )}
@@ -201,10 +197,7 @@ const Login = () => {
           )} */}
 
           {result === 3 && loading === true ? (
-            <WarningMsg>
-              <i className='fas fa-spinner fa-spin' /> <br />
-              로그인 중...
-            </WarningMsg>
+            <WarningMsg>로그인 중...</WarningMsg>
           ) : null}
         </LoginContainer>
       </form>

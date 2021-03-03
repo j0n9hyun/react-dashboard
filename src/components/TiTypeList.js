@@ -4,9 +4,7 @@ import palette from '../static/palette';
 import '../static/fontAwesome/css/all.css';
 import 'react-calendar/dist/Calendar.css';
 import { useDispatch, useSelector } from 'react-redux';
-// import spinner from '../static/load.gif';
 import Modal from 'react-overlays/Modal';
-// import { TitleOutlined } from '@material-ui/icons';
 import '../static/fontawesome.css';
 import { getList } from '../features/api/apiAsync';
 import { getTitle } from '../features/api/apiTitleAsync';
@@ -16,15 +14,13 @@ const Table = styled.table`
   border-radius: 3px;
   border-collapse: collapse;
   height: 320px;
-  /* max-width: 1500px; */
-  width: 80%;
-  /* max-width: 500px; */
-  top: 177px;
-  /* left: 18%; */
-  margin-left: 350px;
-  margin-right: none;
-  overflow-x: auto;
-  position: relative;
+  /* max-width: 80%; */
+  width: 1500px;
+  /* margin-left: 300px; */
+  left: 18%;
+  top: 200px;
+  overflow: auto;
+  position: absolute;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   animation: float 5s infinite;
 `;
@@ -48,7 +44,6 @@ const TableTd = styled.td`
 const TableTr = styled.tr`
   display: table;
   max-width: 1500px;
-  /* border-bottom: 1px solid #c1c3d1; */
   color: ${palette.gray[5]};
   font-size: 14px;
   font-weight: normal;
@@ -59,14 +54,11 @@ const TableTr = styled.tr`
   }
   &:last-child {
     border-bottom: none;
-    /* color: blue; */
   }
 `;
 const TableTh2 = styled.th`
   color: #d5dde5;
   background: #1b1e24;
-  /* border-bottom: 4px solid #9ea7af; */
-  /* border-right: 1px solid #343a45; */
   font-size: 16px;
   font-weight: 100;
   padding: 24px;
@@ -81,7 +73,6 @@ const TableTh2 = styled.th`
   }
   &:last-child {
     border-top-right-radius: 15px;
-    /* border-right: none; */
   }
 `;
 
@@ -133,7 +124,7 @@ const DownButton = styled.button`
 const RandomlyPositionedModal = styled(Modal)`
   position: fixed;
   width: 820px;
-  height: 420px;
+  height: 520px;
   z-index: 1040;
   border: 0;
   outline: none;
@@ -166,13 +157,17 @@ const Backdrop = styled('div')`
   opacity: 0.5;
 `;
 
-const InlineTable = styled.div``;
+const InlineTable = styled.div`
+  margin-top: 35px;
+  overflow-x: auto;
+`;
 
 const InlineTbody = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   float: left;
   height: 360px;
+  width: 819px;
   &::-webkit-scrollbar {
     background-color: gray;
     width: 12px;
@@ -193,27 +188,56 @@ const InlineTd = styled(TableTd)`
 
 const InlineTr = styled.div`
   display: table;
-  width: 800px;
-  /* border-bottom: 1px solid #c1c3d1; */
-  color: ${palette.gray[5]};
-  font-size: 16px;
+  width: 819px;
+  color: ${palette.gray[6]};
+  background: #1b1e24;
   font-weight: normal;
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
   padding-bottom: 10px;
+  color: #d5dde5;
+  font-size: 16px;
+  font-weight: 100;
+  vertical-align: middle;
+  line-height: 2;
+  &:first-child {
+    border-top-left-radius: 15px;
+  }
+  &:last-child {
+    border-top-right-radius: 15px;
+  }
 `;
 
+const InlineTitle = styled.div`
+  color: ${palette.gray[5]};
+`;
+
+// const InlineTh = styled.span`
+//   color: #d5dde5;
+//   background: #1b1e24;
+//   font-size: 16px;
+//   font-weight: 100;
+//   padding: 24px;
+//   text-align: left;
+//   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+//   text-align: center;
+//   &:first-child {
+//     border-top-left-radius: 15px;
+//   }
+//   &:last-child {
+//     border-top-right-radius: 15px;
+//   }
+// `;
+
 const TiTypeList = () => {
-  // const dispatch = useDispatch();
   const dispatch = useDispatch();
   const [count, setCount] = useState(7);
-  // const [tcount, setTcount] = useState(7);
   const column2 = useSelector((state) => state.column2);
   const data = useSelector((state) => state.api);
   const data2 = useSelector((state) => state.apiTitle);
   const [show, setShow] = useState(false);
   const [num, setNum] = useState(1);
   const [title, setTitle] = useState(null);
-  // const [test, setTest] = useState(null);
+  // const [desc, setDesc] = useState(null);
   const renderBackdrop = (props) => <Backdrop {...props} />;
 
   const loadData = data2.filter(function (e) {
@@ -224,12 +248,11 @@ const TiTypeList = () => {
     return e.info.id === num;
   });
 
-  console.log(data);
+  // console.log(data);
 
   useEffect(() => {
     dispatch(getList());
     dispatch(getTitle());
-    // data2();
   }, [dispatch]);
 
   return (
@@ -244,29 +267,24 @@ const TiTypeList = () => {
             </TableTr>
           </TableHead>
           <TableBody>
-            {data2.length === 0
-              ? // <img src={spinner} alt='spinner' />
-                // <i class='fas fa-spinner fa-spin' />
-                null
-              : loadData.map(({ id, tid, title, description: desc }) => (
-                  <TableTr
-                    key={id}
-                    onClick={() => {
-                      setShow(true);
-                      setTitle(title);
-                      setNum(id);
-
-                      // setSibal(data.filter((v) => v.info === id));
-                      // console.log(sibal);
-                    }}
-                  >
-                    <TableTd>{tid}</TableTd>
-                    <TableTd>{title}</TableTd>
-                    <TableTd>{desc.slice(0, 120) + '...'}</TableTd>
-                    {/* <TableTd>{reg_date.substr(0, 16).replace('T', ' ')}</TableTd> */}
-                    {/* <TableTd>{desc.substr(0, 50) + '...'}</TableTd> */}
-                  </TableTr>
-                ))}
+            {data2.length === 0 ? (
+              <i className='fas fa-spinner fa-spin' />
+            ) : (
+              loadData.map(({ id, tid, title, description: desc }) => (
+                <TableTr
+                  key={id}
+                  onClick={() => {
+                    setShow(true);
+                    setTitle(title);
+                    setNum(id);
+                  }}
+                >
+                  <TableTd>{tid}</TableTd>
+                  <TableTd>{title}</TableTd>
+                  <TableTd>{desc.slice(0, 120) + '...'}</TableTd>
+                </TableTr>
+              ))
+            )}
             <DownButton
               onClick={(e) => {
                 setCount(count + 5);
@@ -283,7 +301,7 @@ const TiTypeList = () => {
           renderBackdrop={renderBackdrop}
         >
           <ModalWrapper>
-            {title}
+            <InlineTitle>{title}</InlineTitle>
             <InlineTable>
               <thead>
                 <InlineTr>
@@ -311,13 +329,6 @@ const TiTypeList = () => {
                   )
                 )}
               </InlineTbody>
-              {/* <DownButton
-              onClick={() => {
-                setTcount(tcount + 5);
-              }}
-            >
-              불러오기
-            </DownButton> */}
             </InlineTable>
           </ModalWrapper>
         </RandomlyPositionedModal>

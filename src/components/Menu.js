@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import palette from '../static/palette';
-import Calendar from 'react-calendar';
+// import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 const MenuBar = styled.div`
@@ -10,26 +10,11 @@ const MenuBar = styled.div`
   background-color: ${palette.gray[9]};
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
-  width: 255px;
+  /* width: 255px; */
   max-width: 100%;
   height: 100%;
   box-shadow: 0 2px 20px -10px black;
 `;
-
-// const MenuBarTitle = styled.div`
-//   position: absolute;
-//   top: 65px;
-//   left: 260px;
-//   color: white;
-//   padding: 10px 0 20px 20px;
-//   font-size: 1.5rem;
-// `;
-
-// const SubTitle = styled.div`
-//   margin-top: 15px;
-//   font-size: 14px;
-//   color: ${palette.gray[5]};
-// `;
 
 const Menu1 = styled.div`
   /* background-color: black; */
@@ -50,7 +35,7 @@ const Menu1 = styled.div`
     width: 210px;
     color: white;
     &:active {
-      background-color: #130f40;
+      background-color: black;
     }
     &:before {
       text-align: center;
@@ -94,12 +79,12 @@ const LogoTitle = styled.div`
   margin: 30px 0;
 `;
 
-const CalendarContainer = styled.div`
-  position: relative;
-  left: -2px;
-  width: 255px;
-  top: 15%;
-`;
+// const CalendarContainer = styled.div`
+//   position: relative;
+//   left: -2px;
+//   width: 255px;
+//   top: 15%;
+// `;
 
 const Menu = () => {
   const history = useHistory();
