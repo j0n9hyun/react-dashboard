@@ -118,9 +118,9 @@ const Menu = () => {
           <i className='far fa-chart-bar'></i>
           <SideText>Charts</SideText>
         </Menu2>
-        <Menu2 onClick={onClick2}>
+        {/* <Menu2 onClick={onClick2}>
           <i className='fas fa-key' /> <SideText>blabla</SideText>
-        </Menu2>
+        </Menu2> */}
         <Menu3 onClick={onClickLogout}>
           <i className='fas fa-sign-out-alt'></i>
           <SideText>Logout</SideText>

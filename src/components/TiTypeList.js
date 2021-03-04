@@ -237,19 +237,18 @@ const TiTypeList = () => {
   const [show, setShow] = useState(false);
   const [num, setNum] = useState(1);
   const [title, setTitle] = useState(null);
-  // const [desc, setDesc] = useState(null);
+  // const [test, setTest] = useState(7);
   const renderBackdrop = (props) => <Backdrop {...props} />;
 
   const loadData = data2.filter(function (e) {
     return e.id <= count;
   });
 
-  const countData = data.filter(function (e) {
+  const countData = data.filter((e) => {
     return e.info.id === num;
   });
 
-  // console.log(data);
-
+  // console.log(countData);
   useEffect(() => {
     dispatch(getList());
     dispatch(getTitle());
@@ -286,7 +285,7 @@ const TiTypeList = () => {
               ))
             )}
             <DownButton
-              onClick={(e) => {
+              onClick={() => {
                 setCount(count + 5);
               }}
             >
@@ -316,11 +315,12 @@ const TiTypeList = () => {
                 ) : (
                   countData.map(
                     ({
+                      id,
                       indicator,
                       indicator_type: { indicator_name },
                       reg_date,
                     }) => (
-                      <tr>
+                      <tr key={id}>
                         <InlineTd>{indicator_name}</InlineTd>
                         <InlineTd>{indicator.slice(0, 50)}</InlineTd>
                         <InlineTd>{reg_date.slice(0, 10)}</InlineTd>

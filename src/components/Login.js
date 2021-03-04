@@ -103,6 +103,20 @@ const Login = () => {
       setResult(null);
     }, 5000);
 
+    const love = async () => {
+      await axios
+        .get('http://localhost:8000/api/v2', {
+          params: {
+            limit: '10',
+            offset: '20',
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        });
+    };
+
+    love();
     return () => clearTimeout(timeOut);
   }, []);
 

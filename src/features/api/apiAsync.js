@@ -3,7 +3,11 @@ import axios from 'axios';
 
 export const getList = createAsyncThunk('get_list', async () => {
   // const response = await axios.get('http://localhost:8888/data');
-  const response = await axios.get('http://localhost:8000/api/v1');
+  const response = await axios.get('http://localhost:8000/api/v1', {
+    params: {
+      offset: '10',
+    },
+  });
   return response.data;
 });
 
